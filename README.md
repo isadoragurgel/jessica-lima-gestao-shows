@@ -1,32 +1,15 @@
 # Jessica Lima | Gestão de Shows
 
-Aplicativo web responsivo, com login e dados no Supabase. Abra pelo navegador no celular ou computador.
+Aplicativo web com Supabase. Publicação estática na Vercel: Framework Other, Build Command vazio, Output Directory `.`.
 
-## Publicar pelo navegador
+## Atualização
+Envie todos os arquivos extraídos na raiz do repositório, substituindo os anteriores. Inclua index.html, reset-password.html e guitar-cover.png. Faça Commit changes e aguarde o deploy da Vercel.
 
-1. No GitHub, crie um repositório privado chamado `jessica-lima-gestao-shows`.
-2. Use **Add file → Upload files** e envie os arquivos desta pasta, com `index.html` na raiz. Não envie o ZIP como único arquivo.
-3. Na Vercel, escolha **Add New → Project**, conecte o GitHub e importe o repositório.
-4. Em **Framework Preset**, escolha **Other**. Deixe **Build Command** vazio e informe `.` em **Output Directory**. Root Directory: raiz do repositório.
-5. Clique **Deploy** e abra o endereço retornado pela Vercel.
-6. Entre com a conta já criada no Supabase. Edite uma gig, espere **Salvo no Supabase**, recarregue e confira o valor.
+## Supabase — Authentication → URL Configuration
+Site URL: https://jessica-lima-gestao-shows.vercel.app
+Redirect URLs: adicione https://jessica-lima-gestao-shows.vercel.app/reset-password.html
+Salve. Não exclua outros endereços usados por integrações sem revisá-los.
 
-## Dados e acesso
+Depois da publicação, abra https://jessica-lima-gestao-shows.vercel.app/reset-password.html e solicite um NOVO email de recuperação. Use o link mais recente. Defina e confirme a nova senha; volte ao login e entre com essa senha.
 
-A URL do projeto Supabase e sua chave publishable estão no cliente, como previsto para esse tipo de chave. O acesso aos dados depende de autenticação e das políticas RLS configuradas no SQL já executado. Não use uma chave secret ou service_role no frontend.
-
-Dados bancários e PPS não estão no código desta exportação; o perfil é carregado da tabela protegida no Supabase após o login. O SQL com os dados pessoais não faz parte deste pacote.
-
-O aplicativo precisa de conexão para entrar e salvar. Esta versão não oferece modo offline.
-
-## Estrutura
-
-- `index.html`: interface e lógica do aplicativo.
-- `vercel.json`: configuração de publicação.
-- `.gitignore`: exclusão de arquivos locais e credenciais.
-
-## Atualização desta versão
-
-Login corrigido: clicar ou preencher os campos não envia o formulário. Os campos são preservados durante conexão e erros. Capa com violão em navy blue para celular e desktop.
-
-Envie também `guitar-cover.png` na raiz, ao lado de `index.html`.
+Os dados bancários e PPS são carregados do Supabase após autenticação; não estão no código exportado. Não exclua/recrie a usuária para redefinir a senha.
