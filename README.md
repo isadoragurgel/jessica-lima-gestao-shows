@@ -24,3 +24,9 @@ O aplicativo precisa de conexão para entrar e salvar. Esta versão não oferece
 - `index.html`: interface e lógica do aplicativo.
 - `vercel.json`: configuração de publicação.
 - `.gitignore`: exclusão de arquivos locais e credenciais.
+
+## Atualização desta versão
+
+Login corrigido: clicar ou preencher os campos não envia o formulário. Os campos são preservados durante conexão e erros. Capa com violão em navy blue para celular e desktop.
+
+Envie também `guitar-cover.png` na raiz, ao lado de `index.html`.
