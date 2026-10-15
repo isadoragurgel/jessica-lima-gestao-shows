@@ -1,16 +1,12 @@
-# Jessica Lima — login e Supabase
-Envie TODOS os arquivos extraídos para a raiz do repositório e faça Commit changes. Aguarde a Vercel concluir a publicação. Framework Other, Build Command vazio, Output Directory `.`.
+# Jessica Lima — custo do músico na conclusão
+Envie todos os arquivos extraídos para a raiz do repositório, substitua os anteriores e faça Commit changes. Vercel: Framework Other, Build Command vazio, Output Directory `.`.
 
-Inclui a biblioteca Supabase no próprio site, sem importação de esm.sh para login/recuperação, e limites de espera de rede.
+Ao concluir uma gig, o cachê do músico já cadastrado é reconhecido como custo e abatido do ganho líquido, sem depender da invoice ter sido paga. Isso não lança dinheiro como recebido e não cria um pagamento bancário fictício. A Visão Geral mostra um único Cachê dos músicos. Exceções de valor continuam editáveis dentro de cada gig, e pagamentos efetivamente registrados permanecem no histórico.
 
-Supabase → Authentication → URL Configuration:
+Os registros reais de pagamentos existentes são preservados. Esta versão deixa de gerar pagamentos automáticos ao receber uma invoice. A coluna musician_payment_mode, se criada anteriormente, pode continuar no banco sem uso; não é necessário removê-la.
+
+Mantém cores por pub, calendário .ics, login, Supabase e histórico de invoices. Execute 01-pub-colors.sql uma vez se ainda não executou. Não há novo SQL para o custo do músico.
+
+Supabase URL Configuration:
 Site URL: https://jessica-lima-gestao-shows.vercel.app
-Redirect URLs: https://jessica-lima-gestao-shows.vercel.app/reset-password.html
-
-Depois abra /reset-password.html e solicite um NOVO email de recuperação. Use o email mais recente, defina a senha e entre no app.
-
-Esta versão exige login e salva no Supabase. Os registros de exemplo são substituídos pelos dados autorizados do banco após o login. Não recrie/exclua a usuária. Dados bancários e PPS não estão neste pacote.
-
-O modo instalado na tela inicial exige internet para autenticar e salvar. O cache da demonstração anterior é removido automaticamente. Verifique o retorno “Salvo no Supabase” e recarregue para testar uma mudança antes de registrar todo o histórico.
-
-Invoices no topo do Financeiro, histórico de emissão e pagamentos, download e email pré-preenchido. Anexe manualmente o PDF baixado; nenhum email é enviado automaticamente. Mantém dados nas tabelas já criadas, sem novo SQL.
+Redirect URL: https://jessica-lima-gestao-shows.vercel.app/reset-password.html
