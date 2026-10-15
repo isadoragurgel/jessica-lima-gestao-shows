@@ -12,3 +12,5 @@ Confirmações abrem em dialog visível no centro da tela. Excluir rascunho pres
 Cash in hand é uma condição de pagamento, sem marcar automaticamente como recebido. O gráfico considera o mês inteiro, separando realizado/previsão e valores pendentes. Nenhuma alteração de interface movimenta pagamentos ou apaga gigs no banco automaticamente.
 
 Ao preencher o inicio de uma gig, o termino e sugerido duas horas depois, incluindo a virada de dia. O horario final pode ser editado manualmente. A legenda de tags de pubs abaixo do calendario foi removida.
+
+Ajuste visual: Concluir gig e Ver detalhes com dimensões equivalentes e fundo discreto. Repasses exibem data, pub e músico, nessa ordem. Não exige novo SQL.
