@@ -7,3 +7,7 @@ iPhone: abra no Safari → Compartilhar → Adicionar à Tela de Início.
 Android: abra no Chrome → menu ⋮ → Instalar app/Adicionar à tela inicial.
 
 O funcionamento de instalação depende do navegador e do HTTPS. Após carregar online, o service worker guarda os arquivos locais da demonstração; recursos externos podem não estar disponíveis offline.
+
+Atualização: a tela inicial começa pela agenda do dia em horário de Dublin, com locais, horários, Solo/Duo e ações. Metas e gráficos ficam abaixo.
+
+Atualização v3: Gigs do dia primeiro; conclusão em um clique; tips depois; Contatos em blocos; Visão Geral sem comissão e despesas; ranking de pubs para tips.
