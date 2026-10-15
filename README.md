@@ -1,13 +1,16 @@
-# Jessica Lima — demonstração instalável
-Envie TODOS os arquivos desta pasta para a raiz do repositório e faça Commit changes. Não envie o ZIP fechado. A Vercel deve usar Framework Other, Build Command vazio, Output Directory `.`.
+# Jessica Lima — login e Supabase
+Envie TODOS os arquivos extraídos para a raiz do repositório e faça Commit changes. Aguarde a Vercel concluir a publicação. Framework Other, Build Command vazio, Output Directory `.`.
 
-Abra https://jessica-lima-gestao-shows.vercel.app após o deploy. Esta versão abre sem login, sem conectar ao Supabase. Dados de exemplo e alterações apenas em memória: recarregar reinicia a demonstração. Não use para registros reais.
+Inclui a biblioteca Supabase no próprio site, sem importação de esm.sh para login/recuperação, e limites de espera de rede.
 
-iPhone: abra no Safari → Compartilhar → Adicionar à Tela de Início.
-Android: abra no Chrome → menu ⋮ → Instalar app/Adicionar à tela inicial.
+Supabase → Authentication → URL Configuration:
+Site URL: https://jessica-lima-gestao-shows.vercel.app
+Redirect URLs: https://jessica-lima-gestao-shows.vercel.app/reset-password.html
 
-O funcionamento de instalação depende do navegador e do HTTPS. Após carregar online, o service worker guarda os arquivos locais da demonstração; recursos externos podem não estar disponíveis offline.
+Depois abra /reset-password.html e solicite um NOVO email de recuperação. Use o email mais recente, defina a senha e entre no app.
 
-Atualização: a tela inicial começa pela agenda do dia em horário de Dublin, com locais, horários, Solo/Duo e ações. Metas e gráficos ficam abaixo.
+Esta versão exige login e salva no Supabase. Os registros de exemplo são substituídos pelos dados autorizados do banco após o login. Não recrie/exclua a usuária. Dados bancários e PPS não estão neste pacote.
 
-Atualização v3: Gigs do dia primeiro; conclusão em um clique; tips depois; Contatos em blocos; Visão Geral sem comissão e despesas; ranking de pubs para tips.
+O modo instalado na tela inicial exige internet para autenticar e salvar. O cache da demonstração anterior é removido automaticamente. Verifique o retorno “Salvo no Supabase” e recarregue para testar uma mudança antes de registrar todo o histórico.
+
+Invoices no topo do Financeiro, histórico de emissão e pagamentos, download e email pré-preenchido. Anexe manualmente o PDF baixado; nenhum email é enviado automaticamente. Mantém dados nas tabelas já criadas, sem novo SQL.
