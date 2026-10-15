@@ -1,6 +1,14 @@
-# Jessica Lima — outubro
-Execute o SQL de correção fornecido separadamente. Depois envie os arquivos deste ZIP à raiz do GitHub e faça Commit changes. Vercel: Framework Other, Build Command vazio, Output Directory `.`.
+# Jessica Lima — interface aprovada
+Execute o SQL Cash in hand fornecido separadamente. Depois envie os arquivos deste ZIP à raiz do GitHub e faça Commit changes. Framework Other; Build Command vazio; Output Directory `.`.
 
-O gráfico separa realizado e previsão desde o dia 1. Cachês ainda não informados ficam pendentes. Login, Supabase, tags coloridas, histórico de invoices e Financeiro em blocos mantidos.
+Concluir gig é uma ação principal. Ao concluir, aparece Realizada em verde claro. Cancelar gig fica em Ver detalhes, com confirmação, preserva o histórico e exclui a gig dos totais/previsões. Gigs com dados financeiros precisam ter esses registros revisados antes do cancelamento.
 
-O SQL desta atualização marca as gigs fixas de 1 a 14/10 como realizadas, mantém 15/10 confirmada e exclui somente a invoice identificada pela gig de 15/10, após verificar que não contém outros shows. Não gera recebimentos ou repasses bancários.
+Repasses têm linhas compactas: Marcar pago confirma o saldo na data de hoje, sem alterar novamente o custo/líquido. Detalhes permite exceções.
+
+Biblioteca → Estudo tem apenas um campo para músicas, uma por linha. Salvar mantém IDs de músicas inalteradas e o repertório já pronto.
+
+Confirmações abrem em dialog visível no centro da tela. Excluir rascunho preserva shows e recebimentos; invoices emitidas continuam protegidas.
+
+Cash in hand é uma condição de pagamento, sem marcar automaticamente como recebido. O gráfico considera o mês inteiro, separando realizado/previsão e valores pendentes. Nenhuma alteração de interface movimenta pagamentos ou apaga gigs no banco automaticamente.
+
+Ao preencher o inicio de uma gig, o termino e sugerido duas horas depois, incluindo a virada de dia. O horario final pode ser editado manualmente. A legenda de tags de pubs abaixo do calendario foi removida.
