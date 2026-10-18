@@ -14,4 +14,3 @@ Cash in hand é uma condição de pagamento, sem marcar automaticamente como rec
 Ao preencher o inicio de uma gig, o termino e sugerido duas horas depois, incluindo a virada de dia. O horario final pode ser editado manualmente. A legenda de tags de pubs abaixo do calendario foi removida.
 
 Ajuste visual: Concluir gig e Ver detalhes com dimensões equivalentes e fundo discreto. Repasses exibem data, pub e músico, nessa ordem. Não exige novo SQL.
-Ambiente de teste: teste-melhorias
