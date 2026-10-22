@@ -1,6 +1,5 @@
 {
   "status": "REVIEW_ONLY_NOT_IMPORTED",
-  "rules": "No database writes; no fee inferred; 2h assumed; review flagged rows",
   "gigs": [
     {
       "date": "2026-05-01",
