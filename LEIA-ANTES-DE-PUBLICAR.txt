@@ -1,5 +1,5 @@
-JÉSSICA LIMA | MEU CONTROLE — CANDIDATO DE TESTE
+JÉSSICA LIMA | MEU CONTROLE — PREVIEW 23/10/2026
 
-Ajustes: cartão roxo dentro de Gigs de hoje substitui o primeiro cartão; contraste; navegação direta; registro de despesas com seleção lateral de conta e categorias visuais; remoção do aviso genérico de gigs pendentes.
+Alterações: formulário de despesa com grade visual, nova categoria, conta em botões, divisão com Isadora e opções recolhidas; nome do venue branco no cartão roxo; remoção do atalho financeiro da Home; navegação mobile fixa; cores da legenda; seletor Gig/ADM; botão Fechar visível na edição; histórico dos prints removido da interface.
 
-ATENÇÃO: FINANÇAS PESSOAIS AINDA USAM localStorage, SEM SUPABASE. Não recomendado publicar em main com dados financeiros reais. DAY OFF também pode permanecer local. Teste em teste-melhorias, faça backup e valide os fluxos de gigs/invoices antes de produção.
+AVISOS: Esta versão NÃO está aprovada para produção. O Meu Controle e o DAY OFF ainda usam localStorage e não sincronizam com Supabase. ADM utiliza campos existentes e exige teste real de persistência com seu banco. Faça backup e teste na branch teste-melhorias antes de qualquer alteração na main. Nenhum dado Supabase foi modificado durante a preparação deste ZIP.
