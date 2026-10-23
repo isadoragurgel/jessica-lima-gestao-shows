@@ -2472,5 +2472,5 @@ render();cloudBoot();if(cloud.enabled&&typeof window!=='undefined')window.addEve
 <style>#jl-preview .jl-login{max-width:440px;margin:28px auto}#jl-preview .jl-cloud-status{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:18px 0;color:var(--jl-muted);font-size:12px}#jl-preview .jl-cloud-status button{font-size:12px;padding:6px 10px;min-height:38px}#jl-preview .jl-cloud-error{color:light-dark(#a32030,#ffaaaa);margin-top:16px}</style>
 <script>
 (()=>{let installPrompt=null;window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event});window.jlInstallDemo=async()=>{if(installPrompt){await installPrompt.prompt();installPrompt=null}else{const help=document.getElementById('jl-install-help');if(help)help.hidden=false}};if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));})();
-</script><script src="./meu-controle.js?v=20261023v3"></script></body>
+</script><script src="./nova-despesa-componente.js?v=20261023v4"></script><script src="./meu-controle.js?v=20261023v4"></script></body>
 </html>
