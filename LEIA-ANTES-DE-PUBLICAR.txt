@@ -1,0 +1,5 @@
+JÉSSICA LIMA | MEU CONTROLE — CANDIDATO DE TESTE
+
+Ajustes: cartão roxo dentro de Gigs de hoje substitui o primeiro cartão; contraste; navegação direta; registro de despesas com seleção lateral de conta e categorias visuais; remoção do aviso genérico de gigs pendentes.
+
+ATENÇÃO: FINANÇAS PESSOAIS AINDA USAM localStorage, SEM SUPABASE. Não recomendado publicar em main com dados financeiros reais. DAY OFF também pode permanecer local. Teste em teste-melhorias, faça backup e valide os fluxos de gigs/invoices antes de produção.
