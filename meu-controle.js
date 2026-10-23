@@ -59,6 +59,7 @@ function render(){const host=document.getElementById('mc-overlay');if(!host)retu
  if(screen==='new'){
  host.innerHTML='<div id="mc-expense-island"></div>';
  const root=host.querySelector('#mc-expense-island').attachShadow({mode:'open'});
+ if(typeof window.MCExpensePage!=='function'||typeof window.MCExpenseMarkup!=='string'){host.innerHTML='<div class="mc-panel"><h2>Nova despesa indisponível</h2><p>O formulário não carregou. Atualize a página.</p><button id="mc-expense-back">Voltar para Finanças</button></div>';host.querySelector('#mc-expense-back').onclick=()=>{screen='dashboard';render()};return;}
  root.innerHTML=window.MCExpenseMarkup;
  window.MCExpensePage(root,{
    back:()=>{screen='dashboard';render()},
@@ -76,5 +77,50 @@ const ac=host.querySelector('#mc-account');if(ac)ac.onsubmit=e=>{e.preventDefaul
 const copy=host.querySelector('#mc-copy');if(copy)copy.onclick=()=>{const pending=state.items.filter(x=>x.split&&!x.settled&&x.payer==='Jessica');const total=sum(pending.map(x=>({amount:x.amount*(1-x.jessica/100)})));const msg='Oi, amor! 💙\n\nValores pendentes:\n'+pending.map(x=>'• '+x.description+' — '+euro(x.amount*(1-x.jessica/100))).join('\n')+'\n\nTotal: '+euro(total)+' 💙';navigator.clipboard?.writeText(msg).then(()=>alert('Cobrança copiada!')).catch(()=>prompt('Copie a mensagem:',msg))};}
 function exportCSV(){const rows=[['Data','Tipo','Descrição','Categoria','Valor EUR','Conta','Notas','Compartilhada','Quem pagou','% Jessica','Acertada'],...eligible().map(x=>[x.date,x.type,x.description,x.category,x.amount,x.account,x.note,x.split?'Sim':'Não',x.payer||'',x.jessica??'',x.settled?'Sim':'Não'])];const csv='\ufeff'+rows.map(r=>r.map(v=>'"'+String(v??'').replace(/"/g,'""')+'"').join(';')).join('\r\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='meu-controle-'+month+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
 function printReport(){const inc=sum(income()),exp=sum(expenses()),cats={};expenses().forEach(x=>cats[x.category||'Outros']=(cats[x.category||'Outros']||0)+Number(x.amount));const w=window.open('','_blank');if(!w)return alert('Permita pop-ups para exportar o relatório.');w.document.write(`<html><head><title>Meu Controle ${month}</title><style>body{font:14px Arial;margin:32px;color:#292929}h1{color:#ad6247}table{width:100%;border-collapse:collapse}td,th{padding:9px;border-bottom:1px solid #ddd;text-align:left}.summary{display:flex;gap:24px;font-size:17px}small{color:#777}@page{size:A4;margin:15mm}@media print{button{display:none}}</style></head><body><h1>Jéssica Lima | Meu Controle</h1><h2>Resumo mensal — ${esc(month)}</h2><div class="summary"><p>Receitas<br><b>${euro(inc)}</b></p><p>Despesas<br><b>${euro(exp)}</b></p><p>Resultado<br><b>${euro(inc-exp)}</b></p></div><h3>Despesas por categoria</h3><table><tr><th>Categoria</th><th>Total</th></tr>${Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<tr><td>${esc(k)}</td><td>${euro(v)}</td></tr>`).join('')}</table><h3>Despesas detalhadas</h3><table><tr><th>Data</th><th>Categoria</th><th>Descrição</th><th>Valor</th></tr>${expenses().map(x=>`<tr><td>${esc(x.date)}</td><td>${esc(x.category||'Outros')}</td><td>${esc(x.description||'—')}</td><td>${euro(x.amount)}</td></tr>`).join('')}</table><h3>Contas</h3><table>${state.accounts.map(a=>`<tr><td>${esc(a)}</td><td>${euro(accountBalance(a))}</td></tr>`).join('')}</table><p><small>Relatório gerado a partir dos lançamentos sincronizados com Supabase. Use Imprimir → Salvar como PDF.</small></p><button onclick="window.print()">Salvar como PDF / Imprimir</button></body></html>`);w.document.close()}
+// Receita automática vinculada à gig: sincronização idempotente por source_type/source_id.
+// Executada somente depois que o salvamento da gig no Supabase termina.
+window.MC_SYNC_GIG_REVENUE=async function(gigs){
+ await connect();
+ const existing=checked(await client.from('mc_transactions').select('id,source_type,source_id,amount,account_id,transaction_date,description,category_id').eq('user_id',user.id).in('source_type',['gig_cash','gig_tips']));
+ let accounts=await readTable('mc_accounts');
+ const ensureAccount=async(type)=>{
+  let row=accounts.find(a=>a.account_type===type&&!a.archived);
+  if(!row){const name=type==='cash'?'Dinheiro':'Banco digital';row=accounts.find(a=>a.name===name&&!a.archived)}
+  if(!row){row=checked(await client.from('mc_accounts').insert({user_id:user.id,name:type==='cash'?'Dinheiro':'Banco digital',account_type:type,currency:'EUR',opening_balance:0,opening_date:today(),archived:false}).select().single());accounts.push(row)}
+  return row.id;
+ };
+ const categories=await readTable('mc_categories');
+ const ensureCategory=async(name)=>{
+  let c=categories.find(x=>x.name===name&&x.kind==='income'&&!x.archived);
+  if(!c){c=checked(await client.from('mc_categories').insert({user_id:user.id,name,kind:'income',icon:null,archived:false}).select().single());categories.push(c)}
+  return c.id;
+ };
+ const desired=[];
+ for(const gig of gigs||[]){
+  if(!gig||gig.status!=='Realizada')continue;
+  const gigId=String(gig.dbId||gig.id||'');if(!gigId)continue;
+  const place=String(gig.place||'Gig').trim(),date=gig.date;
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(String(date)))continue;
+  const cycle=gig.paymentCycle||(gig.paymentDays===7?'semanal':gig.paymentDays===14||gig.paymentDays===15?'quinzenal':'mensal');
+  if(cycle==='cash_in_hand'&&Number(gig.fee)>0){desired.push({source_type:'gig_cash',source_id:gigId+':cash',amount:Number(gig.fee),transaction_date:date,description:'Cash in hand — '+place,category:'Cash in hand',accountType:'cash'});}
+  const breakdown=gig.tipsBreakdown||{};
+  for(const [channel,accountType,label] of [['cash','cash','Dinheiro'],['revolut','digital','Revolut'],['coffee','digital','Buy Me a Coffee']]){
+   const amount=Number(breakdown[channel]||0);
+   if(gig.tipsRecorded&&amount>0){desired.push({source_type:'gig_tips',source_id:gigId+':tips:'+channel,amount,transaction_date:date,description:'Tips — '+place+' ('+label+')',category:'Tips',accountType});}
+  }
+ }
+ const keys=new Set(desired.map(d=>d.source_type+'|'+d.source_id));
+ // Só remove receitas automáticas pertencentes às gigs conhecidas; nunca toca receitas manuais.
+ const known=new Set((gigs||[]).map(g=>String(g.dbId||g.id||'')));
+ for(const row of existing){const gigId=String(row.source_id||'').split(':')[0];if(known.has(gigId)&&!keys.has(row.source_type+'|'+row.source_id))checked(await client.from('mc_transactions').delete().eq('id',row.id).eq('user_id',user.id));}
+ for(const item of desired){
+  const account_id=await ensureAccount(item.accountType),category_id=await ensureCategory(item.category);
+  const data={user_id:user.id,kind:'income',amount:item.amount,currency:'EUR',transaction_date:item.transaction_date,description:item.description,account_id,category_id,source_type:item.source_type,source_id:item.source_id,is_brazil:false};
+  const previous=existing.find(r=>r.source_type===item.source_type&&r.source_id===item.source_id);
+  if(previous){if(Number(previous.amount)!==item.amount||previous.account_id!==account_id||previous.transaction_date!==item.transaction_date||previous.description!==item.description||previous.category_id!==category_id)checked(await client.from('mc_transactions').update(data).eq('id',previous.id).eq('user_id',user.id));}
+  else checked(await client.from('mc_transactions').insert(data));
+ }
+ if(document.getElementById('mc-overlay')?.hidden===false)await load();
+};
 document.addEventListener('jl-open-personal-finance',()=>{const host=document.getElementById('mc-overlay');if(host){host.hidden=false;screen='dashboard';render();load();host.scrollTop=0}});function boot(){const div=document.createElement('div');div.id='mc-overlay';div.hidden=true;document.body.append(div);document.addEventListener('click',e=>{if(e.target.closest('[data-page]')){div.hidden=true;}if(e.target.closest('#mc-open-finance')){e.preventDefault();document.getElementById('mc-overlay').hidden=false;render();load()}},true)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
