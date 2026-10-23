@@ -1,0 +1,1 @@
+Ajuste de layout do formulario de despesas para se aproximar da previa interativa. O erro jl_gigs_format_check exige inspecao do constraint existente no Supabase antes de salvar ADM. Nao foi alterado banco de dados. Modulo financeiro ainda usa localStorage; NAO PUBLICAR NA MAIN.

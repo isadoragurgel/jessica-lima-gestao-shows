@@ -27,3 +27,35 @@
 #mc-overlay .mc-other-type{font-size:13px;color:#777}#mc-overlay .mc-other-type summary{cursor:pointer}
 #mc-overlay .mc-quick .mc-save{background:#151515!important;border-radius:28px!important;color:#fff!important;font-size:17px!important}
 @media(max-width:650px){#mc-overlay .mc-body:has(.mc-quick){padding:16px!important}#mc-overlay .mc-quick .mc-categories{gap:7px!important}#mc-overlay .mc-quick .mc-category{padding:9px 4px!important;font-size:12px!important}}
+
+/* Outubro 2026 — formulário alinhado à prévia aprovada */
+#mc-overlay{background:#f7f6f5;color:#202024}
+#mc-overlay .mc-panel{max-width:1100px;padding:clamp(12px,3vw,32px)}
+#mc-overlay .mc-body{border:1px solid #e9e4e0;box-shadow:0 6px 28px #261a1310;background:#fffdfb}
+#mc-overlay .mc-quick{display:grid;grid-template-columns:minmax(0,1fr);gap:23px;max-width:100%;}
+#mc-overlay .mc-quick>*{grid-column:1/-1}
+#mc-overlay .mc-quick .mc-amount{justify-items:center;display:grid;text-align:center;padding:18px 0 12px;color:#68656a;font-weight:500}
+#mc-overlay .mc-quick .mc-amount-input{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:8px}
+#mc-overlay .mc-quick .mc-amount-input span{font-size:28px;color:#141414;font-weight:800}
+#mc-overlay .mc-quick .mc-amount-input input{width:180px;max-width:65vw;border-radius:28px;padding:13px 18px;font-size:25px;text-align:center}
+#mc-overlay .mc-quick .mc-categories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#mc-overlay .mc-quick .mc-category{min-height:82px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:#f5f4f4;color:#252326;border:1px solid #e5e3e2;border-radius:17px;padding:10px}
+#mc-overlay .mc-quick .mc-category strong{font-size:24px;line-height:1.2}
+#mc-overlay .mc-quick .mc-category span{font-size:13px}
+#mc-overlay .mc-quick .mc-category.selected{background:#f3ece9;border-color:#b95d49;box-shadow:inset 0 0 0 1px #b95d49}
+#mc-overlay .mc-quick .mc-account-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;background:#f7f6f6;border-radius:999px;padding:4px}
+#mc-overlay .mc-quick .mc-account-choices button{border:0;border-radius:999px;background:transparent;color:#68646a;min-width:0;font-size:14px;padding:12px 5px}
+#mc-overlay .mc-quick .mc-account-choices button.selected{background:#fff;color:#191719;box-shadow:0 1px 5px #0002}
+#mc-overlay .mc-quick .mc-split-toggle{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer}
+#mc-overlay .mc-quick .mc-split-toggle small{display:block;color:#777;font-size:13px;margin-top:5px}
+#mc-overlay .mc-quick .mc-split-toggle input{appearance:none;width:42px;height:25px;border:1px solid #ccc;border-radius:20px;background:#eee;position:relative;flex-shrink:0}
+#mc-overlay .mc-quick .mc-split-toggle input:before{content:'';position:absolute;top:3px;left:3px;width:17px;height:17px;border-radius:50%;background:white;box-shadow:0 1px 3px #0003}
+#mc-overlay .mc-quick .mc-split-toggle input:checked{background:#b35b45;border-color:#b35b45}
+#mc-overlay .mc-quick .mc-split-toggle input:checked:before{left:20px}
+#mc-overlay .mc-quick .mc-save{background:#a94f3e;color:white;border:0;border-radius:24px;min-height:52px;font-weight:750;position:static}
+#mc-overlay .mc-quick input[name=description]{border-radius:22px;padding:14px 18px}
+#mc-overlay .mc-quick .mc-category-header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+#mc-overlay .mc-quick .mc-add-category{background:transparent!important;color:#a94f3e!important;border:1px solid #e6c6b9!important;border-radius:15px!important;font-size:13px!important}
+#mc-overlay .mc-quick .mc-extra summary{cursor:pointer;color:#6b6668}
+#mc-overlay .mc-quick .mc-other-type{font-size:13px;color:#777}
+@media(max-width:650px){#mc-overlay .mc-panel{padding:10px 10px 100px}#mc-overlay .mc-body{padding:16px 12px}#mc-overlay .mc-quick .mc-categories{gap:7px}#mc-overlay .mc-quick .mc-category{min-height:77px;padding:7px 3px}#mc-overlay .mc-quick .mc-category span{font-size:12px}}
