@@ -4,3 +4,5 @@ Jéssica Lima | Meu Controle — teste visual
 - Registro rápido: valor em destaque, categorias em botões, conta, divisão Isadora e data/notas recolhidas.
 - Dados financeiros locais; Supabase não foi alterado.
 - Publicar somente em teste-melhorias.
+
+NOVO: cartão escuro em destaque na Início para gig de hoje ou próxima gig, com cachê, duração, detalhes e concluir.
