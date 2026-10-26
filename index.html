@@ -1605,6 +1605,26 @@ html,body{background:#f5f7fa!important}
 #mc-overlay .mc-quick .mc-save { background:#527da0 !important; border-color:#527da0 !important; color:#fff !important; }
 #mc-overlay .mc-panel h2 { color:#244a62 !important; }
 </style>
+
+<style id="jl-edit-form-standardized">
+/* Consistent edit/new gig form controls */
+#jl-preview #jl-gig-form .jl-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 14px;align-items:start}
+#jl-preview #jl-gig-form .jl-fields>*,#jl-preview #jl-gig-form .jl-fields>label{min-width:0;box-sizing:border-box}
+#jl-preview #jl-gig-form .jl-fields .jl-full{grid-column:1/-1}
+#jl-preview #jl-gig-form label{font-size:14px;font-weight:600;line-height:1.45;display:flex;flex-direction:column;gap:8px;min-width:0}
+#jl-preview #jl-gig-form input:not([type=hidden]):not([type=color]),#jl-preview #jl-gig-form select,#jl-preview #jl-gig-form textarea{box-sizing:border-box;display:block;width:100%;min-width:0;min-height:46px;height:auto;padding:11px 13px;border-radius:11px;font-size:16px;line-height:1.4;font-weight:400;border:1px solid #cbd5df;background:#fff;color:#283644;appearance:auto}
+#jl-preview #jl-gig-form textarea{min-height:112px;resize:vertical}
+#jl-preview #jl-gig-form .jl-kind-picker select{height:48px;min-height:48px}
+#jl-preview #jl-gig-form .jl-gig-standard[hidden],#jl-preview #jl-gig-form .jl-adm-only[hidden]{display:none!important}
+#jl-preview #jl-gig-form .jl-pub-color{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:10px 16px;align-items:end;padding:15px;border:1px solid #d8e1e9;border-radius:13px;background:#f7fafc}
+#jl-preview #jl-gig-form .jl-pub-color>label{margin:0;align-self:stretch;justify-content:space-between}
+#jl-preview #jl-gig-form .jl-pub-color input[type=color]{box-sizing:border-box;display:block;width:100%;max-width:110px;height:46px;min-height:46px;padding:5px;border:1px solid #cbd5df;border-radius:10px;background:#fff;cursor:pointer}
+#jl-preview #jl-gig-form #jl-color-preview{display:flex;align-items:center;justify-content:flex-end;min-height:46px;max-width:100%;min-width:0;overflow-wrap:anywhere}
+#jl-preview #jl-gig-form #jl-color-preview .jl-tag{max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.4}
+#jl-preview #jl-gig-form .jl-pub-color>small{grid-column:1/-1;font-size:12px;line-height:1.5;color:#64748b}
+#jl-preview #jl-gig-form .jl-actions{gap:10px;flex-wrap:wrap}
+@media(max-width:560px){#jl-preview #jl-gig-form .jl-fields{grid-template-columns:minmax(0,1fr);gap:16px}#jl-preview #jl-gig-form .jl-fields>*{grid-column:1/-1}#jl-preview #jl-gig-form .jl-pub-color{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}#jl-preview #jl-gig-form #jl-color-preview{justify-content:flex-start}}
+</style>
 </head>
 <body>
 <script type="application/json" id="codex-visualization-widget-state">{}</script>
@@ -1969,19 +1989,22 @@ function jlImportHistoricalGigs(){
  }
  return {added,skipped};
 }
+function jlHomeCard(g,isToday=false){
+const duo=g.format==='Duo',fmt=duo?'Duo':g.format==='Solo'?'Solo':g.format||'Solo';
+const when=isToday?'':`<span class="jl-preview-card-date">${esc(date(g.date))}</span>`;
+return `<button type="button" class="jl-preview-gig-card ${duo?'jl-preview-duo':'jl-preview-solo'}" data-act="view-gig" data-id="${g.id}" data-gig-uuid="${esc(g.dbId||'')}" aria-label="Ver detalhes da gig ${esc(g.place)}"><div class="jl-preview-card-content"><div class="jl-preview-card-head"><strong>${esc(g.place)}</strong><span class="jl-preview-format">${duo?'♟':'♙'} ${esc(fmt)}</span></div><div class="jl-preview-card-info">${when}<span>◷ ${esc(g.time||'Horário a confirmar')}</span><span>⌖ ${esc(g.place)}</span></div></div><span class="jl-preview-card-chevron">›</span></button>`
+}
 function mobileHome(){
-const today=cloudToday(),thisMonth=today.slice(0,7),allMonth=gigs.filter(g=>g.date.startsWith(thisMonth)&&g.status!=='Cancelada'),solo=allMonth.filter(g=>g.format==='Solo').length,duo=allMonth.filter(g=>g.format==='Duo').length,hours=allMonth.reduce((sum,g)=>sum+Number(g.duration||2),0);
+const today=cloudToday(),thisMonth=today.slice(0,7),allMonth=gigs.filter(g=>g.date.startsWith(thisMonth)&&g.status!=='Cancelada'),solo=allMonth.filter(g=>g.format==='Solo').length,duo=allMonth.filter(g=>g.format==='Duo').length;
 const todays=gigs.filter(g=>g.date===today&&g.status!=='Cancelada').sort((a,b)=>String(a.time).localeCompare(String(b.time)));
 const next=gigs.filter(g=>g.date>today&&g.status!=='Cancelada').sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,4);
-const target=weeklyTarget(),earned=done().filter(week).reduce((sum,g)=>sum+earnedAmount(g),0),pct=Math.min(100,Math.round(earned/target*100)),remaining=Math.max(0,target-earned);
-const featured=todays[0]||next[0];
-const featuredMarkup=featured?`<section class="jl-featured-gig" aria-label="Gig em destaque"><div class="jl-featured-top"><span>${featured.date===today?'Gig de hoje · '+esc(new Intl.DateTimeFormat('pt-BR',{timeZone:'UTC',weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(featured.date+'T12:00:00Z'))):'Próxima gig · '+esc(new Intl.DateTimeFormat('pt-BR',{timeZone:'UTC',weekday:'long',day:'numeric',month:'long'}).format(new Date(featured.date+'T12:00:00Z')))}</span><span class="jl-featured-status">● ${esc(featured.status||'Agendada')}</span></div><div class="jl-featured-main"><div class="jl-featured-symbol" aria-hidden="true">♫</div><div><h2>${esc(featured.place)}</h2><p>${esc(featured.time||'Horário a confirmar')}${featured.endTime?' – '+esc(featured.endTime):''} · ${featured.format==='Duo'?'👥 Duo':'👤 Solo'}</p></div></div><div class="jl-featured-metrics"><div><strong>${ready(featured)?money(net(featured)):'A definir'}</strong><small>Cachê previsto para Jéssica</small></div><div><strong>${featured.duration?esc(String(featured.duration).replace('.',','))+'h':'—'}</strong><small>Duração</small></div></div><div class="jl-featured-actions"><button type="button" data-act="edit" data-id="${featured.id}" data-gig-uuid="${esc(featured.dbId||'')}">Ver detalhes / Editar →</button>${featured.status==='Confirmada'?`<button type="button" class="jl-featured-complete" data-act="finish" data-id="${featured.id}" data-gig-uuid="${esc(featured.dbId||'')}">✓ Concluir</button>`:''}</div></section>`:'';
-const todayCards=todays.map(g=>`<div class="jl-home-gig ${g.format==='Duo'?'is-duo':'is-solo'}"><div class="jl-home-time">${esc(g.time||'—')}</div><div class="jl-home-venue"><strong>${esc(g.place)}</strong><small>${esc(g.client||g.place)}</small></div><span class="jl-home-type">${g.format==='Duo'?'👥 Duo':'👤 Solo'}</span><div class="jl-home-actions"><button type="button" data-act="view-gig" data-id="${g.id}" data-gig-uuid="${esc(g.dbId||'')}">Editar</button>${g.status==='Confirmada'?`<button type="button" class="jl-home-finish" data-act="finish" data-id="${g.id}" data-gig-uuid="${esc(g.dbId||'')}">✓ Concluir</button>`:'<span class="jl-home-done">'+esc(g.status)+'</span>'}</div></div>`).join('')||'<p class="jl-muted">Nenhuma gig hoje.</p>';
-return `<div class="jl-home-v2"><header class="jl-home-top"><div><div class="jl-home-logo">JÉSSICA LIMA</div><div class="jl-home-sublogo">MEU CONTROLE</div></div><div class="jl-home-top-icon">♫</div></header><div class="jl-home-greeting"><div><h1>Olá, Jéssica!</h1><p>Aqui está o seu dia de hoje.</p></div><small>${esc(date(today))}</small></div>
-<section class="jl-home-section"><div class="jl-home-heading"><div><h2>Gigs de hoje <span>${todays.length}</span></h2></div><button type="button" class="jl-home-link" data-act="new">+ Nova gig</button></div>${todayCards}</section>
-<section class="jl-home-section"><div class="jl-home-heading"><h2>Resumo do mês</h2><small>${esc(monthName(thisMonth))}</small></div><div class="jl-home-stats"><div><span>♫</span><strong>${allMonth.length}</strong><small>Gigs</small></div><div><span>👤</span><strong>${solo}</strong><small>Solo</small></div><div><span>👥</span><strong>${duo}</strong><small>Duo</small></div><div><span>◷</span><strong>${hours}h</strong><small>Horas aprox.</small></div></div></section>
-<section class="jl-home-section jl-home-goal"><div class="jl-home-heading"><h2>◎ Meta da semana</h2><button class="jl-home-link" type="button" data-act="edit-weekly-goal">Editar</button></div><div class="jl-home-earned"><strong>${money(earned)}</strong><span>de ${money(target)}</span></div><div class="jl-home-progress"><div style="width:${pct}%"></div></div><p class="jl-home-hint">${remaining?'Faltam '+money(remaining)+' para atingir sua meta da semana.':'Meta da semana atingida!'}</p></section>
-<section class="jl-home-section"><div class="jl-home-heading"><h2>Próximas gigs</h2><button class="jl-home-link" type="button" data-page="Agenda">Ver todas</button></div><div class="jl-home-next">${next.map(g=>`<div class="jl-home-gig ${g.format==='Duo'?'is-duo':'is-solo'}"><div class="jl-home-time">${esc(g.date.slice(8,10))}/${esc(g.date.slice(5,7))}<small>${esc(g.time||'—')}</small></div><div class="jl-home-venue"><strong>${esc(g.place)}</strong><small>${esc(g.client||g.place)}</small></div><span class="jl-home-type">${esc(g.format)}</span><div class="jl-home-actions"><button type="button" data-act="view-gig" data-id="${g.id}" data-gig-uuid="${esc(g.dbId||'')}">Editar</button>${g.status==='Confirmada'?`<button type="button" class="jl-home-finish" data-act="finish" data-id="${g.id}" data-gig-uuid="${esc(g.dbId||'')}">✓ Concluir</button>`:''}</div></div>`).join('')||'<p>Nenhuma próxima gig.</p>'}</div></section>${jlHistoryPanel()}</div>`;
+const target=weeklyTarget(),earned=done().filter(week).reduce((sum,g)=>sum+earnedAmount(g),0),pct=Math.min(100,Math.round(earned/target*100));
+const monthlyRevenue=allMonth.filter(g=>g.status==='Realizada').reduce((sum,g)=>sum+earnedAmount(g),0);
+return `<div class="jl-home-v2 jl-preview-home"><header class="jl-home-top"><div><div class="jl-home-logo">JÉSSICA LIMA</div><div class="jl-home-sublogo">MEU CONTROLE</div></div></header><div class="jl-home-greeting"><div><h1>Olá, Jéssica!</h1><p>Aqui está o seu dia de hoje.</p></div><small>${esc(date(today))}</small></div>
+<section class="jl-home-section"><div class="jl-home-heading"><h2>Gig${todays.length===1?'':'s'} de hoje</h2><button type="button" class="jl-home-link" data-page="Agenda">Ver agenda ›</button></div><div class="jl-preview-card-stack">${todays.map(g=>jlHomeCard(g,true)).join('')||'<p class="jl-muted">Nenhuma gig hoje.</p>'}</div></section>
+<section class="jl-home-section"><div class="jl-home-heading"><h2>Resumo do mês</h2><small>${esc(monthName(thisMonth))}</small></div><div class="jl-home-stats jl-preview-stats"><div><span>▦</span><strong>${allMonth.length}</strong><small>Gigs</small></div><div><span>♙</span><strong>${solo}</strong><small>Solo</small></div><div><span>♟</span><strong>${duo}</strong><small>Duo</small></div><div><span>€</span><strong>${money(monthlyRevenue)}</strong><small>Receita realizada</small></div></div></section>
+<section class="jl-home-section jl-home-goal"><div class="jl-home-heading"><h2>◎ Meta da semana</h2><button class="jl-home-link" type="button" data-act="edit-weekly-goal">Editar</button></div><div class="jl-home-earned"><strong>${money(earned)}</strong><span>de ${money(target)}</span></div><div class="jl-home-progress"><div style="width:${pct}%"></div></div><p class="jl-home-hint">${pct}% da meta semanal</p></section>
+<section class="jl-home-section"><div class="jl-home-heading"><h2>Próximas gigs</h2><button class="jl-home-link" type="button" data-page="Agenda">Ver todas ›</button></div><div class="jl-preview-card-stack">${next.map(g=>jlHomeCard(g)).join('')||'<p class="jl-muted">Nenhuma próxima gig.</p>'}</div></section>${jlHistoryPanel()}</div>`;
 }
 function heading(title,sub,action=true){return `<div class="jl-head"><div><div class="jl-eyebrow">Jessica Lima / ${esc(page)}</div><h1>${title}</h1><p class="jl-muted">${sub}</p></div>${action?'<button class="primary cursor-interaction" data-act="new">+ Nova gig</button>':''}</div>`}
 function cards(glist){return glist.map(g=>`<div class="jl-gig"><div class="jl-date">${g.date.slice(8)}<small>${(['JAN','FEV','MAR','ABR','MAI','JUN','JUL','AGO','SET','OUT','NOV','DEZ'][Number(g.date.slice(5,7))-1]||'')}</small></div><div><h3>${pubTag(g.place,g.color)}</h3><small>${date(g.date)} · ${esc(g.day||'')} · ${esc(g.time)}${g.endTime?'–'+esc(g.endTime)+(g.endTime<g.time?' (+1 dia)':''):''} · ${esc(g.client)}</small><div><span class="jl-tag ${g.format==='Duo'?'jl-format-duo':'jl-format-solo'}">${esc(g.format)}${g.format==='Duo'&&g.partnerName?' · '+esc(g.partnerName):''}</span><span class="jl-tag">${esc(agency(g)?.name||'Direta')}</span><span class="jl-tag ${g.status==='Realizada'?'jl-status-done':g.status==='Cancelada'?'jl-status-cancelled':g.status==='Confirmada'?'jl-status-confirmed':''}">${esc(g.status)}</span>${g.series?'<span class="jl-tag">Fixa</span>':''}</div>${String(g.notes||'').trim()?`<div class="jl-inline-notes"><strong>Notas:</strong> ${esc(g.notes)}</div>`:''}<div class="jl-actions jl-card-actions">${g.status==='Realizada'?`<button class="cursor-interaction" data-act="tips" data-id="${g.id}" data-gig-uuid="${esc(g.dbId||'')}">${g.tipsRecorded?'Tips '+money(g.tips)+' · editar':'Registrar tips'}</button>`:''}<button class="jl-gig-action cursor-interaction" data-act="edit" data-id="${g.id}" data-gig-uuid="${esc(g.dbId||'')}">Ver detalhes</button>${g.status==='Confirmada'?`<button class="jl-gig-action jl-complete-gig cursor-interaction" data-act="finish" data-id="${g.id}" data-gig-uuid="${esc(g.dbId||'')}">✓ Concluir gig</button>`:''}</div></div><div class="jl-price"><strong>${ready(g)?money(net(g)):'Cachê a definir'}</strong><br><small>${ready(g)?'Para Jessica':'Financeiro pendente'}${g.tips?' · tips '+money(g.tips):''}</small></div></div>`).join('')||'<p class="jl-muted">Nenhuma gig neste período.</p>'}
@@ -2634,3 +2657,33 @@ render();cloudBoot();if(cloud.enabled&&typeof window!=='undefined')window.addEve
 @media(max-width:550px){#jl-preview .jl-home-next .jl-home-gig{grid-template-columns:60px minmax(0,1fr)!important}#jl-preview .jl-home-next .jl-home-type{grid-column:2!important;justify-self:start!important}}
 </style>
 <style id="jl-gig-detail-photo">#jl-preview .jl-gig-detail-view{max-width:740px;margin:auto}#jl-preview .jl-gig-detail-view>.jl-row{align-items:center;gap:10px}#jl-preview .jl-gig-detail-view>.jl-row h2{font-size:18px;margin:0}#jl-preview .jl-gig-hero{display:block;width:100%;height:230px;object-fit:cover;border-radius:18px;margin:18px 0}#jl-preview .jl-gig-hero-placeholder{height:120px;background:linear-gradient(135deg,#dcebf7,#f7e6d8);border-radius:18px;display:grid;place-items:center;font-size:23px;font-weight:700;margin:18px 0}#jl-preview .jl-gig-detail-title{display:flex;justify-content:space-between;align-items:center;gap:12px}#jl-preview .jl-gig-detail-view .jl-panel{margin:12px 0;padding:17px;border-radius:15px}#jl-preview .jl-gig-detail-view .jl-panel p{line-height:1.6}</style>
+<style id="jl-approved-preview-layout">
+#jl-preview .jl-preview-home{max-width:760px;margin:auto;background:#fffdfb;color:#15191e}
+#jl-preview .jl-preview-home .jl-home-logo{font-family:Georgia,"Times New Roman",serif!important;font-weight:500!important;font-size:27px!important;letter-spacing:.7px!important;color:#56291f!important}
+#jl-preview .jl-preview-home .jl-home-sublogo{font-size:10px!important;letter-spacing:3px!important;color:#713c2c!important}
+#jl-preview .jl-preview-home .jl-home-greeting h1{color:#ae3e13!important}
+#jl-preview .jl-preview-home .jl-home-section{margin-top:24px!important}
+#jl-preview .jl-preview-home .jl-home-heading h2{font-size:20px!important;color:#15191e!important}
+#jl-preview .jl-preview-home .jl-home-link{color:#a8390b!important}
+#jl-preview .jl-preview-card-stack{display:grid;gap:11px;margin-top:12px}
+#jl-preview button.jl-preview-gig-card{width:100%;min-height:106px;border:0!important;border-left:6px solid #66b9ff!important;border-radius:14px!important;background:#e4f2ff!important;color:#1b2735!important;display:flex!important;align-items:center!important;justify-content:space-between!important;text-align:left!important;padding:18px 16px 18px 22px!important;box-shadow:none!important;cursor:pointer!important;font:inherit!important}
+#jl-preview button.jl-preview-gig-card.jl-preview-duo{background:#ffebdf!important;border-left-color:#ff995f!important;color:#793615!important}
+#jl-preview .jl-preview-card-content{min-width:0;flex:1;display:grid;gap:12px}
+#jl-preview .jl-preview-card-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+#jl-preview .jl-preview-card-head strong{font-size:19px!important;font-weight:750!important;color:inherit!important}
+#jl-preview .jl-preview-format{border-radius:20px;background:#cde5ff;color:#0562bc;padding:5px 12px;font-size:13px;font-weight:700}
+#jl-preview .jl-preview-duo .jl-preview-format{background:#ffdac4;color:#c34712}
+#jl-preview .jl-preview-card-info{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:inherit}
+#jl-preview .jl-preview-card-chevron{font-size:30px;font-weight:300;color:#577d9f;padding-left:10px}
+#jl-preview .jl-preview-duo .jl-preview-card-chevron{color:#ac4317}
+#jl-preview .jl-preview-stats{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+#jl-preview .jl-preview-stats>div{border:1px solid #eee!important;border-radius:13px!important;background:#fff!important;min-width:0!important;padding:13px 3px!important}
+#jl-preview .jl-preview-stats strong{font-size:clamp(13px,2.8vw,21px)!important;overflow-wrap:anywhere}
+#jl-preview .jl-preview-stats span{color:#c35326!important}
+#jl-preview .jl-home-progress>div{background:#b84413!important}
+#jl-preview .jl-gig-detail-view .jl-gig-hero{height:240px!important;object-fit:cover!important}
+body:has(#mc-overlay:not([hidden])) #jl-preview #jl-cloud-status{position:fixed!important;top:0!important;left:0!important;right:0!important;margin:0!important;padding:12px 18px!important;min-height:46px!important;background:#e6f1fa!important;color:#254c66!important;z-index:2147483003!important;box-shadow:0 1px 8px #0001!important}
+#mc-overlay:not([hidden]){top:48px!important;bottom:calc(76px + env(safe-area-inset-bottom,0px))!important;background:#eef5fb!important}
+#mc-overlay .mc-panel{padding-top:12px!important}
+@media(max-width:520px){#jl-preview button.jl-preview-gig-card{padding:14px 12px 14px 14px!important}#jl-preview .jl-preview-card-head strong{font-size:17px!important}#jl-preview .jl-preview-card-info{font-size:12px;gap:8px}#jl-preview .jl-preview-stats small{font-size:10px!important}}
+</style>
