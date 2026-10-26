@@ -2659,7 +2659,36 @@ render();cloudBoot();if(cloud.enabled&&typeof window!=='undefined')window.addEve
 <style>#jl-preview .jl-login{max-width:440px;margin:28px auto}#jl-preview .jl-cloud-status{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:18px 0;color:var(--jl-muted);font-size:12px}#jl-preview .jl-cloud-status button{font-size:12px;padding:6px 10px;min-height:38px}#jl-preview .jl-cloud-error{color:light-dark(#a32030,#ffaaaa);margin-top:16px}</style>
 <script>
 (()=>{let installPrompt=null;window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event});window.jlInstallDemo=async()=>{if(installPrompt){await installPrompt.prompt();installPrompt=null}else{const help=document.getElementById('jl-install-help');if(help)help.hidden=false}};if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));})();
-</script><script src="./nova-despesa-componente.js?v=20261023fix2"></script><script src="./meu-controle.js?v=20261023fix2"></script></body>
+</script><script src="./nova-despesa-componente.js?v=20261023fix2"></script><script src="./meu-controle.js?v=20261023fix2"></script>
+<style id="jl-mobile-refinement-oct26">
+/* Match page gutters, keeping the white background. */
+@media(max-width:750px){
+ html,body,#jl-preview{width:100%!important;max-width:100%!important;overflow-x:clip!important}
+ #jl-preview .jl-layout,#jl-preview main,#jl-preview #jl-content{min-width:0!important;width:100%!important;max-width:100%!important}
+ #jl-preview main{padding:12px 14px calc(110px + env(safe-area-inset-bottom,0px))!important}
+ #jl-preview .jl-preview-home{width:100%!important;max-width:none!important;margin:0!important;padding:0!important}
+ #jl-preview .jl-preview-home .jl-home-greeting h1{font-size:25px!important;line-height:1.18!important}
+ #jl-preview .jl-preview-home .jl-home-heading h2{font-size:19px!important;line-height:1.3!important}
+ #jl-preview .jl-preview-card-stack{gap:10px!important}
+ #jl-preview .jl-preview-gig-wrap{margin:0 0 10px!important;border-radius:14px!important}
+ #jl-preview .jl-preview-gig-wrap button.jl-preview-gig-card{min-height:0!important;padding:12px 13px 8px 17px!important;gap:8px!important}
+ #jl-preview .jl-preview-card-content{gap:6px!important}
+ #jl-preview .jl-preview-card-head{gap:7px!important}
+ #jl-preview .jl-preview-card-head strong{font-size:16px!important;line-height:1.25!important}
+ #jl-preview .jl-preview-format{font-size:11px!important;padding:3px 9px!important}
+ #jl-preview .jl-preview-card-info{font-size:12px!important;gap:5px 9px!important;line-height:1.4!important}
+ #jl-preview .jl-preview-card-chevron{font-size:23px!important;padding-left:0!important}
+ #jl-preview .jl-preview-card-footer{padding:0 12px 10px 17px!important}
+ #jl-preview .jl-preview-finish{min-height:34px!important;font-size:11px!important;padding:6px 10px!important}
+ #jl-preview .jl-preview-gig-wrap:before{width:5px!important}
+ /* iOS Safari: make navigation independent of overflowing layout and respect the safe area. */
+ #jl-preview .jl-layout nav{position:fixed!important;inset:auto 0 0 0!important;left:0!important;right:0!important;transform:none!important;width:100vw!important;max-width:100vw!important;min-width:0!important;display:grid!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:0!important;padding:7px max(3px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom,0px)) max(3px,env(safe-area-inset-left))!important;z-index:2147483001!important;background:#fff!important;box-sizing:border-box!important;overflow:visible!important}
+ #jl-preview .jl-layout nav button{width:100%!important;min-width:0!important;max-width:100%!important;min-height:48px!important;padding:5px 1px!important;font-size:10px!important;line-height:1.2!important;white-space:normal!important;overflow-wrap:anywhere!important;gap:3px!important}
+ #jl-preview .jl-layout nav svg{width:18px!important;height:18px!important}
+ #mc-overlay{bottom:calc(76px + env(safe-area-inset-bottom,0px))!important}
+}
+</style>
+</body>
 </html>
 
 <style id="jl-final-cards-fix">#jl-preview .jl-home-logo,#jl-preview .jl-brand strong{font-family:Georgia,serif!important;font-weight:800!important;letter-spacing:.2px!important}#jl-preview .jl-home-gig.is-solo{background:#e1edf6!important;border:1px solid #bed4e5!important;color:#244a62!important;border-radius:18px!important;margin:10px 0!important}#jl-preview .jl-home-gig.is-duo{background:#fae7d9!important;border:1px solid #eac6b0!important;color:#7a422c!important;border-radius:18px!important;margin:10px 0!important}#jl-preview .jl-home-next button{border-radius:16px!important;margin-bottom:9px!important;background:#e1edf6!important;border:1px solid #bed4e5!important;color:#244a62!important}#mc-overlay{bottom:calc(76px + env(safe-area-inset-bottom,0px))!important;z-index:101!important}#mc-overlay .mc-panel{padding-bottom:28px!important}@media(min-width:751px){#mc-overlay{bottom:76px!important}}</style>
