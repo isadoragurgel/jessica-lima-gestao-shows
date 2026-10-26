@@ -2011,7 +2011,8 @@ function jlImportHistoricalGigs(){
 function jlHomeCard(g,isToday=false){
 const duo=g.format==='Duo',fmt=duo?'Duo':g.format==='Solo'?'Solo':g.format||'Solo';
 const when=isToday?'':`<span class="jl-preview-card-date">${esc(date(g.date))}</span>`;
-return `<button type="button" class="jl-preview-gig-card ${duo?'jl-preview-duo':'jl-preview-solo'}" data-act="view-gig" data-id="${g.id}" data-gig-uuid="${esc(g.dbId||'')}" aria-label="Ver detalhes da gig ${esc(g.place)}"><div class="jl-preview-card-content"><div class="jl-preview-card-head"><strong>${esc(g.place)}</strong><span class="jl-preview-format">${duo?'♟':'♙'} ${esc(fmt)}</span></div><div class="jl-preview-card-info">${when}<span>◷ ${esc(g.time||'Horário a confirmar')}</span><span>⌖ ${esc(g.place)}</span></div></div><span class="jl-preview-card-chevron">›</span></button>`
+const id=`data-id="${g.id}" data-gig-uuid="${esc(g.dbId||'')}"`;
+return `<div class="jl-preview-gig-wrap ${duo?'jl-preview-duo':'jl-preview-solo'}"><button type="button" class="jl-preview-gig-card ${duo?'jl-preview-duo':'jl-preview-solo'}" data-act="view-gig" ${id} aria-label="Ver detalhes da gig ${esc(g.place)}"><div class="jl-preview-card-content"><div class="jl-preview-card-head"><strong>${esc(g.place)}</strong><span class="jl-preview-format">${esc(fmt)}</span></div><div class="jl-preview-card-info">${when}<span>${esc(g.time||'Horário a confirmar')}</span><span>${esc(g.place)}</span></div></div><span class="jl-preview-card-chevron">›</span></button>${g.status==='Confirmada'?`<div class="jl-preview-card-footer"><button type="button" class="jl-preview-finish" data-act="finish" ${id}>✓ Concluir gig · adicionar tips</button></div>`:''}</div>`;
 }
 function mobileHome(){
 const today=cloudToday(),thisMonth=today.slice(0,7),allMonth=gigs.filter(g=>g.date.startsWith(thisMonth)&&g.status!=='Cancelada'),solo=allMonth.filter(g=>g.format==='Solo').length,duo=allMonth.filter(g=>g.format==='Duo').length;
@@ -2019,7 +2020,7 @@ const todays=gigs.filter(g=>g.date===today&&g.status!=='Cancelada').sort((a,b)=>
 const next=gigs.filter(g=>g.date>today&&g.status!=='Cancelada').sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,4);
 const target=weeklyTarget(),earned=done().filter(week).reduce((sum,g)=>sum+earnedAmount(g),0),pct=Math.min(100,Math.round(earned/target*100));
 const monthlyRevenue=allMonth.filter(g=>g.status==='Realizada').reduce((sum,g)=>sum+earnedAmount(g),0);
-return `<div class="jl-home-v2 jl-preview-home"><header class="jl-home-top"><div><div class="jl-home-logo">JÉSSICA LIMA</div><div class="jl-home-sublogo">MEU CONTROLE</div></div></header><div class="jl-home-greeting"><div><h1>Olá, Jéssica!</h1><p>Aqui está o seu dia de hoje.</p></div><small>${esc(date(today))}</small></div>
+return `<div class="jl-home-v2 jl-preview-home"><div class="jl-home-greeting"><div><h1>Olá, Jéssica!</h1><p>Aqui está o seu dia de hoje.</p></div><small>${esc(date(today))}</small></div>
 <section class="jl-home-section"><div class="jl-home-heading"><h2>Gig${todays.length===1?'':'s'} de hoje</h2><button type="button" class="jl-home-link" data-page="Agenda">Ver agenda ›</button></div><div class="jl-preview-card-stack">${todays.map(g=>jlHomeCard(g,true)).join('')||'<p class="jl-muted">Nenhuma gig hoje.</p>'}</div></section>
 <section class="jl-home-section"><div class="jl-home-heading"><h2>Resumo do mês</h2><small>${esc(monthName(thisMonth))}</small></div><div class="jl-home-stats jl-preview-stats"><div><span>▦</span><strong>${allMonth.length}</strong><small>Gigs</small></div><div><span>♙</span><strong>${solo}</strong><small>Solo</small></div><div><span>♟</span><strong>${duo}</strong><small>Duo</small></div><div><span>€</span><strong>${money(monthlyRevenue)}</strong><small>Receita realizada</small></div></div></section>
 <section class="jl-home-section jl-home-goal"><div class="jl-home-heading"><h2>◎ Meta da semana</h2><button class="jl-home-link" type="button" data-act="edit-weekly-goal">Editar</button></div><div class="jl-home-earned"><strong>${money(earned)}</strong><span>de ${money(target)}</span></div><div class="jl-home-progress"><div style="width:${pct}%"></div></div><p class="jl-home-hint">${pct}% da meta semanal</p></section>
@@ -2705,4 +2706,18 @@ body:has(#mc-overlay:not([hidden])) #jl-preview #jl-cloud-status{position:fixed!
 #mc-overlay:not([hidden]){top:48px!important;bottom:calc(76px + env(safe-area-inset-bottom,0px))!important;background:#eef5fb!important}
 #mc-overlay .mc-panel{padding-top:12px!important}
 @media(max-width:520px){#jl-preview button.jl-preview-gig-card{padding:14px 12px 14px 14px!important}#jl-preview .jl-preview-card-head strong{font-size:17px!important}#jl-preview .jl-preview-card-info{font-size:12px;gap:8px}#jl-preview .jl-preview-stats small{font-size:10px!important}}
+</style>
+<style id="jl-white-and-quick-finish">
+html,body{background:#fff!important}
+#jl-preview,#jl-preview .jl-preview-home,#jl-preview .jl-home-v2,#jl-preview .jl-main,#jl-preview main{background:#fff!important}
+#jl-preview .jl-preview-home{padding-top:12px!important}
+#jl-preview .jl-preview-gig-wrap{border-radius:15px;overflow:hidden;margin-bottom:12px;background:#e4f2ff}
+#jl-preview .jl-preview-gig-wrap.jl-preview-duo{background:#ffebdf}
+#jl-preview .jl-preview-gig-wrap button.jl-preview-gig-card{border-radius:15px 15px 0 0!important;margin:0!important;min-height:95px}
+#jl-preview .jl-preview-card-footer{padding:0 14px 12px 22px;display:flex;justify-content:flex-end}
+#jl-preview .jl-preview-finish{background:#fff!important;border:1px solid #b7d3e8!important;border-radius:9px!important;color:#245a77!important;font-size:12px!important;font-weight:700!important;padding:9px 13px!important;min-height:38px}
+#jl-preview .jl-preview-duo .jl-preview-finish{border-color:#e9c0a9!important;color:#8e471e!important}
+#jl-preview .jl-preview-card-head .jl-preview-format{font-size:12px!important}
+#jl-preview .jl-panel,#jl-preview .jl-dialog{background:#fff!important}
+#jl-preview .jl-dialog{border:1px solid #e7e7e7!important;border-radius:18px!important}
 </style>
