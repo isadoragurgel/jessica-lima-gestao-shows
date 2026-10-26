@@ -1,0 +1,1 @@
+Interface Inicio reconstruida para se aproximar do mockup aprovado. Historico de 113 registros exibido somente para revisao; nenhuma escrita no Supabase. Nao publicado automaticamente. Testar na branch teste-melhorias.

@@ -1,0 +1,1 @@
+TESTE: Módulo Meu Controle em botão flutuante. Lançamentos armazenados somente em localStorage neste navegador. CSV compatível com Excel; PDF via impressão. NÃO integrado ao Supabase, às invoices ou às gigs. Não publicar na produção sem validação.

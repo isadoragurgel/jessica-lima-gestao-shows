@@ -1,0 +1,7 @@
+JESSICA LIMA | MEU CONTROLE — TESTE
+
+Financeiro > Pessoal > Abrir Meu Controle. Sem botão flutuante.
+Visual harmonizado parcialmente; não é reprodução completa do mockup.
+Dados pessoais em localStorage apenas, sem Supabase.
+Exportação Excel em CSV e PDF via impressão do navegador.
+Não publicar em produção sem validação.

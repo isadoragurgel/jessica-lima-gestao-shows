@@ -1,0 +1,1 @@
+Formulário de despesas renderizado via Shadow DOM, sem iframe. Navegação Voltar e salvamento local mantidos. Não sincroniza com Supabase.

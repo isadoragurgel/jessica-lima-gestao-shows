@@ -1,0 +1,6 @@
+Jéssica Lima | Meu Controle — Preview responsivo
+- Estilos financeiros incorporados ao HTML para evitar ausência do CSS em deploys parciais.
+- Calendário corrigido para números de dias em uma linha.
+- Overlay financeiro acima da navegação e responsivo.
+- Dados financeiros permanecem no localStorage, não no Supabase.
+- Ainda não é uma reprodução integral de todos os mockups.
