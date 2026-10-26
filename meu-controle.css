@@ -128,3 +128,21 @@
  #mc-overlay .mc-quick .mc-account-choices{gap:8px!important}
  #mc-overlay .mc-quick .mc-category{font-size:13px!important;padding:9px 11px!important}
 }
+
+/* Coerência visual com o restante do aplicativo — 26/10/2026 */
+#mc-overlay{background:#fff!important;color:#172b45!important;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif!important}
+#mc-overlay .mc-panel,#mc-overlay .mc-panel.mc-new-page{background:#fff!important;max-width:1180px!important;margin:0 auto!important;min-height:0!important}
+#mc-overlay .mc-body,#mc-overlay .mc-new-page .mc-body{background:#fff!important;color:#172b45!important;border-color:#e7e9ee!important;box-shadow:none!important}
+#mc-overlay .mc-panel h2,#mc-overlay .mc-panel h3,#mc-overlay .mc-panel label{color:#172b45!important}
+#mc-overlay .mc-month-nav{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;width:max-content!important;max-width:100%!important;margin:0!important}
+#mc-overlay .mc-month-nav button{width:38px!important;height:40px!important;min-width:38px!important;flex:0 0 38px!important;padding:0!important;font-size:22px!important;border:1px solid #d9e0e8!important;border-radius:11px!important}
+#mc-overlay .mc-month-nav input[type=month]{box-sizing:border-box!important;flex:0 1 160px!important;width:160px!important;min-width:0!important;max-width:160px!important;height:40px!important;min-height:40px!important;padding:5px 8px!important;font-size:15px!important;border-radius:11px!important;border:1px solid #d9e0e8!important;appearance:auto!important}
+#mc-overlay .mc-income-compact{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;max-width:680px!important;margin-top:16px!important}
+#mc-overlay .mc-income-compact>label{display:flex!important;flex-direction:column!important;gap:5px!important;font-size:13px!important;margin:0!important;min-width:0!important}
+#mc-overlay .mc-income-compact>label:nth-of-type(2),#mc-overlay .mc-income-compact>label:last-of-type{grid-column:1/-1!important}
+#mc-overlay .mc-income-compact input,#mc-overlay .mc-income-compact select,#mc-overlay .mc-income-compact textarea{box-sizing:border-box!important;width:100%!important;min-width:0!important;height:42px!important;min-height:42px!important;font-size:14px!important;padding:9px 12px!important;border-radius:10px!important;border:1px solid #dce2e8!important;background:#fff!important;color:#172b45!important}
+#mc-overlay .mc-income-compact textarea{height:64px!important;min-height:64px!important;resize:vertical!important}
+#mc-overlay .mc-income-compact .mc-income-extra{grid-column:1/-1!important;font-size:13px!important;color:#687587!important;order:6!important}
+#mc-overlay .mc-income-compact .mc-income-extra label{display:grid!important;gap:6px!important;margin:9px 0!important}
+#mc-overlay .mc-income-compact .mc-save{grid-column:1/-1!important;min-height:42px!important;height:44px!important;font-size:14px!important;border-radius:11px!important}
+@media(max-width:600px){#mc-overlay .mc-panel{padding:12px!important}#mc-overlay .mc-body{padding:13px!important}#mc-overlay .mc-income-compact{gap:10px!important}#mc-overlay .mc-month-nav input[type=month]{width:145px!important;max-width:145px!important;flex-basis:145px!important}}
