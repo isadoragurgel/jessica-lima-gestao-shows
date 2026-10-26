@@ -146,3 +146,12 @@
 #mc-overlay .mc-income-compact .mc-income-extra label{display:grid!important;gap:6px!important;margin:9px 0!important}
 #mc-overlay .mc-income-compact .mc-save{grid-column:1/-1!important;min-height:42px!important;height:44px!important;font-size:14px!important;border-radius:11px!important}
 @media(max-width:600px){#mc-overlay .mc-panel{padding:12px!important}#mc-overlay .mc-body{padding:13px!important}#mc-overlay .mc-income-compact{gap:10px!important}#mc-overlay .mc-month-nav input[type=month]{width:145px!important;max-width:145px!important;flex-basis:145px!important}}
+
+/* Financeiro usa a mesma superfície branca do restante do app. */
+html body #mc-overlay,html body #mc-overlay .mc-panel,html body #mc-overlay .mc-body{background:#fff!important;background-color:#fff!important;color:#172b45!important}
+#mc-overlay .mc-panel{font-family:inherit!important}
+#mc-overlay .mc-income-compact{row-gap:7px!important;column-gap:10px!important;margin-top:8px!important}
+#mc-overlay .mc-income-compact>label{margin:0!important;gap:3px!important}
+#mc-overlay .mc-income-compact input,#mc-overlay .mc-income-compact select{height:39px!important;min-height:39px!important}
+#mc-overlay .mc-income-compact textarea{min-height:52px!important;height:52px!important}
+#mc-overlay .mc-income-compact .mc-income-extra{display:none!important}
