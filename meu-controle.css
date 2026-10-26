@@ -166,3 +166,6 @@ html body #mc-overlay{background:#fff!important;background-image:none!important;
 #mc-overlay .mc-export-actions{display:flex!important;flex-wrap:wrap!important;gap:8px!important;margin:10px 0 14px!important;}
 #mc-overlay .mc-income-compact{gap:7px 10px!important;margin-top:8px!important;}
 @media(max-width:650px){#mc-overlay .mc-panel{padding:10px 14px!important}#mc-overlay .mc-body{padding:6px 0!important}#mc-overlay .mc-fin-heading{align-items:flex-start!important}}
+
+/* Cabeçalho de Meu Controle idêntico à hierarquia da Agenda */
+#jl-preview #mc-overlay .mc-page-heading{margin:0 0 22px!important;padding:0!important;display:flex!important;align-items:flex-start!important;background:#fff!important;border:0!important}#jl-preview #mc-overlay .mc-page-heading .jl-eyebrow{color:#b65343!important;text-transform:uppercase!important;letter-spacing:.17em!important;font-size:14px!important;font-weight:600!important;margin-bottom:12px!important}#jl-preview #mc-overlay .mc-page-heading h1{color:#243149!important;font-size:clamp(42px,5.2vw,68px)!important;line-height:1.07!important;letter-spacing:-.045em!important;font-weight:800!important;margin:0!important}#jl-preview #mc-overlay .mc-fin-heading{justify-content:flex-end!important}#jl-preview #mc-overlay .mc-fin-heading:empty{display:none!important}
