@@ -2783,3 +2783,20 @@ html,body{background:#fff!important}
 #jl-preview .jl-detail-danger{margin-top:18px;display:flex;justify-content:flex-end}
 #jl-preview .jl-detail-danger button{border:1px solid #c99a9a;border-radius:10px;background:white;color:#a22e2e;padding:10px 14px}
 </style>
+<style id="jl-home-full-width-fix">
+/* A tela Início acompanha a largura do conteúdo das demais abas. */
+#jl-preview .jl-home-v2.jl-preview-home{
+ width:100%!important;max-width:100%!important;
+ margin-left:0!important;margin-right:0!important;
+ box-sizing:border-box!important;
+}
+#jl-preview .jl-preview-home .jl-home-section,
+#jl-preview .jl-preview-home .jl-preview-gig-wrap{
+ width:100%!important;max-width:100%!important;box-sizing:border-box!important;
+}
+#jl-preview #jl-content{min-width:0!important}
+@media(max-width:700px){
+ #jl-preview .jl-home-v2.jl-preview-home{padding-left:0!important;padding-right:0!important}
+ #jl-preview .jl-preview-home .jl-home-stats{width:100%!important}
+}
+</style>
