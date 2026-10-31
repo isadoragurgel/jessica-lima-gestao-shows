@@ -1,0 +1,4 @@
+ATENÇÃO: atualização parcial e segura.
+Inclui mensagem da meta semanal, fonte dos dias da semana, pequeno ajuste de espaçamento e agrupamento das tips digitais em Conta bancária.
+NÃO inclui ainda a lógica de vencimento semanal/quinzenal/mensal, alteração manual de mês, reversão de status ou persistência da data de conclusão: exigem migração de banco e testes integrados.
+NÃO publicar como correção financeira completa. Testar em cópia/preview primeiro.

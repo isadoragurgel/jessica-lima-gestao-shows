@@ -86,8 +86,8 @@ window.MC_SYNC_GIG_REVENUE=async function(gigs){
  let accounts=await readTable('mc_accounts');
  const ensureAccount=async(type)=>{
   let row=accounts.find(a=>a.account_type===type&&!a.archived);
-  if(!row){const name=type==='cash'?'Dinheiro':'Banco';row=accounts.find(a=>a.name===name&&!a.archived)}
-  if(!row){row=checked(await client.from('mc_accounts').insert({user_id:user.id,name:type==='cash'?'Dinheiro':'Banco',account_type:type,currency:'EUR',opening_balance:0,opening_date:today(),archived:false}).select().single());accounts.push(row)}
+  if(!row){const name=type==='cash'?'Dinheiro':'Conta bancária';row=accounts.find(a=>a.name===name&&!a.archived)}
+  if(!row){row=checked(await client.from('mc_accounts').insert({user_id:user.id,name:type==='cash'?'Dinheiro':'Conta bancária',account_type:type,currency:'EUR',opening_balance:0,opening_date:today(),archived:false}).select().single());accounts.push(row)}
   return row.id;
  };
  const categories=await readTable('mc_categories');
@@ -105,7 +105,7 @@ window.MC_SYNC_GIG_REVENUE=async function(gigs){
   const cycle=gig.paymentCycle||(gig.paymentDays===7?'semanal':gig.paymentDays===14||gig.paymentDays===15?'quinzenal':'mensal');
   if(cycle==='cash_in_hand'&&Number(gig.fee)>0){desired.push({source_type:'gig_cash',source_id:gigId+':cash',amount:Number(gig.fee),transaction_date:date,description:'Cash in hand — '+place,category:'Cash in hand',accountType:'cash'});}
   const breakdown=gig.tipsBreakdown||{};
-  for(const [channel,accountType,label] of [['cash','cash','Dinheiro'],['revolut','digital','Revolut'],['coffee','digital','Buy Me a Coffee']]){
+  for(const [channel,accountType,label] of [['cash','cash','Dinheiro'],['revolut','bank','Revolut'],['coffee','bank','Buy Me a Coffee']]){
    const amount=Number(breakdown[channel]||0);
    if(gig.tipsRecorded&&amount>0){desired.push({source_type:'gig_tips',source_id:gigId+':tips:'+channel,amount,transaction_date:date,description:'Tips — '+place+' ('+label+')',category:'Tips',accountType});}
   }

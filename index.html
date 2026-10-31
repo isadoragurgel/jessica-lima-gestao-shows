@@ -1656,6 +1656,10 @@ body.mc-integrated-open #jl-preview .jl-layout main{background:#fff!important}
 #jl-preview #mc-overlay .mc-account-summary{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 #jl-preview #mc-overlay .mc-account-summary>div{background:#fff!important;border:1px solid #e8ddd7!important}
 @media(max-width:600px){#jl-preview #mc-overlay .mc-account-summary{grid-template-columns:1fr!important}}
+</style><style id="jl-2026-10-ui-patch">
+#jl-preview .jl-weekday{font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif!important;font-weight:650!important;letter-spacing:0!important;font-size:12px!important}
+#jl-preview .jl-goal-congrats{color:#a65339;font:600 14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;margin:8px 0 0}
+#jl-preview .jl-preview-home{padding-top:8px!important}
 </style></head>
 <body>
 <script type="application/json" id="codex-visualization-widget-state">{}</script>
@@ -2040,7 +2044,7 @@ const monthlyRevenue=allMonth.filter(g=>g.status==='Realizada').reduce((sum,g)=>
 return `<div class="jl-home-v2 jl-preview-home"><div class="jl-home-greeting"><div><h1>Olá, Jéssica!</h1><p>Aqui está o seu dia de hoje.</p></div><small>${esc(date(today))}</small></div>
 <section class="jl-home-section"><div class="jl-home-heading"><h2>Gig${todays.length===1?'':'s'} de hoje</h2><button type="button" class="jl-home-link" data-page="Agenda">Ver agenda ›</button></div><div class="jl-preview-card-stack">${todays.map(g=>jlHomeCard(g,true)).join('')||'<div class="jl-no-gig-today"><span class="jl-no-gig-icon">☼</span><div><strong>Nenhuma gig hoje</strong><p>Seu dia está livre de apresentações. Confira as próximas gigs abaixo.</p></div></div>'}</div></section>
 <section class="jl-home-section"><div class="jl-home-heading"><h2>Resumo do mês</h2><small>${esc(monthName(thisMonth))}</small></div><div class="jl-home-stats jl-preview-stats"><div><span>▦</span><strong>${allMonth.length}</strong><small>Gigs</small></div><div><span>♙</span><strong>${solo}</strong><small>Solo</small></div><div><span>♟</span><strong>${duo}</strong><small>Duo</small></div><div><span>€</span><strong>${money(monthlyRevenue)}</strong><small>Receita realizada</small></div></div></section>
-<section class="jl-home-section jl-home-goal"><div class="jl-home-heading"><h2>◎ Meta da semana</h2><button class="jl-home-link" type="button" data-act="edit-weekly-goal">Editar</button></div><div class="jl-home-earned"><strong>${money(earned)}</strong><span>de ${money(target)}</span></div><div class="jl-home-progress"><div style="width:${pct}%"></div></div><p class="jl-home-hint">${pct}% da meta semanal</p></section>
+<section class="jl-home-section jl-home-goal"><div class="jl-home-heading"><h2>◎ Meta da semana</h2><button class="jl-home-link" type="button" data-act="edit-weekly-goal">Editar</button></div><div class="jl-home-earned"><strong>${money(earned)}</strong><span>de ${money(target)}</span></div><div class="jl-home-progress"><div style="width:${pct}%"></div></div><p class="jl-home-hint">${pct}% da meta semanal</p>${earned>=target?`<p class="jl-goal-congrats" role="status">🎉 Você é incrível! Meta da semana alcançada!</p>`:""}</section>
 <section class="jl-home-section"><div class="jl-home-heading"><h2>Próximas gigs</h2><button class="jl-home-link" type="button" data-page="Agenda">Ver todas ›</button></div><div class="jl-preview-card-stack">${next.map(g=>jlHomeCard(g)).join('')||'<p class="jl-muted">Nenhuma próxima gig.</p>'}</div></section>${jlHistoryPanel()}</div>`;
 }
 function heading(title,sub,action=true){return `<div class="jl-head"><div><div class="jl-eyebrow">Jessica Lima / ${esc(page)}</div><h1>${title}</h1><p class="jl-muted">${sub}</p></div>${action?'<button class="primary cursor-interaction" data-act="new">+ Nova gig</button>':''}</div>`}
