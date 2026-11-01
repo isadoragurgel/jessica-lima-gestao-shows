@@ -1,5 +1,5 @@
 (()=>{'use strict';
-let state={items:[],accounts:[],opening:{},categories:[]},accountRows=[],categoryRows=[],sharedRows=[],settlementRows=[];
+let state={items:[],accounts:[],opening:{},categories:[],gigForecast:[],forecastError:''},accountRows=[],categoryRows=[],sharedRows=[],settlementRows=[];
 const euro=n=>'€ '+new Intl.NumberFormat('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2}).format(Number(n)||0);
 const today=()=>{const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Dublin',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const v=k=>p.find(x=>x.type===k).value;return v('year')+'-'+v('month')+'-'+v('day')};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -12,6 +12,24 @@ function checked(result){if(result.error)throw result.error;return result.data}
 async function connect(){if(client&&user)return;const cfg=globalThis.JL_SUPABASE_CONFIG;if(!cfg||!window.supabase?.createClient)throw Error('Supabase não está disponível.');if(!client){client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{storage:localStorage,storageKey:'sb-'+new URL(cfg.url).hostname.split('.')[0]+'-auth-token',persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}})}const r=await client.auth.getUser();if(r.error)throw r.error;if(!r.data.user)throw Error('Entre na sua conta antes de abrir o Financeiro.');user=r.data.user}
 async function readTable(name){let rows=[];for(let start=0;;start+=500){const data=checked(await client.from(name).select('*').eq('user_id',user.id).range(start,start+499));rows.push(...data);if(data.length<500)break}return rows}
 async function load(){if(busy)return;busy=true;try{await connect();let [accounts,categories,transactions,shared,settlements]=await Promise.all(['mc_accounts','mc_categories','mc_transactions','mc_shared_expenses','mc_settlements'].map(readTable));if(!accounts.length){for(const name of DEFAULT_ACCOUNTS){checked(await client.from('mc_accounts').insert({user_id:user.id,name,account_type:name==='Dinheiro'?'cash':name==='Dinheiro'?'cash':'bank',currency:'EUR',opening_balance:0,opening_date:today(),archived:false}));}accounts=await readTable('mc_accounts')}
+// Previsões de gigs são somente leitura: NÃO movimentam saldo ou mc_transactions.
+try{
+ const gigsRows=[];
+ for(let start=0;;start+=500){const page=checked(await client.from('jl_gigs').select('id,performance_date,gross_fee,payment_cycle,expected_receipt_month,status,venue_id').range(start,start+499));gigsRows.push(...page);if(page.length<500)break}
+ const venues=checked(await client.from('jl_venues').select('id,name'));
+ const venueNames=new Map(venues.map(v=>[v.id,v.name]));
+ state.gigForecast=gigsRows.map(g=>{
+  const cycle=String(g.payment_cycle||'mensal').toLowerCase().replace(/[ -]/g,'_');
+  const days=cycle==='semanal'?7:cycle==='quinzenal'?15:cycle==='mensal'?30:null;
+  const validDate=/^\d{4}-\d{2}-\d{2}$/.test(g.performance_date||'');
+  if(!validDate||days===null||!Number.isFinite(Number(g.gross_fee)))return null;
+  const date=new Date(g.performance_date+'T12:00:00Z');date.setUTCDate(date.getUTCDate()+days);
+  const automatic=date.toISOString().slice(0,7);
+  const selected=/^\d{4}-(0[1-9]|1[0-2])$/.test(g.expected_receipt_month||'')?g.expected_receipt_month:automatic;
+  return {id:g.id,month:selected,date:g.performance_date,amount:Number(g.gross_fee||0),place:venueNames.get(g.venue_id)||'Gig',status:g.status};
+ }).filter(g=>g&&g.amount>0&&!['cancelada','cancelado','canceled','cancelled'].includes(String(g.status||'').toLowerCase()));
+ state.forecastError='';
+}catch(e){state.gigForecast=[];state.forecastError='Previsões indisponíveis: '+String(e.message||e);console.warn(state.forecastError)}
 accountRows=accounts.filter(x=>!x.archived);categoryRows=categories.filter(x=>!x.archived);sharedRows=shared;settlementRows=settlements;
 state.accounts=['Conta bancária','Dinheiro'];state.opening={'Conta bancária':accountRows.filter(x=>displayAccount(x.name)==='Conta bancária').reduce((n,x)=>n+Number(x.opening_balance||0),0),'Dinheiro':accountRows.filter(x=>displayAccount(x.name)==='Dinheiro').reduce((n,x)=>n+Number(x.opening_balance||0),0)};state.categories=categoryRows.filter(x=>!DEFAULT_CATS.includes(x.name)).map(x=>x.name);
 const accountName=id=>accountRows.find(x=>x.id===id)?.name||'';const catName=id=>categoryRows.find(x=>x.id===id)?.name||'';
@@ -41,8 +59,10 @@ function dashboard(){
  const colors=['#ed7d8a','#b39bdc','#88c6bd','#efc56c','#67a6e9','#d7a98e','#8eb58b'];
  let acc=0;const segments=entries.map(([k,v],i)=>{const start=acc;acc+=exp?v/exp*100:0;return `${colors[i%colors.length]} ${start}% ${acc}%`}).join(',');
  const types={};income().forEach(x=>types[x.category||'Outras receitas']=(types[x.category||'Outras receitas']||0)+Number(x.amount));
+ const forecast=state.gigForecast.filter(g=>g.month===month);const forecastTotal=sum(forecast);
  const outstanding=state.items.filter(x=>x.split&&x.payer==='Jessica').reduce((n,x)=>n+Math.max(0,x.otherShare-(x.settledAmount||0)),0);
  return `<div class="mc-fin-summary"><div><small>Receitas do mês</small><b class="mc-positive">${euro(inc)}</b></div><div><small>Despesas do mês</small><b class="mc-negative">${euro(exp)}</b></div><div><small>Resultado do mês</small><b>${euro(inc-exp)}</b></div><div><small>Acertos a receber · Isadora</small><b>${euro(outstanding)}</b></div></div>
+ <section class="mc-chart-card" style="margin:16px 0;padding:18px"><h3>Receitas previstas de gigs · ${esc(month)}</h3><p style="margin:8px 0"><strong>${euro(forecastTotal)}</strong> <small>previstos · não incluídos no saldo nem nas receitas recebidas</small></p>${state.forecastError?`<p class="mc-empty">${esc(state.forecastError)}</p>`:forecast.length?forecast.sort((a,b)=>a.date.localeCompare(b.date)).map(g=>`<div class="mc-item"><div><b>${esc(g.place)}</b><small>Apresentação: ${esc(g.date)} · Recebimento previsto: ${esc(g.month)}</small></div><strong>${euro(g.amount)}</strong></div>`).join(''):'<p class="mc-empty">Sem cachês previstos neste mês.</p>'}<small>Estimativa pelo valor bruto da gig. Pagamentos recebidos devem ser confirmados separadamente; Cash in hand não aparece como previsão.</small></section>
  <div class="mc-section-heading"><h3>Minhas contas</h3><button type="button" data-mc-go="settings">Editar saldos</button></div>
  <div class="mc-account-summary">${state.accounts.map((a,i)=>`<div><span><small>${esc(a)}</small><b>${euro(accountBalance(a))}</b></span></div>`).join('')}</div>
  <div class="mc-chart-grid"><section class="mc-chart-card"><h3>Despesas por categoria</h3><div class="mc-chart-inner"><div class="mc-donut" style="background:${segments?'conic-gradient('+segments+')':'#eee'}"><span>${euro(exp)}</span></div><div class="mc-legend">${entries.map(([k,v],i)=>`<div><i style="background:${colors[i%colors.length]}"></i><span>${esc(k)}</span><b>${exp?(v/exp*100).toFixed(1).replace('.',','):0}%</b></div>`).join('')||'<small>Sem despesas neste mês</small>'}</div></div></section>

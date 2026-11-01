@@ -1,0 +1,9 @@
+FASE 4 — PREVISÕES FINANCEIRAS
+
+Mostra no painel do Meu Controle as gigs semanais (+7 dias), quinzenais (+15 dias) e mensais (+30 dias), respeitando expected_receipt_month quando preenchido.
+
+IMPORTANTE: previsões são apenas leitura e NÃO criam receitas recebidas em mc_transactions nem alteram saldos. Cash in hand e tips continuam com a integração anterior. Não é uma reconciliação completa de pagamentos.
+
+Não requer SQL adicional além do campo da Fase 3. É necessário que a conta tenha permissão SELECT em jl_gigs e jl_venues.
+
+Teste em ambiente de homologação antes de publicar na main.
