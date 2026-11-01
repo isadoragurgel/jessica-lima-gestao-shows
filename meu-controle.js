@@ -98,16 +98,18 @@ window.MC_SYNC_GIG_REVENUE=async function(gigs){
  };
  const desired=[];
  for(const gig of gigs||[]){
-  if(!gig||gig.status!=='Realizada')continue;
+  if(!gig)continue;
+  // Tips são recebimentos independentes do status da apresentação.
+  const completed=gig.status==='Realizada';
   const gigId=String(gig.dbId||gig.id||'');if(!gigId)continue;
   const place=String(gig.place||'Gig').trim(),date=gig.date;
   if(!/^\d{4}-\d{2}-\d{2}$/.test(String(date)))continue;
   const cycle=gig.paymentCycle||(gig.paymentDays===7?'semanal':gig.paymentDays===14||gig.paymentDays===15?'quinzenal':'mensal');
-  if(cycle==='cash_in_hand'&&Number(gig.fee)>0){desired.push({source_type:'gig_cash',source_id:gigId+':cash',amount:Number(gig.fee),transaction_date:date,description:'Cash in hand — '+place,category:'Cash in hand',accountType:'cash'});}
+  if(completed&&cycle==='cash_in_hand'&&Number(gig.fee)>0){desired.push({source_type:'gig_cash',source_id:gigId+':cash',amount:Number(gig.fee),transaction_date:(existing.find(r=>r.source_type==='gig_cash'&&r.source_id===gigId+':cash')?.transaction_date||today()),description:'Cash in hand — '+place,category:'Cash in hand',accountType:'cash'});}
   const breakdown=gig.tipsBreakdown||{};
   for(const [channel,accountType,label] of [['cash','cash','Dinheiro'],['revolut','bank','Revolut'],['coffee','bank','Buy Me a Coffee']]){
    const amount=Number(breakdown[channel]||0);
-   if(gig.tipsRecorded&&amount>0){desired.push({source_type:'gig_tips',source_id:gigId+':tips:'+channel,amount,transaction_date:date,description:'Tips — '+place+' ('+label+')',category:'Tips',accountType});}
+   if(gig.tipsRecorded&&amount>0){desired.push({source_type:'gig_tips',source_id:gigId+':tips:'+channel,amount,transaction_date:(existing.find(r=>r.source_type==='gig_tips'&&r.source_id===gigId+':tips:'+channel)?.transaction_date||gig.tipRecords?.find(t=>(t.method==='buy_me_a_coffee'?'coffee':t.method)===channel)?.created_at?.slice(0,10)||today()),description:'Tips — '+place+' ('+label+')',category:'Tips',accountType});}
   }
  }
  const keys=new Set(desired.map(d=>d.source_type+'|'+d.source_id));
