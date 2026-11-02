@@ -1661,18 +1661,33 @@ body.mc-integrated-open #jl-preview .jl-layout main{background:#fff!important}
 #jl-preview .jl-goal-congrats{color:#a65339;font:600 14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;margin:8px 0 0}
 #jl-preview .jl-preview-home{padding-top:8px!important}
 </style>
-<style id="jl-home-refresh-and-mobile-nav">
-/* Mais personalidade, sem remover o destaque original da gig */
-#jl-preview{--jl-panel:#fffdfb;--jl-line:#e7ded6;--jl-brand:#ad6247}
-#jl-preview .jl-layout main{background:#f8f5f1}
-#jl-preview .jl-today{background-color:#fffdfb!important;border:1px solid #e5d8cd!important;border-top:4px solid #b36a4c!important;box-shadow:0 8px 26px #26394b10;border-radius:18px!important}
-#jl-preview .jl-home-section{margin-bottom:18px!important}
-#jl-preview .jl-home-section .jl-preview-card-stack{gap:10px!important}
-#jl-preview .jl-home-heading h2{color:#26394b}
-#jl-preview .jl-more-links{display:grid;gap:12px;margin-top:22px}
-#jl-preview .jl-more-links button{padding:17px 18px;text-align:left;background:#fff;border:1px solid #e3d7cd;border-radius:14px;color:#26394b;font-weight:650;cursor:pointer}
-@media(min-width:701px){#jl-preview nav button[data-page="Mais"]{display:none!important}}
-@media(max-width:700px){#jl-preview nav button[data-page="Financeiro"],#jl-preview nav button[data-page="Biblioteca"]{display:none!important}#jl-preview nav{gap:1px!important}#jl-preview nav button{min-width:0!important;font-size:11px!important;padding:7px 3px!important}#jl-preview .jl-today{margin-bottom:15px!important}}
+<style id="jl-home-visual-2026">
+/* Página Início: padrão da Agenda, sem sidebar adicional */
+#jl-preview .jl-preview-home{max-width:1080px!important;margin:0 auto!important;padding:8px 4px 24px!important;font-family:inherit!important;color:#243149!important}
+#jl-preview .jl-preview-home .jl-home-greeting{margin:2px 0 18px!important;padding:0 2px 14px!important;border-bottom:1px solid #efe4dc!important;align-items:center!important}
+#jl-preview .jl-preview-home .jl-home-greeting h1{font-family:inherit!important;color:#243149!important;font-weight:800!important;font-size:clamp(26px,4vw,37px)!important;letter-spacing:-.04em!important}
+#jl-preview .jl-preview-home .jl-home-greeting p{color:#856b60!important;font-size:14px!important}
+#jl-preview .jl-preview-home .jl-home-section{margin-bottom:18px!important}
+#jl-preview .jl-preview-home .jl-home-heading h2{font-family:inherit!important;color:#243149!important;font-size:18px!important;font-weight:750!important}
+#jl-preview .jl-preview-home .jl-home-heading{margin-bottom:10px!important}
+#jl-preview .jl-preview-home .jl-preview-card-stack{display:grid!important;gap:9px!important}
+#jl-preview .jl-preview-home .jl-preview-gig-wrap{border-radius:17px!important;overflow:hidden!important;box-shadow:0 5px 16px rgba(36,49,73,.065)!important}
+#jl-preview .jl-preview-home .jl-preview-gig-card{border-radius:16px!important;min-height:80px!important}
+#jl-preview .jl-preview-home .jl-preview-solo{background:#e8f0f7!important;border-color:#c9dcea!important}
+#jl-preview .jl-preview-home .jl-preview-duo{background:#fbeadd!important;border-color:#efd3bf!important}
+#jl-preview .jl-preview-home .jl-preview-stats{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div{border-radius:15px!important;padding:17px 9px!important;border:1px solid #dfe6ed!important;background:#e8f0f7!important;box-shadow:0 3px 12px rgba(36,49,73,.045)!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div:nth-child(2){background:#fbeadd!important;border-color:#efd8c7!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div:nth-child(3){background:#e8f1eb!important;border-color:#d4e4d9!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div:nth-child(4){background:#f6ece3!important;border-color:#ead9ca!important}
+#jl-preview .jl-preview-home .jl-preview-stats strong{color:#243149!important;font-size:clamp(18px,2.7vw,24px)!important}
+#jl-preview .jl-preview-home .jl-preview-stats span{color:#ae6248!important}
+#jl-preview .jl-preview-home .jl-home-goal{border:1px solid #edddd2!important;border-radius:17px!important;background:linear-gradient(115deg,#fffaf6,#f9eee7)!important;padding:19px 20px!important;box-shadow:0 5px 15px rgba(36,49,73,.045)!important}
+#jl-preview .jl-preview-home .jl-home-progress{height:10px!important;background:#ebdcd1!important}
+#jl-preview .jl-preview-home .jl-home-progress div{background:#b65f43!important}
+#jl-preview .jl-preview-home .jl-home-hint{background:#f3e3d7!important;color:#87432f!important}
+#jl-preview .jl-preview-home .jl-home-next button{border-radius:13px!important;border:1px solid #dce4eb!important;margin-bottom:8px!important;box-shadow:0 3px 10px rgba(36,49,73,.035)!important}
+@media(max-width:620px){#jl-preview .jl-preview-home{padding:2px 0 20px!important}#jl-preview .jl-preview-home .jl-preview-stats{gap:6px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}#jl-preview .jl-preview-home .jl-preview-stats>div{padding:12px 6px!important}#jl-preview .jl-preview-home .jl-home-greeting{gap:8px!important}#jl-preview .jl-preview-home .jl-home-greeting small{font-size:11px!important}}
 </style>
 </head>
 <body>
@@ -2090,7 +2105,7 @@ function contacts(){const pubs=[...new Set(gigs.map(g=>g.place))];return heading
 function library(){return heading('Biblioteca','Seu material, pronto para o próximo palco.',false)+`<div class="jl-grid">${[['Acoustic Essentials','Repertório · 3 músicas','Stand by Me\nValerie\nPerfect'],['Pop & Soul','Repertório · 3 músicas','Ain’t No Sunshine\nDreams\nPut Your Records On'],['Checklist de palco','Notas · preparação','Confirmar microfone e PA\nLevar cabos e fonte\nChegar 30 minutos antes']].map(([name,type,text])=>`<section class="jl-panel"><span class="jl-tag">${type}</span><h2 style="margin-top:12px">${name}</h2><button class="cursor-interaction" data-act="material" data-name="${name}" data-text="${esc(text)}">Abrir material</button></section>`).join('')}</div>`}
 function editForm(g,mode){return simplifiedGigForm(g,mode)}
 
-function render(){if(cloud.enabled&&!cloud.ready){cloudAuthPage();return}nav.hidden=false;const profileButton=root.querySelector('[data-page="Perfil"]');if(profileButton)profileButton.hidden=false;nav.innerHTML=[['Início','layout-dashboard'],['Agenda','calendar-days'],['Financeiro','wallet'],['Meu Controle','wallet-cards'],['Contatos','users'],['Biblioteca','music'],['Mais','menu']].map(([p,icon])=>`<button class="cursor-interaction ${page===p?'active':''}" data-page="${p}" aria-current="${page===p?'page':'false'}"><i data-lucide="${icon}" aria-hidden="true"></i>${p}</button>`).join('');content.innerHTML=(dialog?'<dialog id="jl-active-modal" class="jl-native-modal">'+dialog+'</dialog>':'')+({ 'Início':mobileHome,'Agenda':agenda,'Financeiro':finance,'Meu Controle':()=>'<section class="jl-panel"><h2>Meu Controle</h2><p>Seu painel financeiro está aberto.</p></section>','Contatos':contacts,'Biblioteca':libraryView,'Mais':()=>`<section class="jl-panel jl-more-page"><div class="jl-eyebrow">Jessica Lima</div><h1>Mais opções</h1><p>Encontre aqui os recursos adicionais.</p><div class="jl-more-links"><button type="button" data-page="Financeiro">Financeiro</button><button type="button" data-page="Biblioteca">Biblioteca</button><button type="button" data-page="Perfil">Perfil e configurações</button></div></section>`,'Perfil':profilePage}[page])();if(typeof lucide!=='undefined')lucide.createIcons({attrs:{width:18,height:18}});initializeMonthlyChart();const modal=root.querySelector('#jl-active-modal');if(modal?.showModal){if(!modal.open)modal.showModal();modal.addEventListener('cancel',event=>{event.preventDefault();dialog=null;render()})}else if(modal?.setAttribute)modal.setAttribute('open','');if(cloud.enabled){cloudSetStatus(cloud.status);const footer=root.querySelector('.jl-footer');if(footer)footer.textContent='Conta conectada ao Supabase · Dados privados do artista'}}
+function render(){if(cloud.enabled&&!cloud.ready){cloudAuthPage();return}nav.hidden=false;const profileButton=root.querySelector('[data-page="Perfil"]');if(profileButton)profileButton.hidden=false;nav.innerHTML=[['Início','layout-dashboard'],['Agenda','calendar-days'],['Financeiro','wallet'],['Meu Controle','wallet-cards'],['Contatos','users'],['Biblioteca','music']].map(([p,icon])=>`<button class="cursor-interaction ${page===p?'active':''}" data-page="${p}" aria-current="${page===p?'page':'false'}"><i data-lucide="${icon}" aria-hidden="true"></i>${p}</button>`).join('');content.innerHTML=(dialog?'<dialog id="jl-active-modal" class="jl-native-modal">'+dialog+'</dialog>':'')+({ 'Início':mobileHome,'Agenda':agenda,'Financeiro':finance,'Meu Controle':()=>'<section class="jl-panel"><h2>Meu Controle</h2><p>Seu painel financeiro está aberto.</p></section>','Contatos':contacts,'Biblioteca':libraryView,'Perfil':profilePage}[page])();if(typeof lucide!=='undefined')lucide.createIcons({attrs:{width:18,height:18}});initializeMonthlyChart();const modal=root.querySelector('#jl-active-modal');if(modal?.showModal){if(!modal.open)modal.showModal();modal.addEventListener('cancel',event=>{event.preventDefault();dialog=null;render()})}else if(modal?.setAttribute)modal.setAttribute('open','');if(cloud.enabled){cloudSetStatus(cloud.status);const footer=root.querySelector('.jl-footer');if(footer)footer.textContent='Conta conectada ao Supabase · Dados privados do artista'}}
 
 let jlDragGigId=null;
 root.addEventListener('dragstart',event=>{const card=event.target.closest('.jl-agenda-event[draggable]');if(!card)return;jlDragGigId=card.dataset.id;event.dataTransfer.effectAllowed='move';event.dataTransfer.setData('text/plain',String(jlDragGigId));});
