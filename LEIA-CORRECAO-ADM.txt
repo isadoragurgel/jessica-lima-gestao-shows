@@ -1,0 +1,1 @@
+Correção ADM: prazo de pagamento selecionável (Semanal, Quinzenal, Mensal, Cash in hand); padrão quinzenal para novas gigs ADM. Nome e valor do músico agora são persistidos em jl_gigs no Supabase. Invoice mantém valor bruto. Não é necessário SQL novo. Teste criando e reabrindo uma gig ADM, inclusive em outro dispositivo.
