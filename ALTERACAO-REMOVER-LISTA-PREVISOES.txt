@@ -1,0 +1,1 @@
+Apenas a lista visual de receitas previstas de gigs foi removida da tela Meu Controle. O cálculo e o armazenamento do mês previsto na Agenda foram preservados. Nenhuma alteração SQL necessária.

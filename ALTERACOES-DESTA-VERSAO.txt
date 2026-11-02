@@ -1,0 +1,3 @@
+Ajuste entregue: barra de sincronização Supabase compacta, com botão atualizar no topo e avisos de erro/pendências preservados.
+Ainda pendentes: Admin +15 dias/invoice líquida, edição de transações, categorias novas, campos mobile, menus compactos.
+Não exige SQL.
