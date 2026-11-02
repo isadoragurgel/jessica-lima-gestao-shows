@@ -1689,6 +1689,27 @@ body.mc-integrated-open #jl-preview .jl-layout main{background:#fff!important}
 #jl-preview .jl-preview-home .jl-home-next button{border-radius:13px!important;border:1px solid #dce4eb!important;margin-bottom:8px!important;box-shadow:0 3px 10px rgba(36,49,73,.035)!important}
 @media(max-width:620px){#jl-preview .jl-preview-home{padding:2px 0 20px!important}#jl-preview .jl-preview-home .jl-preview-stats{gap:6px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}#jl-preview .jl-preview-home .jl-preview-stats>div{padding:12px 6px!important}#jl-preview .jl-preview-home .jl-home-greeting{gap:8px!important}#jl-preview .jl-preview-home .jl-home-greeting small{font-size:11px!important}}
 </style>
+<style id="jl-visual-contraste-2026">
+/* JL Visual aprovado: contraste alto nos indicadores e ações de gig visíveis */
+#jl-preview .jl-home-v2{color:#192d40!important;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important}
+#jl-preview .jl-preview-home .jl-preview-stats{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div{border:0!important;border-radius:16px!important;box-shadow:0 5px 14px rgba(23,60,86,.12)!important;padding:18px 12px!important;min-height:120px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div:nth-child(1){background:#173c56!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div:nth-child(2){background:#b65737!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div:nth-child(3){background:#356452!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div:nth-child(4){background:#604a64!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div span,#jl-preview .jl-preview-home .jl-preview-stats>div strong,#jl-preview .jl-preview-home .jl-preview-stats>div small{color:#fff!important;-webkit-text-fill-color:#fff!important;text-shadow:none!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div strong{font-size:clamp(20px,2.5vw,31px)!important;font-weight:800!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div small{font-size:13px!important;font-weight:650!important;opacity:1!important}
+#jl-preview .jl-preview-home .jl-preview-stats>div span{font-size:23px!important}
+#jl-preview .jl-preview-home .jl-home-goal{border:1px solid #e1d8d0!important;background:#fff!important;box-shadow:0 3px 15px rgba(23,60,86,.07)!important;padding:18px!important}
+#jl-preview .jl-preview-home .jl-home-hint{background:transparent!important;padding:4px 0!important}
+#jl-preview .jl-preview-gig-wrap .jl-preview-card-footer{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:9px!important;flex-wrap:wrap!important;padding:10px 14px 13px 20px!important}
+#jl-preview .jl-preview-gig-wrap .jl-preview-card-footer button{border:1px solid #b65737!important;background:#b65737!important;color:#fff!important;border-radius:10px!important;padding:8px 12px!important;font-weight:700!important;font-size:12px!important;min-height:36px!important}
+#jl-preview .jl-preview-gig-wrap .jl-preview-card-footer button.jl-tips-shortcut{background:#fff!important;color:#173c56!important;border-color:#a9bac6!important}
+#jl-preview .jl-preview-gig-wrap .jl-preview-completed{font-size:12px!important;color:#356452!important;font-weight:700!important}
+@media(max-width:640px){#jl-preview .jl-preview-home .jl-preview-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}#jl-preview .jl-preview-home .jl-preview-stats>div{min-height:105px!important;padding:12px 8px!important}#jl-preview .jl-preview-gig-wrap .jl-preview-card-footer{padding:9px 10px 12px!important}}
+</style>
 </head>
 <body>
 <script type="application/json" id="codex-visualization-widget-state">{}</script>
@@ -2078,7 +2099,7 @@ function jlHomeCard(g,isToday=false){
 const duo=g.format==='Duo',fmt=duo?'Duo':g.format==='Solo'?'Solo':g.format||'Solo';
 const when=isToday?'':`<span class="jl-preview-card-date">${esc(date(g.date))}</span>`;
 const id=`data-id="${g.id}" data-gig-uuid="${esc(g.dbId||'')}"`;
-return `<div class="jl-preview-gig-wrap ${duo?'jl-preview-duo':'jl-preview-solo'}"><button type="button" class="jl-preview-gig-card ${duo?'jl-preview-duo':'jl-preview-solo'}" data-act="view-gig" ${id} aria-label="Ver detalhes da gig ${esc(g.place)}"><div class="jl-preview-card-content"><div class="jl-preview-card-head"><strong>${esc(g.place)}</strong><span class="jl-preview-format">${esc(fmt)}</span></div><div class="jl-preview-card-info">${when}<span>${esc(g.time||'Horário a confirmar')}</span><span>${esc(g.place)}</span></div></div><span class="jl-preview-card-chevron">›</span></button>${g.status==='Confirmada'?`<div class="jl-preview-card-footer"><button type="button" class="jl-preview-finish" data-act="finish" ${id}>✓ Concluir gig</button></div>`:g.status==='Realizada'?`<div class="jl-preview-card-footer"><span class="jl-preview-completed">✓ Concluída</span><button type="button" class="jl-preview-finish" data-act="tips" ${id}>${g.tipsRecorded?'Editar tips':'Adicionar tips'}</button></div>`:''}</div>`;
+return `<div class="jl-preview-gig-wrap ${duo?'jl-preview-duo':'jl-preview-solo'}"><button type="button" class="jl-preview-gig-card ${duo?'jl-preview-duo':'jl-preview-solo'}" data-act="view-gig" ${id} aria-label="Ver detalhes da gig ${esc(g.place)}"><div class="jl-preview-card-content"><div class="jl-preview-card-head"><strong>${esc(g.place)}</strong><span class="jl-preview-format">${esc(fmt)}</span></div><div class="jl-preview-card-info">${when}<span>${esc(g.time||'Horário a confirmar')}</span><span>${esc(g.place)}</span></div></div><span class="jl-preview-card-chevron">›</span></button>${g.status==='Confirmada'?`<div class="jl-preview-card-footer"><button type="button" class="jl-preview-finish" data-act="finish" ${id}>✓ Concluir gig</button><button type="button" class="jl-tips-shortcut" data-act="tips" ${id}>${g.tipsRecorded?'Editar tips':'Adicionar tips'}</button></div>`:g.status==='Realizada'?`<div class="jl-preview-card-footer"><span class="jl-preview-completed">✓ Concluída</span><button type="button" class="jl-tips-shortcut" data-act="tips" ${id}>${g.tipsRecorded?'Editar tips':'Adicionar tips'}</button></div>`:''}</div>`;
 }
 function mobileHome(){
 const today=cloudToday(),thisMonth=today.slice(0,7),allMonth=gigs.filter(g=>g.date.startsWith(thisMonth)&&g.status!=='Cancelada'),solo=allMonth.filter(g=>g.format==='Solo').length,duo=allMonth.filter(g=>g.format==='Duo').length;

@@ -1,0 +1,1 @@
+Atualizacao visual: cartões Resumo do mês em azul-marinho, terracota, verde e ameixa, com textos brancos. Ações Concluir gig e Adicionar/Editar tips diretamente nos cartões da tela Início. Não altera dados ou schema Supabase. Testar antes de publicar.
