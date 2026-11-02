@@ -1,6 +1,6 @@
 (()=>{'use strict';
 let state={items:[],accounts:[],opening:{},categories:[],gigForecast:[],forecastError:''},accountRows=[],categoryRows=[],sharedRows=[],settlementRows=[];
-const euro=n=>'€ '+new Intl.NumberFormat('pt-PT',{minimumFractionDigits:2,maximumFractionDigits:2}).format(Number(n)||0);
+const euro=n=>'€ '+new Intl.NumberFormat('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}).format(Number(n)||0);
 const today=()=>{const p=new Intl.DateTimeFormat('en-CA',{timeZone:'Europe/Dublin',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const v=k=>p.find(x=>x.type===k).value;return v('year')+'-'+v('month')+'-'+v('day')};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let month=today().slice(0,7),screen='dashboard',client=null,user=null,loaded=false,busy=false,cloudError='';
@@ -69,7 +69,7 @@ function sum(a){return a.reduce((n,x)=>n+(Number(x.amount)||0),0)}
 function expenses(){return eligible().filter(x=>x.type==='expense'||x.type==='brazil-expense').map(x=>({...x,amount:x.split?x.myShare:x.amount}))}
 function income(){return eligible().filter(x=>x.type==='income')}
 function accountBalance(a){return Number(state.opening[a]||0)+sum(state.items.filter(x=>x.account===a&&['income','reimbursement'].includes(x.type)))-sum(state.items.filter(x=>x.account===a&&['expense','brazil-expense','investment','transfer-out'].includes(x.type)))+sum(state.items.filter(x=>x.account===a&&x.type==='transfer-in'))+settlementRows.filter(s=>accountRows.some(ac=>ac.id===s.account_id&&ac.name===a)).reduce((n,s)=>n+Number(s.amount),0)}
-function row(x){const sign=['income','reimbursement','transfer-in'].includes(x.type)?'+':'−';return `<div class="mc-item"><div><b>${esc(x.description||x.type)}</b><small>${esc(x.date)} · ${esc(x.category||x.type)} · ${esc(x.account||'')} ${x.note?' · Nota: '+esc(x.note):''}</small>${x.split?`<small>Isadora: ${euro(x.amount*(1-x.jessica/100))} · ${x.settled?'Acertado':'Pendente'}</small>`:''}</div><div><strong>${sign}${euro(x.amount)}</strong><button data-edit="${esc(x.id)}" title="Editar lançamento" aria-label="Editar lançamento">✎</button><button data-delete="${esc(x.id)}" title="Excluir lançamento">×</button></div></div>`}
+function row(x){const sign=['income','reimbursement','transfer-in'].includes(x.type)?'+':'−';return `<div class="mc-item"><div><b>${esc(x.description||x.type)}</b><small>${esc(x.date)} · ${esc(x.category||x.type)} · ${esc(x.account||'')} ${x.note?' · Nota: '+esc(x.note):''}</small>${x.split?`<small>Isadora: ${euro(x.amount*(1-x.jessica/100))} · ${x.settled?'Acertado':'Pendente'}</small>`:''}</div><div class="mc-item-actions"><strong class="mc-item-amount">${sign}${euro(x.amount)}</strong><div class="mc-item-buttons"><button data-edit="${esc(x.id)}" title="Editar lançamento" aria-label="Editar lançamento">✎</button><button data-delete="${esc(x.id)}" title="Excluir lançamento" aria-label="Excluir lançamento">×</button></div></div></div>`}
 function dashboard(){
  const inc=sum(income()),exp=sum(expenses()),br=sum(eligible().filter(x=>x.type.startsWith('brazil')||x.type==='investment'));
  const cats={};expenses().forEach(x=>cats[x.category||'Outros']=(cats[x.category||'Outros']||0)+Number(x.amount));

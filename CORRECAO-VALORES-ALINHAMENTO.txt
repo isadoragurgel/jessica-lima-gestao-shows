@@ -1,0 +1,1 @@
+Valores em pt-BR: € 1.670,70. Linhas recentes alinhadas com colunas fixas para valor, editar e excluir. Nenhuma alteração de dados ou SQL.
