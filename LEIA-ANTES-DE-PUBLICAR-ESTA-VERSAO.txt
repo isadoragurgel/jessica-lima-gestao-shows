@@ -1,0 +1,8 @@
+CORREÇÃO DE LAYOUT — 02/11/2026
+
+Este ZIP tem apenas UMA cópia do aplicativo, com index.html na raiz.
+Alterações: cartões escuros com texto branco; meta semanal compacta; fundo off-white; cartões de gigs com botões Concluir gig e Adicionar/Editar tips preservados.
+Não altera tabelas ou dados Supabase.
+Extraia o ZIP e envie os arquivos da raiz para a raiz do repositório GitHub. Não envie uma pasta adicional contendo outro index.html.
+Teste após o deploy: Início, Agenda, Concluir gig, Tips e Meu Controle.
+Não foi feito teste conectado ao seu Supabase.
