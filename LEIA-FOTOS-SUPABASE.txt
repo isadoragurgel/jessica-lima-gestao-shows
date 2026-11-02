@@ -1,0 +1,20 @@
+FOTOS DOS PUBS — SUPABASE STORAGE
+
+1. Bucket privado: jl-venue-photos
+2. Políticas SELECT, INSERT, UPDATE, DELETE para authenticated (já executadas pelo usuário).
+3. Publique o conteúdo deste ZIP no GitHub main, após fazer backup.
+4. Entre no aplicativo, abra Contatos > Pubs / Venues > Foto do venue.
+5. Escolha JPG/PNG/WebP de até 8 MB e clique Salvar foto.
+6. Abra uma gig desse pub: a foto aparecerá no topo dos detalhes.
+7. Atualize a página no outro dispositivo para carregar a foto do Supabase.
+
+Fotos antigas guardadas apenas no navegador não são migradas automaticamente.
+Envie novamente as fotos que desejar sincronizar.
+
+O bucket é privado. Links temporários assinados expiram após 7 dias e são
+renovados quando o aplicativo recarrega os dados. Usuários autenticados
+com acesso ao mesmo projeto podem acessar as fotos segundo as políticas
+já criadas; se houver múltiplos usuários sem autorização mútua, restrinja
+as políticas por artista antes de usar em produção.
+
+Esta entrega não foi testada contra o Supabase real nem publicada na Vercel.
