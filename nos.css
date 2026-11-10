@@ -290,3 +290,32 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
 #reportRows .report-movements-table tr:nth-child(even) td{background:#fbfaf7;}
 #reportRows .report-movements-table th:last-child,#reportRows .report-movements-table td:last-child{text-align:right;white-space:nowrap;font-weight:700;color:#1a324b;}
 @media print{#reportRows{overflow:visible!important;border:0!important}#reportRows .report-movements-table{min-width:0!important;font-size:9px!important;table-layout:fixed!important}#reportRows .report-movements-table th,#reportRows .report-movements-table td{padding:5px 4px!important;word-break:break-word!important}#reportRows .report-movements-table tr{break-inside:avoid}#reportRows .report-movements-table thead{display:table-header-group}}
+
+/* Refinamentos: relatório, gráfico e cabeçalho consistente de Casal */
+#reportRows .report-movements-table th:nth-child(2),
+#reportRows .report-movements-table td:nth-child(2) {
+  min-width: 98px !important;
+  width: 108px;
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+#categoryChart .donut-center strong {
+  font-size: 15px !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.35px !important;
+  white-space: nowrap !important;
+}
+@media (max-width: 750px) {
+  #categoryChart .donut-center strong { font-size: clamp(14px, 4vw, 19px) !important; }
+}
+@media print {
+  #reportRows .report-movements-table th:nth-child(2),
+  #reportRows .report-movements-table td:nth-child(2) {
+    width: 11% !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+}
