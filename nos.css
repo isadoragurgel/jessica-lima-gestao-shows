@@ -94,3 +94,271 @@
   #inicio .stats>.stat small{font-size:14px;}
   #inicio .stats>.stat.dark span{font-size:13px;}
 }
+
+
+/* UI Kit Gemini integrado com a aplicação existente — apenas apresentação. */
+:root{--navy:#1A324B;--ink:#1A324B;--muted:#7A8C9E;--ivory:#F8F6F0;--border:#E8ECF0;--terracotta:#D98268;--sage:#e5f0e9}
+body{background:#eeeae3;color:var(--ink);font-family:'Plus Jakarta Sans',Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+.shell{background:var(--ivory)}
+.brand,h1,h2{font-family:'DM Serif Display',Georgia,serif;font-weight:400}
+.brand span{color:var(--terracotta)}
+.panel,.stat:not(.dark),.account,.chart-card,.investment-disclosure{background:#fff;border-color:var(--border);box-shadow:0 4px 16px -2px rgba(26,50,75,.045)}
+.panel,.stat,.account{border-radius:22px}
+button{transition:background .15s,transform .15s,filter .15s}
+button:active{transform:scale(.98)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--terracotta);outline-offset:2px}
+button:not(.soft):not(.textbtn):not(.tiny):not(.danger):not(.iconbtn):not(.mobile-add-transaction){background:var(--navy)}
+.sectionhead>button[data-modal=transaction]{background:var(--terracotta)!important}
+input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);border-color:var(--terracotta)}
+#recent,#txList{display:flex;flex-direction:column;gap:9px;margin-top:12px}
+#recent .tx-item,#txList .tx-item{border:1px solid transparent;background:#F8F6F0;border-radius:15px;padding:13px 14px;gap:12px;align-items:center;transition:background .15s,border-color .15s}
+#recent .tx-item:hover,#txList .tx-item:hover{background:#F6E6E1;border-color:#efd9d0}
+.tx-main{display:flex;align-items:center;gap:12px;min-width:0;flex:1}
+.tx-copy{min-width:0;overflow-wrap:anywhere}
+.tx-copy b{font-size:13px;color:var(--navy)}
+.tx-copy small{font-size:11px;line-height:1.5}
+.tx-type-dot{display:block;width:11px;height:11px;border-radius:50%;flex:none;background:var(--terracotta)}
+.tx-income .tx-type-dot{background:#6b9e86}.tx-transfer .tx-type-dot{background:#8198b0}
+.tx-item .rowactions{gap:5px}.tx-item .amount{font-size:14px;letter-spacing:-.2px}
+.tx-item .negative{color:#B96550}.tx-item .positive{color:#397e65}
+.tx-item .tiny{font-size:10px;padding:5px 8px;margin-left:2px}
+#inicio .stats>.stat.dark{background:var(--navy)}
+#inicio .stats>.stat.dark strong{color:white}
+.mobile-add-transaction{display:none}
+@media(max-width:900px){
+  .shell>nav,nav{background:var(--navy);border-top:0;box-shadow:0 -6px 28px rgba(26,50,75,.16);height:76px;padding:8px 5px max(7px,env(safe-area-inset-bottom));justify-content:space-around}
+  nav button{color:#b8c4d0!important;background:transparent!important;border-radius:12px;max-width:none;font-size:20px;padding:5px 2px;min-width:0}
+  nav button span{color:inherit;font-size:10px}
+  nav button.selected{color:var(--terracotta)!important;background:transparent!important;position:relative}
+  nav button.selected::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:6px;height:6px;border-radius:50%;background:var(--terracotta)}
+  nav button:nth-child(2){margin-right:25px}
+  nav button:nth-child(3){margin-left:25px}
+  nav .mobile-add-transaction{display:flex!important;align-items:center;justify-content:center;position:absolute;left:50%;top:-16px;transform:translateX(-50%);width:56px;height:56px;border-radius:50%;border:4px solid var(--ivory);background:var(--terracotta)!important;color:white!important;font-size:32px;font-weight:400;box-shadow:0 5px 20px rgba(217,130,104,.35);padding:0;z-index:2}
+  nav .mobile-add-transaction:active{transform:translateX(-50%) scale(.95)}
+  .shell{padding-bottom:110px}
+  #recent .tx-item,#txList .tx-item{flex-wrap:wrap}
+  .tx-item .rowactions{margin-left:23px;justify-content:flex-start}
+}
+@media(max-width:380px){nav button span{font-size:9px}.tx-item .amount{font-size:13px}}
+@media print{nav .mobile-add-transaction{display:none!important}}
+
+/* Ajustes finais — navegação desktop discreta e movimentos em creme */
+@media(min-width:901px){
+ .shell>nav button,.shell>nav button:hover,.shell>nav button.selected{background:transparent!important;box-shadow:none!important;}
+ .shell>nav button{border-left:3px solid transparent;border-radius:0 10px 10px 0;color:#6f8190!important;}
+ .shell>nav button.selected{border-left-color:var(--terracotta);color:var(--navy)!important;font-weight:700;}
+ .shell>nav button:hover{color:var(--navy)!important;}
+}
+#recent .tx-item,#txList .tx-item{background:#F8F6F0!important;border:1px solid #F0EDE7!important;}
+#recent .tx-item:hover,#txList .tx-item:hover{background:#F4F1EB!important;border-color:#E9E3DA!important;}
+.tx-type-icon{display:flex;align-items:center;justify-content:center;flex:0 0 38px;width:38px;height:38px;border-radius:12px;background:#fff;color:var(--terracotta);font-size:19px;font-weight:700;line-height:1;}
+.tx-income .tx-type-icon{color:#397e65}.tx-transfer .tx-type-icon{color:#68829a}
+
+
+/* Correção mobile 11-11: seis espaços reais na barra, sem botão sobreposto. */
+@media (max-width:900px) {
+  .shell>nav, nav {
+    display:grid;
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    align-items:center;
+    justify-content:stretch;
+    gap:0;
+    height:calc(72px + env(safe-area-inset-bottom, 0px));
+    padding:7px 4px calc(7px + env(safe-area-inset-bottom, 0px));
+  }
+  .shell>nav>button, nav>button {
+    width:100%;min-width:0;max-width:none;
+    margin:0!important;
+    padding:5px 0;
+    align-self:center;
+    justify-self:center;
+    line-height:1.1;
+  }
+  .shell>nav>button:nth-child(1),nav>button:nth-child(1){grid-column:1;grid-row:1}
+  .shell>nav>button:nth-child(2),nav>button:nth-child(2){grid-column:2;grid-row:1}
+  .shell>nav>button:nth-child(3),nav>button:nth-child(3){grid-column:4;grid-row:1}
+  .shell>nav>button:nth-child(4),nav>button:nth-child(4){grid-column:5;grid-row:1}
+  .shell>nav>button:nth-child(5),nav>button:nth-child(5){grid-column:6;grid-row:1}
+  .shell>nav>.mobile-add-transaction,nav>.mobile-add-transaction {
+    grid-column:3;grid-row:1;
+    display:flex!important;
+    position:static!important;
+    top:auto;left:auto;
+    transform:none!important;
+    width:48px;height:48px;
+    border:3px solid #fff;
+    border-radius:50%;
+    margin:0 auto!important;
+    padding:0;
+    font-size:28px;
+    z-index:1;
+  }
+  nav .mobile-add-transaction:active {transform:scale(.96)!important}
+  nav button span{font-size:clamp(8px,2.1vw,10px)}
+  .shell{padding-bottom:calc(100px + env(safe-area-inset-bottom, 0px))}
+  /* iOS Safari amplia automaticamente inputs com texto inferior a 16px. */
+  input,select,textarea,dialog input,dialog select,dialog textarea,
+  .login-screen input,.login-screen select {font-size:16px!important}
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+}
+
+/* Cabeçalho da lista de movimentos */
+.movements-list-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.movements-list-header h2{margin:0}
+.movements-add-button{background:#D98268;color:#fff;border-radius:12px;font-weight:700;white-space:nowrap}
+.movements-add-button:hover{background:#c97159}
+@media(max-width:480px){.movements-list-header{gap:12px;margin-bottom:20px}.movements-list-header h2{font-size:24px}.movements-add-button{padding:11px 13px;font-size:14px}}
+
+/* Refinamento mobile — quatro destinos e ação central, sem sobreposição. */
+.mobile-casal-accounts{display:none}
+@media(max-width:900px){
+  .shell>nav,nav{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:0!important;}
+  .shell>nav>button[data-page="contas"],nav>button[data-page="contas"]{display:none!important}
+  .shell>nav>button[data-page="inicio"],nav>button[data-page="inicio"]{grid-column:1!important;grid-row:1!important}
+  .shell>nav>button[data-page="movimentos"],nav>button[data-page="movimentos"]{grid-column:2!important;grid-row:1!important}
+  .shell>nav>.mobile-add-transaction,nav>.mobile-add-transaction{grid-column:3!important;grid-row:1!important;position:static!important;width:52px;height:52px;transform:none!important}
+  .shell>nav>button[data-page="casal"],nav>button[data-page="casal"]{grid-column:4!important;grid-row:1!important}
+  .shell>nav>button[data-page="relatorios"],nav>button[data-page="relatorios"]{grid-column:5!important;grid-row:1!important}
+  nav button span{font-size:clamp(9px,2.5vw,11px)!important}
+  .mobile-casal-accounts{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .mobile-casal-accounts h2{margin:0 0 4px;font-size:22px}
+  .mobile-casal-accounts p{margin:0;font-size:13px}
+  .mobile-casal-accounts button{flex-shrink:0}
+  .intro .monthwrap{width:auto;max-width:100%}
+  .intro .monthwrap label{font-size:12px;margin:0}
+  .intro input[type=month]{width:195px!important;min-width:0!important;max-width:100%;padding:10px 12px!important;font-size:16px!important;min-height:44px!important;border-radius:12px}
+  #inicio .stats{gap:10px!important}
+  #inicio .stats>.stat{min-width:0;min-height:0!important;padding:18px 15px!important;border-radius:20px!important}
+  #inicio .stats>.stat.dark{padding:23px 22px!important}
+  #inicio .stats>.stat strong{font-size:clamp(19px,5.3vw,26px)!important;letter-spacing:-.8px;overflow-wrap:anywhere}
+  #inicio .stats>.stat.dark strong{font-size:clamp(30px,8vw,41px)!important}
+  #inicio .stats>.stat small{font-size:12px!important}
+  #inicio .stats>.stat.dark span{font-size:12px!important}
+  #recurringList .item{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:10px 12px;padding:17px 0}
+  #recurringList .item>div:first-child{min-width:0;overflow-wrap:anywhere}
+  #recurringList .rowactions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;align-items:center;justify-items:stretch;min-width:142px;max-width:166px}
+  #recurringList .rowactions>b{grid-column:1/-1;text-align:right;font-size:17px;white-space:nowrap}
+  #recurringList .rowactions>button{margin:0!important;padding:9px 7px!important;font-size:12px!important;min-height:36px;white-space:nowrap;text-align:center}
+  #recurringList .rowactions>button[data-use-recurring]{grid-column:1/-1;grid-row:2;background:var(--navy)!important;color:white!important}
+  #recurringList .rowactions>button[data-edit="recurring"]{grid-column:1;grid-row:3}
+  #recurringList .rowactions>button[data-archive-recurring]{grid-column:2;grid-row:3}
+  #recurringList .rowactions:not(:has([data-use-recurring]))>button[data-edit="recurring"]{grid-row:2}
+  #recurringList .rowactions:not(:has([data-use-recurring]))>button[data-archive-recurring]{grid-row:2}
+}
+@media(max-width:370px){#recurringList .rowactions{min-width:126px;max-width:136px}#recurringList .rowactions>button{font-size:11px!important;padding:8px 4px!important}}
+
+/* Casal: mesmas secções em desktop e telemóvel */
+.shell main .casal-tabs{position:static;transform:none;width:100%;height:auto;display:flex;justify-content:flex-start;gap:8px;padding:5px;background:#f0f0ea;border:0;border-radius:15px;margin:0 0 22px;z-index:auto}
+.shell main .casal-tabs button{flex:1;max-width:none;width:auto;background:transparent!important;color:#536b76!important;border:0;border-radius:11px;font-size:14px;line-height:1.3;font-weight:650;padding:12px 14px;white-space:normal}
+.shell main .casal-tabs button.active{background:#fff!important;color:#193447!important;box-shadow:0 2px 8px #19344713}
+@media(max-width:900px){
+  .shell>nav{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center!important;gap:0!important}
+  .shell>nav>button[data-page="inicio"]{grid-column:1!important;grid-row:1!important}
+  .shell>nav>button[data-page="movimentos"]{grid-column:2!important;grid-row:1!important}
+  .shell>nav>.mobile-add-transaction{grid-column:3!important;grid-row:1!important;display:flex!important;align-items:center!important;justify-content:center!important;position:static!important;transform:none!important;line-height:1!important;padding:0 0 3px!important;font-family:Arial,sans-serif!important;font-size:32px!important;font-weight:400!important;width:52px!important;height:52px!important;margin:0 auto!important}
+  .shell>nav>button[data-page="casal"]{grid-column:4!important;grid-row:1!important}
+  .shell>nav>button[data-page="relatorios"]{grid-column:5!important;grid-row:1!important}
+  .intro .monthwrap{width:auto;max-width:100%}
+  .intro .monthwrap label{color:#617680;font-size:12px}
+  .intro #month{width:177px!important;max-width:100%!important;min-width:0!important;min-height:42px!important;padding:9px 12px!important;border:1px solid #e1e4de!important;border-radius:12px!important;background:#eceee8!important;color:#193447!important;font-size:16px!important;font-weight:600!important;box-shadow:none!important}
+}
+@media(min-width:901px){.shell>nav>.mobile-add-transaction{display:none!important}}
+
+
+/* Ajustes 10/11: separadores Casal independentes da navegação fixa */
+.shell main .casal-tabs {display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;width:100%!important;min-width:0!important;max-width:100%!important;position:relative!important;left:auto!important;bottom:auto!important;transform:none!important;height:auto!important;overflow:visible!important;box-shadow:none!important;margin:0 0 18px!important;padding:5px!important;background:#eceee9!important;}
+.shell main .casal-tabs button {display:flex!important;align-items:center!important;justify-content:center!important;min-width:0!important;width:100%!important;max-width:none!important;min-height:48px!important;margin:0!important;white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.25!important;font-size:clamp(12px,3.2vw,14px)!important;padding:10px 8px!important;}
+.shell main .casal-tabs button.active {background:#fff!important;box-shadow:0 2px 8px #19344718!important;}
+/* O conteúdo do diálogo mantém a mesma largura ao abrir o teclado e ao focar campos */
+#dialog {box-sizing:border-box!important;max-width:calc(100vw - 24px)!important;max-height:calc(100dvh - 24px)!important;overflow-y:auto!important;overscroll-behavior:contain!important;}
+#dialog #entityForm,#dialog #fields,#dialog label {min-width:0!important;max-width:100%!important;}
+#dialog input,#dialog select,#dialog textarea {min-width:0!important;max-width:100%!important;box-sizing:border-box!important;font-size:16px!important;}
+#dialog textarea {resize:vertical;}
+@media(max-width:900px){
+  #dialog {width:calc(100vw - 24px)!important;margin:auto!important;padding:18px!important;}
+  #dialog #fields {display:block!important;}
+  #dialog label {width:100%!important;}
+  #dialog input,#dialog select,#dialog textarea {width:100%!important;}
+  #categoryChart .donut-center strong{font-size:clamp(16px,5vw,23px)!important;line-height:1.1!important;letter-spacing:-.5px!important;white-space:nowrap!important;}
+}
+/* Mesma apresentação dos movimentos na tabela de relatórios e no PDF */
+#reportRows {overflow-x:auto;max-width:100%;border:1px solid #e4e8e5;border-radius:15px;background:#fff;}
+#reportRows .report-movements-table{width:100%;border-collapse:collapse;min-width:640px;font-size:13px;}
+#reportRows .report-movements-table thead{background:#f8f6f0;color:#1a324b;}
+#reportRows .report-movements-table th{font-weight:700;}
+#reportRows .report-movements-table th,#reportRows .report-movements-table td{padding:12px 10px;border-bottom:1px solid #e8ece8;vertical-align:top;overflow-wrap:anywhere;}
+#reportRows .report-movements-table tr:nth-child(even) td{background:#fbfaf7;}
+#reportRows .report-movements-table th:last-child,#reportRows .report-movements-table td:last-child{text-align:right;white-space:nowrap;font-weight:700;color:#1a324b;}
+@media print{#reportRows{overflow:visible!important;border:0!important}#reportRows .report-movements-table{min-width:0!important;font-size:9px!important;table-layout:fixed!important}#reportRows .report-movements-table th,#reportRows .report-movements-table td{padding:5px 4px!important;word-break:break-word!important}#reportRows .report-movements-table tr{break-inside:avoid}#reportRows .report-movements-table thead{display:table-header-group}}
+
+/* Refinamentos: relatório, gráfico e cabeçalho consistente de Casal */
+#reportRows .report-movements-table th:nth-child(2),
+#reportRows .report-movements-table td:nth-child(2) {
+  min-width: 98px !important;
+  width: 108px;
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+#categoryChart .donut-center strong {
+  font-size: 15px !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.35px !important;
+  white-space: nowrap !important;
+}
+@media (max-width: 750px) {
+  #categoryChart .donut-center strong { font-size: clamp(14px, 4vw, 19px) !important; }
+}
+@media print {
+  #reportRows .report-movements-table th:nth-child(2),
+  #reportRows .report-movements-table td:nth-child(2) {
+    width: 11% !important;
+    min-width: 0 !important;
+    white-space: nowrap !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
+  }
+}
+
+/* PDF e tabela responsivos: versão 11/11 */
+#categoryChart .donut-svg{position:relative;background:none!important;isolation:isolate;overflow:visible;}
+#categoryChart .donut-svg svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;}
+#categoryChart .donut-svg .donut-center{position:relative;z-index:1;width:57%;height:57%;margin:auto;}
+#categoryChart .donut-svg .donut-center strong{font-size:clamp(13px,2vw,17px)!important;white-space:nowrap!important;}
+/* Não impor uma largura fixa à coluna Tipo em detrimento das restantes. */
+#reportRows .report-movements-table{table-layout:auto!important;min-width:790px!important;}
+#reportRows .report-movements-table th:nth-child(2),
+#reportRows .report-movements-table td:nth-child(2){width:auto!important;min-width:78px!important;white-space:nowrap!important;}
+#reportRows .report-movements-table th:nth-child(1),
+#reportRows .report-movements-table td:nth-child(1){white-space:nowrap!important;}
+#reportRows .report-movements-table th:last-child,
+#reportRows .report-movements-table td:last-child{white-space:nowrap!important;}
+#reportRows .report-movements-table th,
+#reportRows .report-movements-table td{overflow-wrap:normal!important;word-break:normal!important;}
+@media print {
+  @page{size:A4 landscape;margin:12mm;}
+  html,body{width:auto!important;overflow:visible!important;background:#fff!important;}
+  .shell{width:100%!important;max-width:none!important;min-height:0!important;margin:0!important;padding:0!important;box-shadow:none!important;}
+  .shell>nav,.shell nav,body nav,nav,.mobile-add-transaction,.reportactions,header,button{display:none!important;visibility:hidden!important;}
+  .shell main{padding:0!important;}
+  .report-charts{display:block!important;}
+  .report-charts .chart-card{display:block!important;break-inside:avoid-page!important;page-break-inside:avoid!important;margin:0 0 12mm!important;padding:12px!important;}
+  #categoryChart{min-height:0!important;}
+  #categoryChart .donut-svg{width:165px!important;height:165px!important;min-width:165px!important;min-height:165px!important;}
+  #categoryChart .donut-svg .donut-center strong{font-size:13px!important;}
+  #categoryChart .donut-svg svg circle{stroke-opacity:1!important;}
+  #categoryLegend{width:100%!important;}
+  #reportRows{overflow:visible!important;max-width:none!important;border:0!important;}
+  #reportRows .report-movements-table{width:100%!important;min-width:0!important;table-layout:auto!important;font-size:9px!important;}
+  #reportRows .report-movements-table th,
+  #reportRows .report-movements-table td{padding:6px 5px!important;overflow-wrap:break-word!important;word-break:normal!important;}
+  #reportRows .report-movements-table th:nth-child(2),
+  #reportRows .report-movements-table td:nth-child(2){min-width:70px!important;white-space:nowrap!important;}
+  #reportRows .report-movements-table th:nth-child(1),
+  #reportRows .report-movements-table td:nth-child(1),
+  #reportRows .report-movements-table th:last-child,
+  #reportRows .report-movements-table td:last-child{white-space:nowrap!important;}
+  #reportRows .report-movements-table tr{break-inside:avoid!important;}
+  #reportRows .report-movements-table thead{display:table-header-group!important;}
+  .donut-svg,.donut-svg svg,.legend-dot,.bar-fill,.budget-fill,.income-bar-fill{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+}

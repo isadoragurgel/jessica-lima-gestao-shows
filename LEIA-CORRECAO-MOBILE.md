@@ -1,0 +1,1 @@
+Correção mobile: botão + tem agora coluna própria no menu de seis posições; inputs, selects e textareas usam 16px para evitar zoom automático ao focar no iOS Safari. Zoom manual permanece disponível. Sem SQL ou alterações ao Supabase. Testar no Safari iPhone e nos dois logins antes de produção.
