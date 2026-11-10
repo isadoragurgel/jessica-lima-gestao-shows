@@ -246,3 +246,20 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
   #recurringList .rowactions:not(:has([data-use-recurring]))>button[data-archive-recurring]{grid-row:2}
 }
 @media(max-width:370px){#recurringList .rowactions{min-width:126px;max-width:136px}#recurringList .rowactions>button{font-size:11px!important;padding:8px 4px!important}}
+
+/* Casal: mesmas secções em desktop e telemóvel */
+.shell main .casal-tabs{position:static;transform:none;width:100%;height:auto;display:flex;justify-content:flex-start;gap:8px;padding:5px;background:#f0f0ea;border:0;border-radius:15px;margin:0 0 22px;z-index:auto}
+.shell main .casal-tabs button{flex:1;max-width:none;width:auto;background:transparent!important;color:#536b76!important;border:0;border-radius:11px;font-size:14px;line-height:1.3;font-weight:650;padding:12px 14px;white-space:normal}
+.shell main .casal-tabs button.active{background:#fff!important;color:#193447!important;box-shadow:0 2px 8px #19344713}
+@media(max-width:900px){
+  .shell>nav{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;align-items:center!important;gap:0!important}
+  .shell>nav>button[data-page="inicio"]{grid-column:1!important;grid-row:1!important}
+  .shell>nav>button[data-page="movimentos"]{grid-column:2!important;grid-row:1!important}
+  .shell>nav>.mobile-add-transaction{grid-column:3!important;grid-row:1!important;display:flex!important;align-items:center!important;justify-content:center!important;position:static!important;transform:none!important;line-height:1!important;padding:0 0 3px!important;font-family:Arial,sans-serif!important;font-size:32px!important;font-weight:400!important;width:52px!important;height:52px!important;margin:0 auto!important}
+  .shell>nav>button[data-page="casal"]{grid-column:4!important;grid-row:1!important}
+  .shell>nav>button[data-page="relatorios"]{grid-column:5!important;grid-row:1!important}
+  .intro .monthwrap{width:auto;max-width:100%}
+  .intro .monthwrap label{color:#617680;font-size:12px}
+  .intro #month{width:177px!important;max-width:100%!important;min-width:0!important;min-height:42px!important;padding:9px 12px!important;border:1px solid #e1e4de!important;border-radius:12px!important;background:#eceee8!important;color:#193447!important;font-size:16px!important;font-weight:600!important;box-shadow:none!important}
+}
+@media(min-width:901px){.shell>nav>.mobile-add-transaction{display:none!important}}
