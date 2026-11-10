@@ -1,0 +1,12 @@
+NÓS. — FASE 3: CONVITE PARA SEGUNDO LOGIN
+
+1. Esta entrega NÃO apaga dados antigos, NÃO migra movimentos e NÃO integra ainda a prévia às tabelas financeiras.
+2. Faça backup do Supabase antes de qualquer SQL.
+3. Execute 03-fase3-convite-seguro.sql no Supabase SQL Editor (uma vez).
+4. Publique os arquivos do ZIP no GitHub/Vercel.
+5. Proprietária: entre no aplicativo, abra /casal-convite.html e gere o código para o email da esposa.
+6. Esposa: use OUTRO navegador ou janela privada, abra /casal-convite.html, crie conta, confirme email, faça login no aplicativo e retorne para aceitar o código.
+7. O código dura 48 horas e só pode ser aceito pela conta com email correspondente.
+8. NÃO compartilhe senhas, códigos de convite em público ou chaves privadas do Supabase.
+9. Esta fase ainda não implementa a separação real do novo controle iniciado em 01/11/2026; não faça lançamentos financeiros na prévia esperando que sejam salvos.
+10. Se houver erro no SQL ou no convite, pare e envie a mensagem completa para revisão.

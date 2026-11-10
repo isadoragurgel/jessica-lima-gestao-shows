@@ -1,0 +1,1 @@
+Esta versão apenas compacta os três cartões na página inicial. Nenhum SQL foi executado. Antes de ativar investimentos e acertos, revisar scripts 06 e 08, verificar RLS e confirmar autorização para migração. O rollback da Vercel não reverte alterações no banco.

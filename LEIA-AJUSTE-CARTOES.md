@@ -1,0 +1,1 @@
+Ajustes: três cartões (Saldo total das contas, Receitas do mês, Despesas do mês) na primeira linha em desktop; Investimentos recolhidos na linha abaixo. Texto alterado para Resultado hoje. Nenhum SQL executado; nenhum dado modificado. Em telemóvel os cartões adaptam-se à largura.
