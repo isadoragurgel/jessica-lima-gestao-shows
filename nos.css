@@ -263,3 +263,30 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
   .intro #month{width:177px!important;max-width:100%!important;min-width:0!important;min-height:42px!important;padding:9px 12px!important;border:1px solid #e1e4de!important;border-radius:12px!important;background:#eceee8!important;color:#193447!important;font-size:16px!important;font-weight:600!important;box-shadow:none!important}
 }
 @media(min-width:901px){.shell>nav>.mobile-add-transaction{display:none!important}}
+
+
+/* Ajustes 10/11: separadores Casal independentes da navegação fixa */
+.shell main .casal-tabs {display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;width:100%!important;min-width:0!important;max-width:100%!important;position:relative!important;left:auto!important;bottom:auto!important;transform:none!important;height:auto!important;overflow:visible!important;box-shadow:none!important;margin:0 0 18px!important;padding:5px!important;background:#eceee9!important;}
+.shell main .casal-tabs button {display:flex!important;align-items:center!important;justify-content:center!important;min-width:0!important;width:100%!important;max-width:none!important;min-height:48px!important;margin:0!important;white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.25!important;font-size:clamp(12px,3.2vw,14px)!important;padding:10px 8px!important;}
+.shell main .casal-tabs button.active {background:#fff!important;box-shadow:0 2px 8px #19344718!important;}
+/* O conteúdo do diálogo mantém a mesma largura ao abrir o teclado e ao focar campos */
+#dialog {box-sizing:border-box!important;max-width:calc(100vw - 24px)!important;max-height:calc(100dvh - 24px)!important;overflow-y:auto!important;overscroll-behavior:contain!important;}
+#dialog #entityForm,#dialog #fields,#dialog label {min-width:0!important;max-width:100%!important;}
+#dialog input,#dialog select,#dialog textarea {min-width:0!important;max-width:100%!important;box-sizing:border-box!important;font-size:16px!important;}
+#dialog textarea {resize:vertical;}
+@media(max-width:900px){
+  #dialog {width:calc(100vw - 24px)!important;margin:auto!important;padding:18px!important;}
+  #dialog #fields {display:block!important;}
+  #dialog label {width:100%!important;}
+  #dialog input,#dialog select,#dialog textarea {width:100%!important;}
+  #categoryChart .donut-center strong{font-size:clamp(16px,5vw,23px)!important;line-height:1.1!important;letter-spacing:-.5px!important;white-space:nowrap!important;}
+}
+/* Mesma apresentação dos movimentos na tabela de relatórios e no PDF */
+#reportRows {overflow-x:auto;max-width:100%;border:1px solid #e4e8e5;border-radius:15px;background:#fff;}
+#reportRows .report-movements-table{width:100%;border-collapse:collapse;min-width:640px;font-size:13px;}
+#reportRows .report-movements-table thead{background:#f8f6f0;color:#1a324b;}
+#reportRows .report-movements-table th{font-weight:700;}
+#reportRows .report-movements-table th,#reportRows .report-movements-table td{padding:12px 10px;border-bottom:1px solid #e8ece8;vertical-align:top;overflow-wrap:anywhere;}
+#reportRows .report-movements-table tr:nth-child(even) td{background:#fbfaf7;}
+#reportRows .report-movements-table th:last-child,#reportRows .report-movements-table td:last-child{text-align:right;white-space:nowrap;font-weight:700;color:#1a324b;}
+@media print{#reportRows{overflow:visible!important;border:0!important}#reportRows .report-movements-table{min-width:0!important;font-size:9px!important;table-layout:fixed!important}#reportRows .report-movements-table th,#reportRows .report-movements-table td{padding:5px 4px!important;word-break:break-word!important}#reportRows .report-movements-table tr{break-inside:avoid}#reportRows .report-movements-table thead{display:table-header-group}}
