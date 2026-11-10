@@ -208,3 +208,41 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
 .movements-add-button{background:#D98268;color:#fff;border-radius:12px;font-weight:700;white-space:nowrap}
 .movements-add-button:hover{background:#c97159}
 @media(max-width:480px){.movements-list-header{gap:12px;margin-bottom:20px}.movements-list-header h2{font-size:24px}.movements-add-button{padding:11px 13px;font-size:14px}}
+
+/* Refinamento mobile — quatro destinos e ação central, sem sobreposição. */
+.mobile-casal-accounts{display:none}
+@media(max-width:900px){
+  .shell>nav,nav{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:0!important;}
+  .shell>nav>button[data-page="contas"],nav>button[data-page="contas"]{display:none!important}
+  .shell>nav>button[data-page="inicio"],nav>button[data-page="inicio"]{grid-column:1!important;grid-row:1!important}
+  .shell>nav>button[data-page="movimentos"],nav>button[data-page="movimentos"]{grid-column:2!important;grid-row:1!important}
+  .shell>nav>.mobile-add-transaction,nav>.mobile-add-transaction{grid-column:3!important;grid-row:1!important;position:static!important;width:52px;height:52px;transform:none!important}
+  .shell>nav>button[data-page="casal"],nav>button[data-page="casal"]{grid-column:4!important;grid-row:1!important}
+  .shell>nav>button[data-page="relatorios"],nav>button[data-page="relatorios"]{grid-column:5!important;grid-row:1!important}
+  nav button span{font-size:clamp(9px,2.5vw,11px)!important}
+  .mobile-casal-accounts{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .mobile-casal-accounts h2{margin:0 0 4px;font-size:22px}
+  .mobile-casal-accounts p{margin:0;font-size:13px}
+  .mobile-casal-accounts button{flex-shrink:0}
+  .intro .monthwrap{width:auto;max-width:100%}
+  .intro .monthwrap label{font-size:12px;margin:0}
+  .intro input[type=month]{width:195px!important;min-width:0!important;max-width:100%;padding:10px 12px!important;font-size:16px!important;min-height:44px!important;border-radius:12px}
+  #inicio .stats{gap:10px!important}
+  #inicio .stats>.stat{min-width:0;min-height:0!important;padding:18px 15px!important;border-radius:20px!important}
+  #inicio .stats>.stat.dark{padding:23px 22px!important}
+  #inicio .stats>.stat strong{font-size:clamp(19px,5.3vw,26px)!important;letter-spacing:-.8px;overflow-wrap:anywhere}
+  #inicio .stats>.stat.dark strong{font-size:clamp(30px,8vw,41px)!important}
+  #inicio .stats>.stat small{font-size:12px!important}
+  #inicio .stats>.stat.dark span{font-size:12px!important}
+  #recurringList .item{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:10px 12px;padding:17px 0}
+  #recurringList .item>div:first-child{min-width:0;overflow-wrap:anywhere}
+  #recurringList .rowactions{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;align-items:center;justify-items:stretch;min-width:142px;max-width:166px}
+  #recurringList .rowactions>b{grid-column:1/-1;text-align:right;font-size:17px;white-space:nowrap}
+  #recurringList .rowactions>button{margin:0!important;padding:9px 7px!important;font-size:12px!important;min-height:36px;white-space:nowrap;text-align:center}
+  #recurringList .rowactions>button[data-use-recurring]{grid-column:1/-1;grid-row:2;background:var(--navy)!important;color:white!important}
+  #recurringList .rowactions>button[data-edit="recurring"]{grid-column:1;grid-row:3}
+  #recurringList .rowactions>button[data-archive-recurring]{grid-column:2;grid-row:3}
+  #recurringList .rowactions:not(:has([data-use-recurring]))>button[data-edit="recurring"]{grid-row:2}
+  #recurringList .rowactions:not(:has([data-use-recurring]))>button[data-archive-recurring]{grid-row:2}
+}
+@media(max-width:370px){#recurringList .rowactions{min-width:126px;max-width:136px}#recurringList .rowactions>button{font-size:11px!important;padding:8px 4px!important}}

@@ -190,9 +190,9 @@ function showLogin(message=''){ $('appShell').hidden=true;$('loginScreen').hidde
 function showApp(){ $('loginScreen').hidden=true;$('appShell').hidden=false;$('logout').hidden=false; }
 async function enterApp(){
  const {data:{user},error:e}=await S.db.auth.getUser();
- if(e||!user){showLogin();return;}
- S.user=user;$('identity').textContent=user.email;
- const {data:members,error:em}=await S.db.from('mc_household_members').select('household_id').eq('user_id',user.id).limit(1);
+ if(e||!user){const {data:{session}}=await S.db.auth.getSession();if(session?.user){S.user=session.user;}else{showLogin();return;}}else{S.user=user;}
+ const currentUser=S.user;$('identity').textContent=currentUser.email;
+ const {data:members,error:em}=await S.db.from('mc_household_members').select('household_id').eq('user_id',currentUser.id).limit(1);
  if(em)throw em;
  if(!members?.length){showLogin('Este email ainda não pertence ao espaço do casal. Confirme o convite antes de entrar.');return;}
  S.household=members[0].household_id;$('month').value=S.month;$('modeMonth').value=S.month;
@@ -216,5 +216,6 @@ function showPage(id){S.page=id;document.querySelectorAll('.page').forEach(p=>p.
 $('entityForm').addEventListener('focusout',e=>{if(e.target.matches('[data-arithmetic]')){try{e.target.value=arithmetic(e.target.value)}catch(ex){/* mantém a expressão para correção pelo usuário */}}});
 $('entityForm').addEventListener('change',e=>{if(e.target.name==='kind'&&['transaction','recurring'].includes(S.edit?.kind)){syncModalCategories();const sharing=$('entityForm').querySelector('[data-sharing-controls]');if(sharing)sharing.hidden=e.target.value!=='expense';}});
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.emojiToggle){const grid=document.querySelector(`[data-emoji-grid="${b.dataset.emojiToggle}"]`);if(grid)grid.hidden=!grid.hidden;return}if(b.dataset.emoji){const grid=b.closest('[data-emoji-grid]'),target=$(grid?.dataset.emojiGrid);if(target)target.value=b.dataset.emoji;if(grid)grid.hidden=true;return}if(b.dataset.inlineCategory){const action=b.dataset.inlineCategory,box=$('quickCategory');if(action==='open'){if($('entityForm').elements.kind.value==='transfer'){note('Transferências não têm categoria.');return}box.hidden=false;$('quickCategoryName').focus()}else if(action==='cancel'){box.hidden=true}else if(action==='save')quickCategorySave();return}if(b.dataset.page)showPage(b.dataset.page);if(b.dataset.modal)modal(b.dataset.modal);if(b.dataset.edit)modal(b.dataset.edit,b.dataset.id);if(b.dataset.delete==='transaction')removeTransaction(b.dataset.id);if(b.dataset.delete==='investment')removeInvestment(b.dataset.id);if(b.dataset.archive)archiveEntity(b.dataset.archive,b.dataset.id);if(b.dataset.removeBudget)removeBudget(b.dataset.removeBudget);if(b.dataset.useRecurring)useRecurring(b.dataset.useRecurring);if(b.dataset.archiveRecurring)archiveRecurring(b.dataset.archiveRecurring)});
+document.addEventListener('visibilitychange',async()=>{if(document.visibilityState==='visible'&&S.db&&!S.user){try{const {data:{session}}=await S.db.auth.getSession();if(session)await enterApp();}catch(e){console.warn('Sessão ainda não disponível',e)}}});
 init();
 })();
