@@ -1,0 +1,10 @@
+nós. — Correção de autenticação
+
+1. Faça backup dos arquivos atuais.
+2. Publique o conteúdo deste ZIP na raiz do mesmo repositório GitHub.
+3. Aguarde o deploy da Vercel e abra a URL principal.
+4. Sem sessão, a página apresenta login. Entre com o email e senha já cadastrados.
+5. Teste os dois logins e o botão Sair.
+
+Não é necessário executar SQL. Não altera ou exclui dados do Supabase.
+A página antiga continua em app-antigo.html.
