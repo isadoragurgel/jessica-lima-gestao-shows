@@ -35,3 +35,8 @@
 .emoji-option{font-size:1.3rem;min-height:37px;padding:3px;border-radius:8px;background:white;color:#1d3442;}
 .emoji-option:hover{background:#e0f0e7;}
 @media(max-width:600px){.emoji-grid{grid-template-columns:repeat(6,minmax(0,1fr));}}
+
+/* Patrimônio investido separado do saldo disponível */
+.stats{grid-template-columns:repeat(auto-fit,minmax(175px,1fr));}
+#investmentSummary .item small{display:block;}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,minmax(0,1fr));}}
