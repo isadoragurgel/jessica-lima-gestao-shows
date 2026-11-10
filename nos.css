@@ -70,3 +70,7 @@
 .report-charts .chart-card:last-child{grid-column:auto;}
 .budget-fill,.budget-fill.over{background:#e7a45f;}
 @media(max-width:750px){.report-charts{grid-template-columns:1fr;}.investment-detail-grid{grid-template-columns:1fr;}.stats>.stat.dark{min-height:185px;padding:26px;}}
+
+/* Restaurar exatamente a fila de três cartões antes de Investimentos. */
+@media(min-width:751px){.stats{grid-template-columns:2fr 1fr 1fr;}.stats>.stat.dark{grid-column:auto;min-height:190px;padding:30px 32px;}.stats>.stat.dark strong{font-size:clamp(32px,3.5vw,49px);}.stats>.stat.dark small{font-size:15px;}.stats>.stat.dark span{font-size:14px;}.stats>.stat:not(.dark){min-height:190px;padding:30px 26px;}.stats>.stat:not(.dark) strong{font-size:clamp(25px,2.5vw,37px);}.investment-disclosure{grid-column:1/-1;}}
+@media(max-width:750px){.stats{grid-template-columns:repeat(2,minmax(0,1fr));}.stats>.stat.dark{grid-column:1/-1;}.investment-disclosure{grid-column:1/-1;}}
