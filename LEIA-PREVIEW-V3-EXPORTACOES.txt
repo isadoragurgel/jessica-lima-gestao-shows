@@ -1,0 +1,1 @@
+Prévia V3: relatório Excel (.xlsx) e PDF (via diálogo Imprimir > Guardar como PDF). Os dados são fictícios e não são gravados no Supabase. A aplicação principal permanece inalterada. Para ver a prévia: /casal-preview.html. Próximos passos: modelagem do casal, RLS, migração de dados e integração das telas.
