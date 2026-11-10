@@ -40,3 +40,33 @@
 .stats{grid-template-columns:repeat(auto-fit,minmax(175px,1fr));}
 #investmentSummary .item small{display:block;}
 @media(max-width:650px){.stats{grid-template-columns:repeat(2,minmax(0,1fr));}}
+
+/* Refinamentos visuais solicitados: preservar o destaque do saldo e recolher investimentos. */
+.stats{grid-template-columns:repeat(2,minmax(0,1fr));}
+.stats>.stat.dark{grid-column:1/-1;min-height:220px;padding:34px 38px;display:flex;flex-direction:column;justify-content:center;}
+.stats>.stat.dark strong{font-size:clamp(38px,5vw,55px);margin:18px 0 10px;}
+.stats>.stat.dark small{font-size:17px;}
+.stats>.stat.dark span{font-size:14px;}
+.investment-disclosure{grid-column:1/-1;border:1px solid var(--border);background:#fff;border-radius:18px;overflow:hidden;}
+.investment-disclosure summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 22px;font-weight:750;color:var(--navy);}
+.investment-disclosure summary::-webkit-details-marker{display:none;}
+.investment-disclosure summary::after{content:'⌄';font-size:23px;color:#6f8690;}
+.investment-disclosure[open] summary::after{content:'⌃';}
+.investment-expand{font-weight:500;color:#7a8b93;font-size:12px;margin-left:auto;}
+.investment-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:0 22px 20px;}
+.investment-detail-grid>div{background:#f4f7f4;border-radius:13px;padding:18px;}
+.investment-detail-grid small{display:block;color:#647983;font-size:12px;}
+.investment-detail-grid strong{display:block;color:var(--navy);font-size:25px;margin-top:9px;}
+#proportionHelp{font-size:13px;line-height:1.55;overflow-wrap:anywhere;}
+#proportionHelp p{margin:0 0 8px;}
+#settlementCard{margin-top:18px;padding:22px;}
+#settlementCard h2{font-size:21px;}
+/* Gráfico circular centrado e legenda em coluna, evitando que o gráfico fique colado à esquerda. */
+.donut-layout{display:flex;flex-direction:column;align-items:stretch;gap:20px;}
+#categoryChart{width:100%;display:flex;justify-content:center;align-items:center;min-height:205px;}
+#categoryLegend{width:100%;}
+#categoryChart .donut{width:min(225px,70vw);height:min(225px,70vw);}
+/* Receitas e limites lado a lado; limite de orçamento em laranja. */
+.report-charts .chart-card:last-child{grid-column:auto;}
+.budget-fill,.budget-fill.over{background:#e7a45f;}
+@media(max-width:750px){.report-charts{grid-template-columns:1fr;}.investment-detail-grid{grid-template-columns:1fr;}.stats>.stat.dark{min-height:185px;padding:26px;}}
