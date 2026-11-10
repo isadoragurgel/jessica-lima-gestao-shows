@@ -319,3 +319,46 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
     overflow-wrap: normal !important;
   }
 }
+
+/* PDF e tabela responsivos: versão 11/11 */
+#categoryChart .donut-svg{position:relative;background:none!important;isolation:isolate;overflow:visible;}
+#categoryChart .donut-svg svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;}
+#categoryChart .donut-svg .donut-center{position:relative;z-index:1;width:57%;height:57%;margin:auto;}
+#categoryChart .donut-svg .donut-center strong{font-size:clamp(13px,2vw,17px)!important;white-space:nowrap!important;}
+/* Não impor uma largura fixa à coluna Tipo em detrimento das restantes. */
+#reportRows .report-movements-table{table-layout:auto!important;min-width:790px!important;}
+#reportRows .report-movements-table th:nth-child(2),
+#reportRows .report-movements-table td:nth-child(2){width:auto!important;min-width:78px!important;white-space:nowrap!important;}
+#reportRows .report-movements-table th:nth-child(1),
+#reportRows .report-movements-table td:nth-child(1){white-space:nowrap!important;}
+#reportRows .report-movements-table th:last-child,
+#reportRows .report-movements-table td:last-child{white-space:nowrap!important;}
+#reportRows .report-movements-table th,
+#reportRows .report-movements-table td{overflow-wrap:normal!important;word-break:normal!important;}
+@media print {
+  @page{size:A4 landscape;margin:12mm;}
+  html,body{width:auto!important;overflow:visible!important;background:#fff!important;}
+  .shell{width:100%!important;max-width:none!important;min-height:0!important;margin:0!important;padding:0!important;box-shadow:none!important;}
+  .shell>nav,.shell nav,body nav,nav,.mobile-add-transaction,.reportactions,header,button{display:none!important;visibility:hidden!important;}
+  .shell main{padding:0!important;}
+  .report-charts{display:block!important;}
+  .report-charts .chart-card{display:block!important;break-inside:avoid-page!important;page-break-inside:avoid!important;margin:0 0 12mm!important;padding:12px!important;}
+  #categoryChart{min-height:0!important;}
+  #categoryChart .donut-svg{width:165px!important;height:165px!important;min-width:165px!important;min-height:165px!important;}
+  #categoryChart .donut-svg .donut-center strong{font-size:13px!important;}
+  #categoryChart .donut-svg svg circle{stroke-opacity:1!important;}
+  #categoryLegend{width:100%!important;}
+  #reportRows{overflow:visible!important;max-width:none!important;border:0!important;}
+  #reportRows .report-movements-table{width:100%!important;min-width:0!important;table-layout:auto!important;font-size:9px!important;}
+  #reportRows .report-movements-table th,
+  #reportRows .report-movements-table td{padding:6px 5px!important;overflow-wrap:break-word!important;word-break:normal!important;}
+  #reportRows .report-movements-table th:nth-child(2),
+  #reportRows .report-movements-table td:nth-child(2){min-width:70px!important;white-space:nowrap!important;}
+  #reportRows .report-movements-table th:nth-child(1),
+  #reportRows .report-movements-table td:nth-child(1),
+  #reportRows .report-movements-table th:last-child,
+  #reportRows .report-movements-table td:last-child{white-space:nowrap!important;}
+  #reportRows .report-movements-table tr{break-inside:avoid!important;}
+  #reportRows .report-movements-table thead{display:table-header-group!important;}
+  .donut-svg,.donut-svg svg,.legend-dot,.bar-fill,.budget-fill,.income-bar-fill{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+}
