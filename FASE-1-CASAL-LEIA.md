@@ -1,0 +1,1 @@
+Prévia V2: novo modelo financeiro mensal (conjunto sem percentuais nem acertos), perfis editáveis, categorias com ícones, metas editáveis e exportação Excel. Dados fictícios, sem Supabase. O index.html antigo permanece intocado.
