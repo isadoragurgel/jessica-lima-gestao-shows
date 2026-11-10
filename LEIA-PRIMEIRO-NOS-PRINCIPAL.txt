@@ -1,0 +1,9 @@
+nós. — Página principal
+
+1. Não precisa executar SQL novamente se a Fase 4 já foi instalada.
+2. Publique o conteúdo deste ZIP na raiz do repositório GitHub (branch main).
+3. Aguarde a implantação da Vercel e abra a URL base, sem /nos.
+4. O menu continua fixo embaixo no celular.
+5. O antigo index.html foi preservado como app-antigo.html, sem apagar dados ou páginas.
+6. Caso apareça a versão antiga no celular, feche o aplicativo instalado, abra em uma aba anônima e atualize o atalho da tela inicial.
+7. O modo híbrido e a privacidade das contas individuais ainda não estão totalmente implementados.
