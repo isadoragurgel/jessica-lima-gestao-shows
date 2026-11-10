@@ -1,0 +1,11 @@
+FASE 2 — ATIVAÇÃO SEGURA DO ESPAÇO "nós."
+
+1. Publique todos os arquivos do ZIP no mesmo projeto GitHub/Vercel.
+2. Entre no aplicativo normal em /index.html com seu login atual.
+3. Acesse /casal-ativacao.html no mesmo domínio e navegador.
+4. Confira o estado do seu espaço e, se ainda não existir, clique em Criar espaço financeiro UMA VEZ.
+5. Não crie outro espaço para a segunda pessoa: o convite será implementado depois.
+
+Esta fase NÃO integra os dados financeiros ao layout novo, NÃO habilita o segundo login no espaço, NÃO altera políticas SQL e NÃO apaga dados antigos.
+A função mc_create_household precisa estar instalada e com permissão authenticated, conforme validado no Supabase.
+O arquivo casal-preview.html continua demonstrativo.
