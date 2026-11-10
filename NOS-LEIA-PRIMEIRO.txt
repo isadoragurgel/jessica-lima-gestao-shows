@@ -1,0 +1,11 @@
+nós. — Finanças conectadas ao Supabase
+1. Faça backup do projeto Supabase.
+2. Execute 04-nos-financas-completo.sql no SQL Editor (apenas uma vez; o script pode ser repetido para políticas).
+3. Publique os arquivos do ZIP no GitHub/main.
+4. Entre com um dos logins e abra /nos.html.
+5. Cadastre uma conta com saldo inicial em 01/11/2026; registre um movimento de teste.
+6. Confira a mesma conta no segundo login em outro navegador.
+ATENÇÃO: não substitui index.html. O app antigo continua funcionando. A prévia casal-preview.html continua demonstrativa.
+Todas as contas cadastradas nesta etapa são familiares e visíveis às duas pessoas. Não use para dados que deseja manter privados.
+A regra de divisão mensal e privacidade individual exigem testes e ainda não controlam automaticamente saldos/lançamentos nesta entrega.
+Os dados financeiros antigos e shows não são alterados.
