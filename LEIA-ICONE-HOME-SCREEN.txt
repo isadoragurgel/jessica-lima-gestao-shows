@@ -1,0 +1,3 @@
+Ícone de instalação do nós. atualizado.
+No iPhone, remova o atalho antigo e use Safari > Partilhar > Adicionar ao ecrã principal após publicar.
+Não requer SQL.

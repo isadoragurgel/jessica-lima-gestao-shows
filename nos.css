@@ -141,3 +141,70 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
 }
 @media(max-width:380px){nav button span{font-size:9px}.tx-item .amount{font-size:13px}}
 @media print{nav .mobile-add-transaction{display:none!important}}
+
+/* Ajustes finais — navegação desktop discreta e movimentos em creme */
+@media(min-width:901px){
+ .shell>nav button,.shell>nav button:hover,.shell>nav button.selected{background:transparent!important;box-shadow:none!important;}
+ .shell>nav button{border-left:3px solid transparent;border-radius:0 10px 10px 0;color:#6f8190!important;}
+ .shell>nav button.selected{border-left-color:var(--terracotta);color:var(--navy)!important;font-weight:700;}
+ .shell>nav button:hover{color:var(--navy)!important;}
+}
+#recent .tx-item,#txList .tx-item{background:#F8F6F0!important;border:1px solid #F0EDE7!important;}
+#recent .tx-item:hover,#txList .tx-item:hover{background:#F4F1EB!important;border-color:#E9E3DA!important;}
+.tx-type-icon{display:flex;align-items:center;justify-content:center;flex:0 0 38px;width:38px;height:38px;border-radius:12px;background:#fff;color:var(--terracotta);font-size:19px;font-weight:700;line-height:1;}
+.tx-income .tx-type-icon{color:#397e65}.tx-transfer .tx-type-icon{color:#68829a}
+
+
+/* Correção mobile 11-11: seis espaços reais na barra, sem botão sobreposto. */
+@media (max-width:900px) {
+  .shell>nav, nav {
+    display:grid;
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    align-items:center;
+    justify-content:stretch;
+    gap:0;
+    height:calc(72px + env(safe-area-inset-bottom, 0px));
+    padding:7px 4px calc(7px + env(safe-area-inset-bottom, 0px));
+  }
+  .shell>nav>button, nav>button {
+    width:100%;min-width:0;max-width:none;
+    margin:0!important;
+    padding:5px 0;
+    align-self:center;
+    justify-self:center;
+    line-height:1.1;
+  }
+  .shell>nav>button:nth-child(1),nav>button:nth-child(1){grid-column:1;grid-row:1}
+  .shell>nav>button:nth-child(2),nav>button:nth-child(2){grid-column:2;grid-row:1}
+  .shell>nav>button:nth-child(3),nav>button:nth-child(3){grid-column:4;grid-row:1}
+  .shell>nav>button:nth-child(4),nav>button:nth-child(4){grid-column:5;grid-row:1}
+  .shell>nav>button:nth-child(5),nav>button:nth-child(5){grid-column:6;grid-row:1}
+  .shell>nav>.mobile-add-transaction,nav>.mobile-add-transaction {
+    grid-column:3;grid-row:1;
+    display:flex!important;
+    position:static!important;
+    top:auto;left:auto;
+    transform:none!important;
+    width:48px;height:48px;
+    border:3px solid #fff;
+    border-radius:50%;
+    margin:0 auto!important;
+    padding:0;
+    font-size:28px;
+    z-index:1;
+  }
+  nav .mobile-add-transaction:active {transform:scale(.96)!important}
+  nav button span{font-size:clamp(8px,2.1vw,10px)}
+  .shell{padding-bottom:calc(100px + env(safe-area-inset-bottom, 0px))}
+  /* iOS Safari amplia automaticamente inputs com texto inferior a 16px. */
+  input,select,textarea,dialog input,dialog select,dialog textarea,
+  .login-screen input,.login-screen select {font-size:16px!important}
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+}
+
+/* Cabeçalho da lista de movimentos */
+.movements-list-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px;flex-wrap:wrap}
+.movements-list-header h2{margin:0}
+.movements-add-button{background:#D98268;color:#fff;border-radius:12px;font-weight:700;white-space:nowrap}
+.movements-add-button:hover{background:#c97159}
+@media(max-width:480px){.movements-list-header{gap:12px;margin-bottom:20px}.movements-list-header h2{font-size:24px}.movements-add-button{padding:11px 13px;font-size:14px}}

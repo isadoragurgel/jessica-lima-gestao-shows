@@ -1,0 +1,1 @@
+Revisão visual: navegação desktop sem blocos de fundo, ícones nos movimentos (emoji da categoria quando disponível, alternativa por tipo), cartões de movimentos em creme #F8F6F0 e novo ícone nós. com arco azul à esquerda e ponto à direita. Sem SQL ou alterações ao Supabase. Testar em preview antes de produção.
