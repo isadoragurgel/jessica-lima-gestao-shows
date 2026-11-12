@@ -397,3 +397,14 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
 #relatorios>.reportactions{display:flex;justify-content:flex-end;gap:8px;margin:10px 0 12px}
 #relatorios>.reportactions button{flex:0 1 auto;width:auto;padding:9px 13px;font-size:12px;font-weight:550}
 @media(max-width:600px){#recurringList .rowactions{min-width:104px!important;max-width:120px!important}#recurringList .icon-action{width:30px!important;min-width:30px!important;height:30px!important;min-height:30px!important}#relatorios>.reportactions button{font-size:11px;padding:9px 11px}}
+
+/* Correções finais: ações fixas em linha, responsividade e moeda do investimento */
+#recurringList .recurring-item{align-items:flex-start;gap:12px}
+#recurringList .recurring-item>div:first-child{min-width:0;flex:1 1 auto;overflow-wrap:anywhere}
+#recurringList .recurring-actions{display:flex!important;flex:0 0 auto;flex-direction:column!important;align-items:flex-end!important;justify-content:flex-start!important;gap:8px!important;width:auto!important;min-width:0!important;max-width:none!important}
+#recurringList .recurring-actions>b{display:block!important;width:auto!important;text-align:right!important;white-space:nowrap;font-size:clamp(13px,2.8vw,16px)!important}
+#recurringList .recurring-buttons{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;grid-column:auto!important}
+#recurringList .recurring-buttons>.icon-action{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 0 34px!important;width:34px!important;min-width:34px!important;max-width:34px!important;height:34px!important;min-height:34px!important;max-height:34px!important;padding:0!important;margin:0!important;grid-row:auto!important;grid-column:auto!important;border-radius:11px!important;font-family:Arial,sans-serif!important;font-size:21px!important;line-height:1!important;font-weight:500!important;letter-spacing:0!important}
+#recurringList .recurring-buttons>.register-action{background:#dcf3e4!important;color:#166b3d!important;border:1px solid #b6dec6!important}
+#recurringList .recurring-buttons>button[data-archive-recurring]{background:#fbe6e3!important;color:#9a3c35!important}
+@media(max-width:600px){#recurringList .recurring-item{gap:8px}#recurringList .recurring-buttons{gap:4px!important}#recurringList .recurring-buttons>.icon-action{flex-basis:30px!important;width:30px!important;min-width:30px!important;max-width:30px!important;height:30px!important;min-height:30px!important;max-height:30px!important;font-size:19px!important}#recurringList .recurring-actions>b{font-size:14px!important}}
