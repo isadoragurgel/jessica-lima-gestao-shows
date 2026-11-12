@@ -408,3 +408,14 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
 #recurringList .recurring-buttons>.register-action{background:#dcf3e4!important;color:#166b3d!important;border:1px solid #b6dec6!important}
 #recurringList .recurring-buttons>button[data-archive-recurring]{background:#fbe6e3!important;color:#9a3c35!important}
 @media(max-width:600px){#recurringList .recurring-item{gap:8px}#recurringList .recurring-buttons{gap:4px!important}#recurringList .recurring-buttons>.icon-action{flex-basis:30px!important;width:30px!important;min-width:30px!important;max-width:30px!important;height:30px!important;min-height:30px!important;max-height:30px!important;font-size:19px!important}#recurringList .recurring-actions>b{font-size:14px!important}}
+
+/* Moeda à esquerda do montante, com campo compacto */
+.investment-currency-row{display:grid;grid-template-columns:minmax(100px,0.34fr) minmax(0,1fr);align-items:end;gap:12px}
+.investment-currency-row label{min-width:0}
+.investment-currencies{padding:0 22px 18px;display:grid;gap:8px}
+.investment-currencies>small{color:#647983}
+.investment-other-currency{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#1A324B}
+.investment-other-currency strong{font-size:16px;white-space:nowrap}
+#recent .tx-day{margin-bottom:8px}
+#recent .tx-day-heading{margin:12px 0 6px;font-size:13px;font-weight:650;color:#617580;text-transform:capitalize}
+@media(max-width:430px){.investment-currency-row{grid-template-columns:minmax(88px,0.36fr) minmax(0,1fr);gap:8px}}
