@@ -449,3 +449,28 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
 #dialog #entityForm input::placeholder,#dialog #entityForm textarea::placeholder{font-weight:400!important;color:#92999d!important;opacity:1}
 #dialog #entityForm input[type="date"],#dialog #entityForm input[type="month"]{min-width:0!important;width:100%!important;max-width:100%!important}
 #dialog .dialoghead .iconbtn{display:grid;place-items:center;line-height:1!important;min-width:38px;min-height:38px;padding:0!important}
+
+/* Ajuste final de tipografia dos formulários: escala coerente com o app */
+#dialog #entityForm input:not([type="checkbox"]):not([type="radio"]),
+#dialog #entityForm select,
+#dialog #entityForm textarea,
+#dialog #entityForm option,
+#dialog #fields input:not([type="checkbox"]):not([type="radio"]),
+#dialog #fields select,
+#dialog #fields textarea {
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif!important;
+  font-size:14px!important;
+  font-weight:400!important;
+  line-height:1.45!important;
+  letter-spacing:0!important;
+}
+#dialog #entityForm input::placeholder,
+#dialog #fields input::placeholder,
+#dialog #entityForm textarea::placeholder,
+#dialog #fields textarea::placeholder {font-size:14px!important;font-weight:400!important;opacity:1}
+@media(max-width:600px){
+  #dialog #entityForm input:not([type="checkbox"]):not([type="radio"]),
+  #dialog #entityForm select,#dialog #entityForm textarea,
+  #dialog #fields input:not([type="checkbox"]):not([type="radio"]),
+  #dialog #fields select,#dialog #fields textarea {font-size:15px!important}
+}
