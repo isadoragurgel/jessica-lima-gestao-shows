@@ -419,3 +419,18 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
 #recent .tx-day{margin-bottom:8px}
 #recent .tx-day-heading{margin:12px 0 6px;font-size:13px;font-weight:650;color:#617580;text-transform:capitalize}
 @media(max-width:430px){.investment-currency-row{grid-template-columns:minmax(88px,0.36fr) minmax(0,1fr);gap:8px}}
+
+/* Detalhamento dos saldos no card principal */
+.balance-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.balance-title-row small{min-width:0}
+.balance-eye{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;padding:0;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(255,255,255,.12);color:#fff}
+.balance-eye:hover,.balance-eye:focus-visible{background:rgba(255,255,255,.24)}
+#accountBalancesDialog{width:min(440px,calc(100vw - 28px));max-height:80vh;overflow-y:auto}
+#accountBalancesDialog .dialoghead h2{margin:0}
+#accountBalancesDialog .iconbtn{width:36px;height:36px;display:grid;place-items:center;padding:0;line-height:1}
+.account-balance-line,.account-balances-total{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid #e6eae5}
+.account-balance-line strong,.account-balances-total strong{text-align:right;white-space:nowrap}
+.account-balance-line span{min-width:0;overflow-wrap:anywhere}
+.account-balance-line small{color:var(--muted)}
+.account-balances-total{border:0;margin-top:8px;font-weight:700}
+@media(max-width:420px){.account-balance-line,.account-balances-total{font-size:13px}}

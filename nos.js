@@ -35,6 +35,15 @@ function balance(a){let n=Number(a.opening_balance);for(const t of S.tx){if(t.ac
 // Totais consolidados incluem apenas saldos em EUR explicitamente partilhados.
 // Movimentos existentes permanecem em EUR e partilhados até a migração do modelo de aportes.
 const includedBalance=b=>b.include_in_household!==false;
+function showAccountBalances(){
+ const list=$('accountBalancesList');
+ list.innerHTML=S.accounts.map(a=>`<div class="account-balance-line"><span>${esc(a.name)}${a.archived?' <small>(arquivada)</small>':''}</span><strong>${euro(balance(a))}</strong></div>`).join('')||'<p class="empty">Nenhuma conta cadastrada.</p>';
+ $('accountBalancesTotal').textContent=euro(S.accounts.reduce((sum,a)=>sum+balance(a),0));
+ $('accountBalancesDialog').showModal();
+}
+$('viewAccountBalances').addEventListener('click',showAccountBalances);
+$('closeAccountBalances').addEventListener('click',()=>$('accountBalancesDialog').close());
+$('accountBalancesDialog').addEventListener('click',e=>{if(e.target===$('accountBalancesDialog'))e.target.close()});
 const balanceCurrency=b=>b.currency||'EUR';
 const moneyByCurrency=(n,c='EUR')=>{const symbols={EUR:'€',USD:'US$',GBP:'£',BRL:'R$'};return (symbols[c]||c)+' '+moneyInput(n);};
 const investmentTotal=()=>S.investmentBalances.filter(b=>includedBalance(b)&&balanceCurrency(b)==='EUR').reduce((n,b)=>n+Number(b.opening_balance),0)+S.investmentMovements.reduce((n,m)=>n+(m.movement_type==='deposit'?1:-1)*Number(m.amount),0);
