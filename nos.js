@@ -41,9 +41,9 @@ function showAccountBalances(){
  $('accountBalancesTotal').textContent=euro(S.accounts.reduce((sum,a)=>sum+balance(a),0));
  $('accountBalancesDialog').showModal();
 }
-$('viewAccountBalances').addEventListener('click',showAccountBalances);
-$('closeAccountBalances').addEventListener('click',()=>$('accountBalancesDialog').close());
-$('accountBalancesDialog').addEventListener('click',e=>{if(e.target===$('accountBalancesDialog'))e.target.close()});
+$('viewAccountBalances')?.addEventListener('click',showAccountBalances);
+$('closeAccountBalances')?.addEventListener('click',()=>$('accountBalancesDialog').close());
+$('accountBalancesDialog')?.addEventListener('click',e=>{if(e.target===$('accountBalancesDialog'))e.target.close()});
 const balanceCurrency=b=>b.currency||'EUR';
 const moneyByCurrency=(n,c='EUR')=>{const symbols={EUR:'€',USD:'US$',GBP:'£',BRL:'R$'};return (symbols[c]||c)+' '+moneyInput(n);};
 const investmentTotal=()=>S.investmentBalances.filter(b=>includedBalance(b)&&balanceCurrency(b)==='EUR').reduce((n,b)=>n+Number(b.opening_balance),0)+S.investmentMovements.reduce((n,m)=>n+(m.movement_type==='deposit'?1:-1)*Number(m.amount),0);
