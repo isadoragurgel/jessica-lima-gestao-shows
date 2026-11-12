@@ -374,3 +374,26 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
 #goalsList .item small{overflow-wrap:normal;word-break:normal}
 #goalsList .item small .money-amount{white-space:nowrap}
 @media(max-width:600px){#movimentos .filters{grid-template-columns:repeat(2,minmax(0,1fr))}#movimentos .filters label:last-child{grid-column:1/-1}#recurringList .rowactions{min-width:150px!important;max-width:175px!important}#recurringList .rowactions>button[data-use-recurring]{font-size:13px!important;padding:10px 4px!important}}
+
+/* Ajustes de usabilidade — Movimentos, fixos, orçamento e filtros */
+#movimentos .tx-day{margin:17px 0 22px}
+#movimentos .tx-day-heading{margin:0 0 9px 4px;font-size:13px;font-weight:650;color:#607581;text-transform:capitalize}
+#movimentos .tx-day-items{display:grid;gap:8px}
+#movimentos .tx-reconcile{border:1px solid #e4e9e4;background:#f8faf7;border-radius:14px;padding:13px 15px;margin:12px 0 20px;font-size:12px}
+#movimentos .tx-reconcile>b{display:block;margin-bottom:9px;color:#1a324b;font-size:13px}
+#movimentos .tx-reconcile>div{display:flex;justify-content:space-between;gap:12px;margin:5px 0}
+#movimentos .tx-reconcile strong{font-weight:650;white-space:nowrap}
+#movimentos .tx-reconcile small{display:block;color:#647783;line-height:1.5;margin-top:10px}
+#recurringList .rowactions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:5px;min-width:0!important;max-width:none!important}
+#recurringList .rowactions>b{width:100%;text-align:right;font-size:14px}
+#recurringList .icon-action{width:32px!important;min-width:32px!important;height:32px!important;min-height:32px!important;padding:0!important;display:inline-grid;place-items:center;font-size:19px!important;font-weight:500;line-height:1}
+#recurringList .register-action{background:#e0f2e7;color:#17653c;border:1px solid #b6dfc6}
+#casal #budgetForm{gap:8px 10px;align-items:end}
+#casal #budgetForm label{margin:0;font-size:12px;font-weight:500}
+#casal #budgetForm input,#casal #budgetForm select{margin-top:4px;padding:9px 10px;font-size:13px;font-weight:400}
+#casal #budgetForm button{padding:10px 12px;font-size:12px}
+#movimentos .filters label,#movimentos .filters select,#movimentos .filters option{font-weight:400!important;font-size:12px!important}
+#movimentos .filters select{padding:8px 7px}
+#relatorios>.reportactions{display:flex;justify-content:flex-end;gap:8px;margin:10px 0 12px}
+#relatorios>.reportactions button{flex:0 1 auto;width:auto;padding:9px 13px;font-size:12px;font-weight:550}
+@media(max-width:600px){#recurringList .rowactions{min-width:104px!important;max-width:120px!important}#recurringList .icon-action{width:30px!important;min-width:30px!important;height:30px!important;min-height:30px!important}#relatorios>.reportactions button{font-size:11px;padding:9px 11px}}
