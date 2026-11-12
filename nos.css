@@ -362,3 +362,115 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(217,130,104,.4);b
   #reportRows .report-movements-table thead{display:table-header-group!important;}
   .donut-svg,.donut-svg svg,.legend-dot,.bar-fill,.budget-fill,.income-bar-fill{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
 }
+
+/* Ajustes compactos — 11 Nov */
+#movimentos .filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 10px;align-items:end;margin-bottom:13px}
+#movimentos .filters label{min-width:0;margin:0;font-size:12px}
+#movimentos .filters select{min-width:0;margin-top:4px;padding:9px 7px;font-size:13px}
+#relatorios .reportactions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0 15px}
+#relatorios .reportactions button{min-width:0;padding:11px 8px;font-size:clamp(11px,2.8vw,14px);line-height:1.2}
+#recurringList .rowactions button[data-use-recurring]{font-size:12px!important;letter-spacing:0!important;overflow:visible!important;min-width:0;white-space:nowrap}
+#goalsList .item>div:first-child{min-width:0;overflow-wrap:break-word}
+#goalsList .item small{overflow-wrap:normal;word-break:normal}
+#goalsList .item small .money-amount{white-space:nowrap}
+@media(max-width:600px){#movimentos .filters{grid-template-columns:repeat(2,minmax(0,1fr))}#movimentos .filters label:last-child{grid-column:1/-1}#recurringList .rowactions{min-width:150px!important;max-width:175px!important}#recurringList .rowactions>button[data-use-recurring]{font-size:13px!important;padding:10px 4px!important}}
+
+/* Ajustes de usabilidade — Movimentos, fixos, orçamento e filtros */
+#movimentos .tx-day{margin:17px 0 22px}
+#movimentos .tx-day-heading{margin:0 0 9px 4px;font-size:13px;font-weight:650;color:#607581;text-transform:capitalize}
+#movimentos .tx-day-items{display:grid;gap:8px}
+#movimentos .tx-reconcile{border:1px solid #e4e9e4;background:#f8faf7;border-radius:14px;padding:13px 15px;margin:12px 0 20px;font-size:12px}
+#movimentos .tx-reconcile>b{display:block;margin-bottom:9px;color:#1a324b;font-size:13px}
+#movimentos .tx-reconcile>div{display:flex;justify-content:space-between;gap:12px;margin:5px 0}
+#movimentos .tx-reconcile strong{font-weight:650;white-space:nowrap}
+#movimentos .tx-reconcile small{display:block;color:#647783;line-height:1.5;margin-top:10px}
+#recurringList .rowactions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:5px;min-width:0!important;max-width:none!important}
+#recurringList .rowactions>b{width:100%;text-align:right;font-size:14px}
+#recurringList .icon-action{width:32px!important;min-width:32px!important;height:32px!important;min-height:32px!important;padding:0!important;display:inline-grid;place-items:center;font-size:19px!important;font-weight:500;line-height:1}
+#recurringList .register-action{background:#e0f2e7;color:#17653c;border:1px solid #b6dfc6}
+#casal #budgetForm{gap:8px 10px;align-items:end}
+#casal #budgetForm label{margin:0;font-size:12px;font-weight:500}
+#casal #budgetForm input,#casal #budgetForm select{margin-top:4px;padding:9px 10px;font-size:13px;font-weight:400}
+#casal #budgetForm button{padding:10px 12px;font-size:12px}
+#movimentos .filters label,#movimentos .filters select,#movimentos .filters option{font-weight:400!important;font-size:12px!important}
+#movimentos .filters select{padding:8px 7px}
+#relatorios>.reportactions{display:flex;justify-content:flex-end;gap:8px;margin:10px 0 12px}
+#relatorios>.reportactions button{flex:0 1 auto;width:auto;padding:9px 13px;font-size:12px;font-weight:550}
+@media(max-width:600px){#recurringList .rowactions{min-width:104px!important;max-width:120px!important}#recurringList .icon-action{width:30px!important;min-width:30px!important;height:30px!important;min-height:30px!important}#relatorios>.reportactions button{font-size:11px;padding:9px 11px}}
+
+/* Correções finais: ações fixas em linha, responsividade e moeda do investimento */
+#recurringList .recurring-item{align-items:flex-start;gap:12px}
+#recurringList .recurring-item>div:first-child{min-width:0;flex:1 1 auto;overflow-wrap:anywhere}
+#recurringList .recurring-actions{display:flex!important;flex:0 0 auto;flex-direction:column!important;align-items:flex-end!important;justify-content:flex-start!important;gap:8px!important;width:auto!important;min-width:0!important;max-width:none!important}
+#recurringList .recurring-actions>b{display:block!important;width:auto!important;text-align:right!important;white-space:nowrap;font-size:clamp(13px,2.8vw,16px)!important}
+#recurringList .recurring-buttons{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;grid-column:auto!important}
+#recurringList .recurring-buttons>.icon-action{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 0 34px!important;width:34px!important;min-width:34px!important;max-width:34px!important;height:34px!important;min-height:34px!important;max-height:34px!important;padding:0!important;margin:0!important;grid-row:auto!important;grid-column:auto!important;border-radius:11px!important;font-family:Arial,sans-serif!important;font-size:21px!important;line-height:1!important;font-weight:500!important;letter-spacing:0!important}
+#recurringList .recurring-buttons>.register-action{background:#dcf3e4!important;color:#166b3d!important;border:1px solid #b6dec6!important}
+#recurringList .recurring-buttons>button[data-archive-recurring]{background:#fbe6e3!important;color:#9a3c35!important}
+@media(max-width:600px){#recurringList .recurring-item{gap:8px}#recurringList .recurring-buttons{gap:4px!important}#recurringList .recurring-buttons>.icon-action{flex-basis:30px!important;width:30px!important;min-width:30px!important;max-width:30px!important;height:30px!important;min-height:30px!important;max-height:30px!important;font-size:19px!important}#recurringList .recurring-actions>b{font-size:14px!important}}
+
+/* Moeda à esquerda do montante, com campo compacto */
+.investment-currency-row{display:grid;grid-template-columns:minmax(100px,0.34fr) minmax(0,1fr);align-items:end;gap:12px}
+.investment-currency-row label{min-width:0}
+.investment-currencies{padding:0 22px 18px;display:grid;gap:8px}
+.investment-currencies>small{color:#647983}
+.investment-other-currency{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#1A324B}
+.investment-other-currency strong{font-size:16px;white-space:nowrap}
+#recent .tx-day{margin-bottom:8px}
+#recent .tx-day-heading{margin:12px 0 6px;font-size:13px;font-weight:650;color:#617580;text-transform:capitalize}
+@media(max-width:430px){.investment-currency-row{grid-template-columns:minmax(88px,0.36fr) minmax(0,1fr);gap:8px}}
+
+/* Detalhamento dos saldos no card principal */
+.balance-title-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.balance-title-row small{min-width:0}
+.balance-eye{display:grid;place-items:center;flex:0 0 40px;width:40px;height:40px;padding:0;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(255,255,255,.12);color:#fff}
+.balance-eye:hover,.balance-eye:focus-visible{background:rgba(255,255,255,.24)}
+#accountBalancesDialog{width:min(440px,calc(100vw - 28px));max-height:80vh;overflow-y:auto}
+#accountBalancesDialog .dialoghead h2{margin:0}
+#accountBalancesDialog .iconbtn{width:36px;height:36px;display:grid;place-items:center;padding:0;line-height:1}
+.account-balance-line,.account-balances-total{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid #e6eae5}
+.account-balance-line strong,.account-balances-total strong{text-align:right;white-space:nowrap}
+.account-balance-line span{min-width:0;overflow-wrap:anywhere}
+.account-balance-line small{color:var(--muted)}
+.account-balances-total{border:0;margin-top:8px;font-weight:700}
+@media(max-width:420px){.account-balance-line,.account-balances-total{font-size:13px}}
+
+/* Campos dos formulários: tipografia mais leve e legível, sem zoom automático no iPhone */
+#dialog #entityForm input:not([type="checkbox"]):not([type="radio"]),
+#dialog #entityForm select,
+#dialog #entityForm textarea,
+#dialog #entityForm option{
+ font-family:'Plus Jakarta Sans',system-ui,sans-serif!important;
+ font-size:16px!important;
+ font-weight:400!important;
+ letter-spacing:0!important;
+ line-height:1.45!important;
+}
+#dialog #entityForm input::placeholder,#dialog #entityForm textarea::placeholder{font-weight:400!important;color:#92999d!important;opacity:1}
+#dialog #entityForm input[type="date"],#dialog #entityForm input[type="month"]{min-width:0!important;width:100%!important;max-width:100%!important}
+#dialog .dialoghead .iconbtn{display:grid;place-items:center;line-height:1!important;min-width:38px;min-height:38px;padding:0!important}
+
+/* Ajuste final de tipografia dos formulários: escala coerente com o app */
+#dialog #entityForm input:not([type="checkbox"]):not([type="radio"]),
+#dialog #entityForm select,
+#dialog #entityForm textarea,
+#dialog #entityForm option,
+#dialog #fields input:not([type="checkbox"]):not([type="radio"]),
+#dialog #fields select,
+#dialog #fields textarea {
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif!important;
+  font-size:14px!important;
+  font-weight:400!important;
+  line-height:1.45!important;
+  letter-spacing:0!important;
+}
+#dialog #entityForm input::placeholder,
+#dialog #fields input::placeholder,
+#dialog #entityForm textarea::placeholder,
+#dialog #fields textarea::placeholder {font-size:14px!important;font-weight:400!important;opacity:1}
+@media(max-width:600px){
+  #dialog #entityForm input:not([type="checkbox"]):not([type="radio"]),
+  #dialog #entityForm select,#dialog #entityForm textarea,
+  #dialog #fields input:not([type="checkbox"]):not([type="radio"]),
+  #dialog #fields select,#dialog #fields textarea {font-size:15px!important}
+}
