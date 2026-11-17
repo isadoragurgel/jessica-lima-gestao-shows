@@ -516,3 +516,21 @@ html,body{max-width:100%;overflow-x:clip}
 [data-category-split] label{display:block;min-width:0}
 [data-category-split] input[readonly]{background:#f0f4f2;color:#20374d}
 @media(max-width:480px){.tx-item{grid-template-columns:minmax(0,1fr)!important;gap:8px!important}.tx-item .rowactions{justify-content:flex-end!important}.tx-item .tx-copy b{font-size:15px}.tx-item .rowactions .amount{margin-right:auto}.tx-item .tx-type-icon{flex-shrink:0}#goalsList .item{grid-template-columns:minmax(0,1fr)!important}#goalsList .rowactions{justify-content:flex-end!important}}
+
+/* Correção iOS Safari: seletor nativo de mês não pode ultrapassar a margem do cartão. */
+#casal .two, #casal .two > .panel, #modeForm {min-width:0;max-width:100%}
+#modeForm {display:grid;grid-template-columns:minmax(0,1fr);width:100%;overflow:clip}
+#modeForm > label {min-width:0;width:100%;max-width:100%;overflow:hidden}
+#modeForm #modeMonth,
+#modeForm #financialMode {
+  display:block!important;
+  inline-size:100%!important;
+  min-inline-size:0!important;
+  max-inline-size:100%!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
+  margin-inline:0!important;
+}
+#modeForm #modeMonth { -webkit-appearance:none;appearance:none; }
