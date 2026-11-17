@@ -495,3 +495,24 @@ html,body{max-width:100%;overflow-x:clip}
 /* Divisão entre contas: campos claros e valor restante somente leitura */
 [data-single-account][hidden],[data-transfer-destination][hidden]{display:none!important}
 [data-split-details] input[readonly]{background:#f0f4f2;color:#20374d;opacity:1;cursor:default}
+
+/* 17/11 — refinamento de movimentos, formulários e metas */
+.tx-item{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;gap:12px!important}
+.tx-item .tx-main{display:flex;min-width:0;gap:10px;align-items:center}
+.tx-item .tx-copy{min-width:0;flex:1 1 auto}
+.tx-item .tx-copy b{display:block;overflow-wrap:normal;word-break:normal;hyphens:none;line-height:1.3}
+.tx-item .tx-copy small{overflow-wrap:break-word;word-break:normal;line-height:1.45}
+.tx-item .rowactions{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;min-width:0}
+.tx-item .rowactions .amount{white-space:nowrap;font-size:clamp(12px,3vw,16px)}
+.tx-item .rowactions button{white-space:nowrap;flex-shrink:0}
+#modeForm label{display:block;width:100%;min-width:0;box-sizing:border-box}
+#modeForm input[type=month],#modeForm select{display:block;width:100%!important;min-width:0!important;max-width:100%!important;box-sizing:border-box!important;min-height:48px}
+#goalsList .item{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center}
+#goalsList .item>div:first-child{min-width:0;overflow-wrap:normal;word-break:normal}
+#goalsList .rowactions{display:flex!important;flex-wrap:nowrap!important;gap:6px!important;align-items:center}
+#goalsList .rowactions button{white-space:nowrap!important;flex-shrink:0!important;padding:9px 11px!important}
+[data-category-split]{padding:14px;margin:10px 0;border:1px solid #dce4e8;border-radius:14px}
+[data-category-split][hidden]{display:none!important}
+[data-category-split] label{display:block;min-width:0}
+[data-category-split] input[readonly]{background:#f0f4f2;color:#20374d}
+@media(max-width:480px){.tx-item{grid-template-columns:minmax(0,1fr)!important;gap:8px!important}.tx-item .rowactions{justify-content:flex-end!important}.tx-item .tx-copy b{font-size:15px}.tx-item .rowactions .amount{margin-right:auto}.tx-item .tx-type-icon{flex-shrink:0}#goalsList .item{grid-template-columns:minmax(0,1fr)!important}#goalsList .rowactions{justify-content:flex-end!important}}
