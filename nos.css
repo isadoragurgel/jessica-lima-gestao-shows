@@ -491,3 +491,7 @@ html,body{max-width:100%;overflow-x:clip}
 
 /* Movimento dividido entre duas contas */
 [data-split-controls]{border:1px solid #dce4e8;border-radius:14px;padding:14px;margin:12px 0;}[data-split-controls][hidden],[data-split-details][hidden]{display:none!important}.split-check{display:flex;align-items:center;gap:10px}.split-check input{width:auto!important;flex:none!important}[data-split-details] label{display:block;min-width:0}[data-split-details] input,[data-split-details] select{max-width:100%;min-width:0;box-sizing:border-box}
+
+/* Divisão entre contas: campos claros e valor restante somente leitura */
+[data-single-account][hidden],[data-transfer-destination][hidden]{display:none!important}
+[data-split-details] input[readonly]{background:#f0f4f2;color:#20374d;opacity:1;cursor:default}
