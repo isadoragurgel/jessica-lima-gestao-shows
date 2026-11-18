@@ -609,3 +609,11 @@ html,body{max-width:100%;overflow-x:clip}
  #relatorios .report-compare-table td:before{content:attr(data-label);display:block;font-size:.72rem;color:#7a8c96;margin-bottom:3px}
  #relatorios .report-compare-table td:last-child{grid-column:1/-1;border-top:1px solid #e3e9e7;padding-top:7px}
 }
+
+/* Paginação de movimentos nos relatórios */
+.report-pagination{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:16px;color:#607784;font-size:.9rem}
+.report-pagination-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.report-pagination-actions button{white-space:nowrap}
+.report-pagination-actions button:disabled{opacity:.45;cursor:default}
+.report-table-scroll{max-width:100%;overflow-x:auto}
+@media(max-width:540px){.report-pagination{flex-direction:column;align-items:stretch}.report-pagination-actions{justify-content:space-between}.report-pagination-actions button{padding:9px 12px}}
