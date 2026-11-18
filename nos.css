@@ -579,3 +579,33 @@ html,body{max-width:100%;overflow-x:clip}
 #relatorios>.reportactions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin:0 0 22px}
 #relatorios>.reportactions button{flex:0 1 auto;width:auto;max-width:100%;font-size:12px;padding:10px 12px}
 @media(max-width:480px){#relatorios .panel{padding:16px}#relatorios .report-filter-bar{gap:8px}#relatorios .report-filter-bar input[type=month]{font-size:12px!important;padding:8px 4px!important}#relatorios>.reportactions{justify-content:center}#relatorios>.reportactions button{flex:1 1 135px}}
+
+/* Comparação integrada à evolução mensal; tabela responsiva sem corte lateral */
+#relatorios .report-charts>.chart-card{min-width:0;max-width:100%;overflow:hidden}
+#relatorios .report-comparison[hidden]{display:none!important}
+#relatorios .report-comparison{border-top:1px solid #e4e9e8;margin-top:24px;padding-top:22px;min-width:0;max-width:100%;color:#526b76}
+#relatorios .compare-heading{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px 12px;margin-bottom:14px}
+#relatorios .compare-heading h3{font-size:1.12rem;margin:0;color:#1a324b}
+#relatorios .compare-heading small{font-size:.82rem}
+#relatorios .compare-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+#relatorios .compare-summary>div{padding:11px;background:#f5f7f5;border-radius:12px;min-width:0}
+#relatorios .compare-summary small{display:block;font-size:.76rem;line-height:1.35;margin-bottom:5px}
+#relatorios .compare-summary strong{display:block;font-size:.98rem;color:#1a324b;overflow-wrap:anywhere}
+#relatorios .compare-up{color:#b65e4d!important}
+#relatorios .compare-down{color:#357e65!important}
+#relatorios .report-compare-scroll{max-width:100%;overflow-x:auto;margin-top:8px}
+#relatorios .report-compare-table{min-width:0;width:100%;table-layout:fixed;font-size:.83rem}
+#relatorios .report-compare-table th,#relatorios .report-compare-table td{padding:10px 7px;white-space:normal;overflow-wrap:anywhere;vertical-align:middle}
+#relatorios .report-compare-table th:first-child,#relatorios .report-compare-table td:first-child{width:28%}
+@media(max-width:650px){
+ #relatorios .compare-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #relatorios .compare-summary>div:last-child{grid-column:1/-1}
+ #relatorios .report-compare-table{display:block;min-width:0}
+ #relatorios .report-compare-table thead{display:none}
+ #relatorios .report-compare-table tbody{display:grid;gap:10px}
+ #relatorios .report-compare-table tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 12px;padding:12px;border:1px solid #e3e9e7;border-radius:12px}
+ #relatorios .report-compare-table th,#relatorios .report-compare-table td{display:block;text-align:left!important;width:auto!important;border:0;padding:0;white-space:normal;min-width:0}
+ #relatorios .report-compare-table th{grid-column:1/-1;color:#1a324b;font-weight:700}
+ #relatorios .report-compare-table td:before{content:attr(data-label);display:block;font-size:.72rem;color:#7a8c96;margin-bottom:3px}
+ #relatorios .report-compare-table td:last-child{grid-column:1/-1;border-top:1px solid #e3e9e7;padding-top:7px}
+}

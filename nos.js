@@ -151,19 +151,25 @@ $('reportMonth').value=S.reportMonth;
 $('reportCompareMonth').value=S.reportCompareMonth;
 $('reportStats').innerHTML=`<p><b>${esc(monthLabel(S.reportMonth))}:</b> Receitas ${euro(ri)} · Despesas ${euro(re)} · Resultado ${euro(ri-re)}</p>`;
 const comparison=$('reportComparison');
-if(S.reportCompareMonth){
+const comparing=Boolean(S.reportCompareMonth && S.reportCompareMonth!==S.reportMonth);
+comparison.hidden=!comparing;
+if(comparing){
  const previous=S.tx.filter(t=>t.kind==='expense'&&t.transaction_date.startsWith(S.reportCompareMonth));
  const prevTotal=previous.reduce((v,t)=>v+Number(t.amount),0),diff=re-prevTotal;
  const cats=new Map();
-for(const [list,index] of [[rm.filter(t=>t.kind==='expense'),0],[previous,1]]){
- for(const t of list)for(const part of categoryParts(t)){
-  const name=byId(S.categories,part.category_id)?.name||'Sem categoria';
-  const values=cats.get(name)||[0,0];values[index]+=Number(part.amount);cats.set(name,values);
+ for(const [list,index] of [[rm.filter(t=>t.kind==='expense'),0],[previous,1]]){
+  for(const t of list)for(const part of categoryParts(t)){
+   const name=byId(S.categories,part.category_id)?.name||'Sem categoria';
+   const values=cats.get(name)||[0,0];values[index]+=Number(part.amount);cats.set(name,values);
+  }
  }
-}
-const catRows=[...cats].sort((a,b)=>b[1][0]-a[1][0]).map(([name,[now,before]])=>`<tr><td>${esc(name)}</td><td>${euro(now)}</td><td>${euro(before)}</td><td>${now-before>0?'+':''}${euro(now-before)}</td></tr>`).join('');
-comparison.innerHTML=`<b>Comparação de despesas</b><p>${esc(monthLabel(S.reportMonth))}: ${euro(re)} · ${esc(monthLabel(S.reportCompareMonth))}: ${euro(prevTotal)}</p><p>Diferença: <strong>${diff>0?'+':''}${euro(diff)}</strong></p><div class="report-compare-scroll"><table class="report-compare-table"><thead><tr><th>Categoria</th><th>${esc(monthLabel(S.reportMonth))}</th><th>${esc(monthLabel(S.reportCompareMonth))}</th><th>Diferença</th></tr></thead><tbody>${catRows}</tbody></table></div>`;
-}else comparison.innerHTML='<small>Escolha outro mês para comparar o total e as categorias.</small>';
+ const monthA=monthLabel(S.reportMonth),monthB=monthLabel(S.reportCompareMonth);
+ const catRows=[...cats].sort((a,b)=>b[1][0]-a[1][0]).map(([name,[now,before]])=>{
+  const delta=now-before;
+  return `<tr><th scope="row">${esc(name)}</th><td data-label="${esc(monthA)}">${euro(now)}</td><td data-label="${esc(monthB)}">${euro(before)}</td><td data-label="Diferença" class="${delta>0?'compare-up':delta<0?'compare-down':''}">${delta>0?'+':''}${euro(delta)}</td></tr>`;
+ }).join('');
+ comparison.innerHTML=`<div class="compare-heading"><h3>Comparação por categoria</h3><small>${esc(monthA)} × ${esc(monthB)}</small></div><div class="compare-summary"><div><small>${esc(monthA)}</small><strong>${euro(re)}</strong></div><div><small>${esc(monthB)}</small><strong>${euro(prevTotal)}</strong></div><div><small>Diferença</small><strong class="${diff>0?'compare-up':diff<0?'compare-down':''}">${diff>0?'+':''}${euro(diff)}</strong></div></div><div class="report-compare-scroll"><table class="report-compare-table"><thead><tr><th scope="col">Categoria</th><th scope="col">${esc(monthA)}</th><th scope="col">${esc(monthB)}</th><th scope="col">Diferença</th></tr></thead><tbody>${catRows||'<tr><td colspan="4">Sem despesas nos meses selecionados.</td></tr>'}</tbody></table></div>`;
+}else comparison.innerHTML='';
 renderCharts();
 $('reportRows').innerHTML=`<table class="report-movements-table"><thead><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Categoria</th><th>Observação</th><th>Conta</th><th>Valor (€)</th></tr></thead><tbody >${rm.slice().sort((a,b)=>b.transaction_date.localeCompare(a.transaction_date)).map(t=>`<tr><td>${esc(t.transaction_date)}</td><td>${labelKind(t.kind)}</td><td>${esc(t.description)}</td><td>${categoryDescription(t)}</td><td>${esc(t.notes||'')}</td><td>${esc(byId(S.accounts,t.account_id)?.name||'')}</td><td>${euro(t.amount)}</td></tr>`).join('')}</tbody></table>`;
 }
@@ -328,8 +334,8 @@ $('loginForm').addEventListener('submit',async e=>{e.preventDefault();const butt
  }catch(e){console.error(e);showLogin('Não foi possível entrar. Verifique email, senha e confirmação do cadastro.');}finally{button.disabled=false;}});
 $('logout').addEventListener('click',async()=>{stopLiveSync();try{await S.db.auth.signOut()}catch(e){console.error(e)}S.user=null;S.household=null;S.accounts=[];S.tx=[];S.categories=[];S.profiles=[];S.goals=[];S.settings=[];S.budgets=[];S.recurring=[];S.investmentBalances=[];S.investmentMovements=[];S.investmentsAvailable=false;$('loginPassword').value='';showLogin();});
 $('month').addEventListener('change',e=>{S.month=e.target.value;render()});
-$('reportMonth').addEventListener('change',e=>{if(!e.target.value)return;S.reportMonth=e.target.value;S.reportCategory=null;render()});
-$('reportCompareMonth').addEventListener('change',e=>{S.reportCompareMonth=e.target.value;render()});
+$('reportMonth').addEventListener('change',e=>{if(!e.target.value)return;S.reportMonth=e.target.value;if(S.reportCompareMonth===S.reportMonth)S.reportCompareMonth='';S.reportCategory=null;render()});
+$('reportCompareMonth').addEventListener('change',e=>{S.reportCompareMonth=e.target.value===S.reportMonth?'':e.target.value;render()});
 $('categoryLegend').addEventListener('click',e=>{const target=e.target.closest('[data-report-category]');if(target){S.reportCategory=decodeURIComponent(target.dataset.reportCategory);renderCharts();}});
 $('categoryLegend').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){const target=e.target.closest('[data-report-category]');if(target){e.preventDefault();S.reportCategory=decodeURIComponent(target.dataset.reportCategory);renderCharts();}}});
 $('categoryChart').addEventListener('click',e=>{const target=e.target.closest('[data-report-category]');if(target){S.reportCategory=decodeURIComponent(target.dataset.reportCategory);renderCharts();}});
